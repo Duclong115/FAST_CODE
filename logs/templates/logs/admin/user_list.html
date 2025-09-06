@@ -127,6 +127,7 @@
                                 <th>Email</th>
                                 <th>Vai Trò</th>
                                 <th>Trạng Thái</th>
+                                <th>Account Status</th>
                                 <th>Ngày Tạo</th>
                                 <th>Đăng Nhập Cuối</th>
                                 <th width="150">Thao Tác</th>
@@ -163,6 +164,25 @@
                                     <span class="badge bg-success">Hoạt động</span>
                                     {% else %}
                                     <span class="badge bg-danger">Không hoạt động</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if user.is_account_locked %}
+                                        <span class="badge bg-danger">
+                                            <i class="fas fa-lock"></i> Locked
+                                        </span>
+                                        <br><small class="text-muted">
+                                            {{ user.failed_login_attempts }}/3 attempts
+                                        </small>
+                                    {% else %}
+                                        <span class="badge bg-success">
+                                            <i class="fas fa-unlock"></i> Unlocked
+                                        </span>
+                                        {% if user.failed_login_attempts > 0 %}
+                                            <br><small class="text-warning">
+                                                {{ user.failed_login_attempts }}/3 attempts
+                                            </small>
+                                        {% endif %}
                                     {% endif %}
                                 </td>
                                 <td>

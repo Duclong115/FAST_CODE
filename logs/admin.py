@@ -29,22 +29,22 @@ class SqlLogAdmin(admin.ModelAdmin):
 @admin.register(LogFile)
 class LogFileAdmin(admin.ModelAdmin):
     list_display = [
-        'file_name', 'file_size', 'total_lines', 'processed_lines', 
-        'failed_lines', 'success_rate', 'processing_time', 'processed_at'
+        'file_name', 'file_size', 'imported_count', 'skipped_count', 
+        'error_count', 'processed_by', 'processed_at'
     ]
-    list_filter = ['processed_at']
-    search_fields = ['file_name', 'file_path']
-    readonly_fields = ['success_rate']
+    list_filter = ['processed_at', 'processed_by']
+    search_fields = ['file_name', 'processed_by__username']
+    readonly_fields = ['processed_at']
     ordering = ['-processed_at']
     
     fieldsets = (
         ('Thông tin file', {
             'fields': ('file_name', 'file_path', 'file_size')
         }),
-        ('Kết quả xử lý', {
-            'fields': ('total_lines', 'processed_lines', 'failed_lines', 'success_rate')
+        ('Kết quả import', {
+            'fields': ('imported_count', 'skipped_count', 'error_count', 'total_lines', 'processed_lines')
         }),
-        ('Thời gian', {
-            'fields': ('processed_at', 'processing_time')
+        ('Thông tin xử lý', {
+            'fields': ('processed_by', 'processed_at')
         }),
     )

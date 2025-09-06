@@ -1,0 +1,585 @@
+[INFO] 2025-09-06 12:35:35,487 | REQUEST | GET / | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:35:35,513 | RESPONSE | GET / | Status: 200 | Duration: 0.071s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:35:40,235 | REQUEST | GET /statistics/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:35:40,253 | RESPONSE | GET /statistics/ | Status: 200 | Duration: 0.053s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:36:08,201 | ADMIN_ACTION | TEST_ACTION | Details: Test details | IP: 127.0.0.1
+[INFO] 2025-09-06 12:36:08,244 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:36:08,245 | POST_DATA | /auth/login/ | Data: {'username': 'testuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:36:08,905 | RESPONSE | POST /auth/login/ | Status: 200 | Duration: 0.661s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:36:08,906 | REQUEST | GET /manage/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:36:08,906 | RESPONSE | GET /manage/ | Status: 302 | Duration: 0.000s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:36:31,973 | REQUEST | GET /statistics/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:36:31,997 | RESPONSE | GET /statistics/ | Status: 200 | Duration: 0.061s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:36:34,562 | REQUEST | GET /manage/users/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:36:34,576 | RESPONSE | GET /manage/users/ | Status: 200 | Duration: 0.054s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:36:46,428 | REQUEST | POST /manage/users/bulk-action/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:36:46,429 | POST_DATA | /manage/users/bulk-action/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'action': 'deactivate'}
+[INFO] 2025-09-06 12:36:46,429 | RESPONSE | POST /manage/users/bulk-action/ | Status: 302 | Duration: 0.037s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:36:46,478 | REQUEST | GET /manage/users/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:36:46,482 | RESPONSE | GET /manage/users/ | Status: 200 | Duration: 0.039s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:36:58,080 | REQUEST | GET /manage/logs/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:36:58,151 | RESPONSE | GET /manage/logs/ | Status: 500 | Duration: 0.105s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:37:01,625 | REQUEST | GET /manage/logs/stats/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:37:01,682 | RESPONSE | GET /manage/logs/stats/ | Status: 500 | Duration: 0.089s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:38:32,628 | REQUEST | GET /manage/logs/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:38:32,978 | RESPONSE | GET /manage/logs/ | Status: 200 | Duration: 0.351s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:38:32,982 | REQUEST | GET /manage/logs/stats/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:38:33,011 | RESPONSE | GET /manage/logs/stats/ | Status: 200 | Duration: 0.030s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:38:40,311 | REQUEST | GET /manage/logs/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:38:40,647 | RESPONSE | GET /manage/logs/ | Status: 200 | Duration: 0.338s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:38:40,651 | REQUEST | GET /manage/logs/stats/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:38:40,663 | RESPONSE | GET /manage/logs/stats/ | Status: 200 | Duration: 0.014s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:38:40,666 | REQUEST | GET /manage/logs/download/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:38:40,674 | ADMIN_ACTION | LOG_DOWNLOAD_web_activity | Admin: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:38:40,674 | RESPONSE | GET /manage/logs/download/ | Status: 200 | Duration: 0.009s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:38:40,678 | REQUEST | POST /manage/logs/search/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:38:40,679 | POST_DATA | /manage/logs/search/ | Data: {'search_term': 'admin', 'log_types': 'security'}
+[INFO] 2025-09-06 12:38:40,687 | ADMIN_ACTION | LOG_SEARCH | Admin: admin (ID: 5) | Details: Term: admin, Types: ['web_activity', 'security'], Results: 34 | IP: 127.0.0.1
+[INFO] 2025-09-06 12:38:40,710 | RESPONSE | POST /manage/logs/search/ | Status: 500 | Duration: 0.033s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:39:06,704 | REQUEST | GET /manage/logs/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:39:07,016 | RESPONSE | GET /manage/logs/ | Status: 200 | Duration: 0.313s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:39:07,020 | REQUEST | GET /manage/logs/stats/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:39:07,051 | RESPONSE | GET /manage/logs/stats/ | Status: 200 | Duration: 0.033s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:39:07,055 | REQUEST | GET /manage/logs/download/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:39:07,061 | ADMIN_ACTION | LOG_DOWNLOAD_web_activity | Admin: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:39:07,062 | RESPONSE | GET /manage/logs/download/ | Status: 200 | Duration: 0.008s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:39:07,065 | REQUEST | POST /manage/logs/search/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:39:07,065 | POST_DATA | /manage/logs/search/ | Data: {'search_term': 'admin', 'log_types': 'security'}
+[INFO] 2025-09-06 12:39:07,074 | ADMIN_ACTION | LOG_SEARCH | Admin: admin (ID: 5) | Details: Term: admin, Types: ['web_activity', 'security'], Results: 47 | IP: 127.0.0.1
+[INFO] 2025-09-06 12:39:07,077 | RESPONSE | POST /manage/logs/search/ | Status: 200 | Duration: 0.013s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:39:21,340 | REQUEST | GET /manage/users/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:39:21,352 | RESPONSE | GET /manage/users/ | Status: 200 | Duration: 0.050s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:39:23,901 | REQUEST | GET /manage/logs/stats/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:39:23,938 | RESPONSE | GET /manage/logs/stats/ | Status: 500 | Duration: 0.072s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:39:27,994 | REQUEST | GET /manage/logs/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:39:28,031 | RESPONSE | GET /manage/logs/ | Status: 500 | Duration: 0.070s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:40:47,936 | REQUEST | GET /manage/logs/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:40:47,953 | RESPONSE | GET /manage/logs/ | Status: 200 | Duration: 0.054s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:40:51,322 | REQUEST | GET /manage/logs/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:40:51,635 | RESPONSE | GET /manage/logs/ | Status: 200 | Duration: 0.314s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:40:51,639 | REQUEST | GET /manage/logs/stats/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:40:51,656 | RESPONSE | GET /manage/logs/stats/ | Status: 200 | Duration: 0.018s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:40:51,660 | REQUEST | GET /manage/logs/download/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:40:51,668 | ADMIN_ACTION | LOG_DOWNLOAD_web_activity | Admin: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:40:51,668 | RESPONSE | GET /manage/logs/download/ | Status: 200 | Duration: 0.009s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:40:51,671 | REQUEST | POST /manage/logs/search/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:40:51,671 | POST_DATA | /manage/logs/search/ | Data: {'search_term': 'admin', 'log_types': 'security'}
+[INFO] 2025-09-06 12:40:51,680 | ADMIN_ACTION | LOG_SEARCH | Admin: admin (ID: 5) | Details: Term: admin, Types: ['web_activity', 'security'], Results: 76 | IP: 127.0.0.1
+[INFO] 2025-09-06 12:40:51,683 | RESPONSE | POST /manage/logs/search/ | Status: 200 | Duration: 0.013s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:40:51,686 | REQUEST | GET /manage/logs/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:40:51,695 | RESPONSE | GET /manage/logs/ | Status: 200 | Duration: 0.011s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:40:51,698 | REQUEST | GET /manage/logs/stats/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:40:51,707 | RESPONSE | GET /manage/logs/stats/ | Status: 200 | Duration: 0.010s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:40:51,710 | REQUEST | GET /manage/logs/download/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:40:51,718 | ADMIN_ACTION | LOG_DOWNLOAD_web_activity | Admin: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:40:51,719 | RESPONSE | GET /manage/logs/download/ | Status: 200 | Duration: 0.010s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:40:51,721 | REQUEST | POST /manage/logs/search/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:40:51,721 | POST_DATA | /manage/logs/search/ | Data: {'search_term': 'admin', 'log_types': 'security'}
+[INFO] 2025-09-06 12:40:51,729 | ADMIN_ACTION | LOG_SEARCH | Admin: admin (ID: 5) | Details: Term: admin, Types: ['web_activity', 'security'], Results: 87 | IP: 127.0.0.1
+[INFO] 2025-09-06 12:40:51,731 | RESPONSE | POST /manage/logs/search/ | Status: 200 | Duration: 0.011s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:40:53,987 | REQUEST | GET /manage/logs/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:40:53,990 | RESPONSE | GET /manage/logs/ | Status: 200 | Duration: 0.036s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:41:05,552 | REQUEST | GET /manage/logs/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:41:05,558 | RESPONSE | GET /manage/logs/ | Status: 200 | Duration: 0.040s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:41:16,674 | REQUEST | GET /manage/logs/stats/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:41:16,693 | RESPONSE | GET /manage/logs/stats/ | Status: 200 | Duration: 0.049s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:41:22,288 | REQUEST | GET /manage/logs/download/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:41:22,300 | ADMIN_ACTION | LOG_DOWNLOAD_web_activity | Admin: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:41:22,300 | RESPONSE | GET /manage/logs/download/ | Status: 200 | Duration: 0.151s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:41:31,665 | REQUEST | GET /manage/logs/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:41:31,676 | RESPONSE | GET /manage/logs/ | Status: 200 | Duration: 0.046s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:42:01,772 | REQUEST | GET /manage/logs/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:42:01,784 | RESPONSE | GET /manage/logs/ | Status: 200 | Duration: 0.074s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:42:13,893 | REQUEST | GET /manage/users/1/reset-password/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:42:14,173 | RESPONSE | GET /manage/users/1/reset-password/ | Status: 404 | Duration: 0.281s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:42:14,178 | REQUEST | POST /manage/users/1/reset-password/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:42:14,178 | POST_DATA | /manage/users/1/reset-password/ | Data: {'new_password': '[REDACTED]', 'confirm_password': '[REDACTED]', 'force_change': 'on'}
+[INFO] 2025-09-06 12:42:14,181 | RESPONSE | POST /manage/users/1/reset-password/ | Status: 404 | Duration: 0.005s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:42:14,184 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:42:14,184 | POST_DATA | /auth/login/ | Data: {'username': 'admin', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:42:14,543 | USER_LOGIN_SUCCESS | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:42:14,545 | RESPONSE | POST /auth/login/ | Status: 302 | Duration: 0.361s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:42:14,549 | REQUEST | POST /auth/login/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:42:14,549 | POST_DATA | /auth/login/ | Data: {'username': 'admin', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:42:14,549 | RESPONSE | POST /auth/login/ | Status: 302 | Duration: 0.002s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:42:30,610 | REQUEST | GET /manage/users/8/reset-password/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:42:30,899 | RESPONSE | GET /manage/users/8/reset-password/ | Status: 200 | Duration: 0.290s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:42:31,861 | REQUEST | GET /manage/logs/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:42:31,861 | RESPONSE | GET /manage/logs/ | Status: 302 | Duration: 0.036s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:42:31,864 | REQUEST | GET /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:42:31,872 | RESPONSE | GET /auth/login/ | Status: 200 | Duration: 0.007s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:42:51,196 | REQUEST | GET /manage/users/8/reset-password/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:42:51,487 | RESPONSE | GET /manage/users/8/reset-password/ | Status: 200 | Duration: 0.293s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:42:51,491 | REQUEST | POST /manage/users/8/reset-password/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:42:51,491 | POST_DATA | /manage/users/8/reset-password/ | Data: {'new_password': '[REDACTED]', 'confirm_password': '[REDACTED]', 'force_change': 'on'}
+[INFO] 2025-09-06 12:42:51,862 | RESPONSE | POST /manage/users/8/reset-password/ | Status: 302 | Duration: 0.372s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:42:51,869 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:42:51,869 | POST_DATA | /auth/login/ | Data: {'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:42:52,237 | USER_LOGIN_SUCCESS | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:42:52,238 | RESPONSE | POST /auth/login/ | Status: 302 | Duration: 0.369s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:43:55,580 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:43:55,581 | POST_DATA | /auth/login/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'username': 'admin', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:43:56,071 | USER_LOGIN_SUCCESS | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:43:56,072 | RESPONSE | POST /auth/login/ | Status: 302 | Duration: 0.491s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:43:56,112 | REQUEST | GET /manage/logs/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:43:56,127 | RESPONSE | GET /manage/logs/ | Status: 200 | Duration: 0.049s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:44:00,914 | REQUEST | POST /manage/users/8/reset-password/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:44:00,914 | POST_DATA | /manage/users/8/reset-password/ | Data: {'new_password': '[REDACTED]', 'confirm_password': '[REDACTED]'}
+[INFO] 2025-09-06 12:44:01,293 | RESPONSE | POST /manage/users/8/reset-password/ | Status: 200 | Duration: 0.380s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:44:01,325 | REQUEST | POST /manage/users/8/reset-password/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:44:01,326 | POST_DATA | /manage/users/8/reset-password/ | Data: {'new_password': '[REDACTED]', 'confirm_password': '[REDACTED]'}
+[INFO] 2025-09-06 12:44:01,327 | RESPONSE | POST /manage/users/8/reset-password/ | Status: 200 | Duration: 0.003s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:44:01,329 | REQUEST | POST /manage/users/8/reset-password/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:44:01,329 | POST_DATA | /manage/users/8/reset-password/ | Data: {'new_password': '[REDACTED]', 'confirm_password': '[REDACTED]'}
+[INFO] 2025-09-06 12:44:01,330 | RESPONSE | POST /manage/users/8/reset-password/ | Status: 200 | Duration: 0.002s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:44:01,333 | REQUEST | POST /manage/users/8/reset-password/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:44:01,333 | POST_DATA | /manage/users/8/reset-password/ | Data: {'new_password': '[REDACTED]', 'confirm_password': '[REDACTED]'}
+[INFO] 2025-09-06 12:44:01,694 | RESPONSE | POST /manage/users/8/reset-password/ | Status: 302 | Duration: 0.362s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:44:03,399 | REQUEST | GET /generate-report/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:44:03,404 | RESPONSE | GET /generate-report/ | Status: 200 | Duration: 0.038s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:44:05,741 | REQUEST | GET /log-files/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:44:05,746 | RESPONSE | GET /log-files/ | Status: 200 | Duration: 0.039s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:44:06,386 | REQUEST | GET /abnormal-queries/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:44:06,397 | RESPONSE | GET /abnormal-queries/ | Status: 200 | Duration: 0.049s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:44:11,717 | REQUEST | GET /manage/users/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:44:12,019 | RESPONSE | GET /manage/users/ | Status: 200 | Duration: 0.303s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:44:12,023 | REQUEST | GET /manage/users/8/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:44:12,028 | RESPONSE | GET /manage/users/8/ | Status: 200 | Duration: 0.006s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:44:12,031 | REQUEST | GET /manage/users/8/reset-password/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:44:12,034 | RESPONSE | GET /manage/users/8/reset-password/ | Status: 200 | Duration: 0.004s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:44:27,662 | REQUEST | GET /manage/users/8/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:44:27,967 | RESPONSE | GET /manage/users/8/ | Status: 200 | Duration: 0.306s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:44:27,970 | REQUEST | GET /manage/users/8/reset-password/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:44:27,972 | RESPONSE | GET /manage/users/8/reset-password/ | Status: 200 | Duration: 0.003s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:44:41,991 | REQUEST | GET /manage/users/8/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:44:42,299 | RESPONSE | GET /manage/users/8/ | Status: 200 | Duration: 0.309s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:44:42,303 | REQUEST | GET /manage/users/8/reset-password/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:44:42,304 | RESPONSE | GET /manage/users/8/reset-password/ | Status: 200 | Duration: 0.003s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:44:42,308 | REQUEST | POST /manage/users/8/reset-password/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:44:42,308 | POST_DATA | /manage/users/8/reset-password/ | Data: {'new_password': '[REDACTED]', 'confirm_password': '[REDACTED]', 'force_change': 'on'}
+[INFO] 2025-09-06 12:44:42,666 | RESPONSE | POST /manage/users/8/reset-password/ | Status: 302 | Duration: 0.360s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:44:42,671 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:44:42,671 | POST_DATA | /auth/login/ | Data: {'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:44:43,027 | USER_LOGIN_SUCCESS | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:44:43,027 | RESPONSE | POST /auth/login/ | Status: 302 | Duration: 0.356s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:47:05,721 | REQUEST | GET / | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:47:05,730 | RESPONSE | GET / | Status: 200 | Duration: 0.041s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:47:06,921 | REQUEST | GET /abnormal-queries/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:47:06,929 | RESPONSE | GET /abnormal-queries/ | Status: 200 | Duration: 0.041s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:47:07,821 | REQUEST | GET /generate-report/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:47:07,824 | RESPONSE | GET /generate-report/ | Status: 200 | Duration: 0.038s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:47:08,906 | REQUEST | GET /log-files/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:47:08,910 | RESPONSE | GET /log-files/ | Status: 200 | Duration: 0.041s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:47:10,882 | REQUEST | GET /statistics/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:47:10,894 | RESPONSE | GET /statistics/ | Status: 200 | Duration: 0.046s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:47:12,040 | REQUEST | GET /abnormal-queries/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:47:12,049 | RESPONSE | GET /abnormal-queries/ | Status: 200 | Duration: 0.046s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:47:13,612 | REQUEST | GET /generate-report/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:47:13,616 | RESPONSE | GET /generate-report/ | Status: 200 | Duration: 0.037s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:47:15,106 | REQUEST | GET /manage/logs/stats/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:47:15,128 | RESPONSE | GET /manage/logs/stats/ | Status: 200 | Duration: 0.057s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:47:17,495 | REQUEST | GET /manage/logs/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:47:17,505 | RESPONSE | GET /manage/logs/ | Status: 200 | Duration: 0.042s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:47:18,549 | REQUEST | GET /log-files/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:47:18,553 | RESPONSE | GET /log-files/ | Status: 200 | Duration: 0.038s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:47:20,402 | REQUEST | GET /generate-report/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:47:20,405 | RESPONSE | GET /generate-report/ | Status: 200 | Duration: 0.037s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:47:21,664 | REQUEST | GET /abnormal-queries/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:47:21,672 | RESPONSE | GET /abnormal-queries/ | Status: 200 | Duration: 0.041s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:47:25,735 | REQUEST | GET /manage/users/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:47:25,741 | RESPONSE | GET /manage/users/ | Status: 200 | Duration: 0.039s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:47:37,042 | REQUEST | GET /manage/users/8/reset-password/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:47:37,045 | RESPONSE | GET /manage/users/8/reset-password/ | Status: 200 | Duration: 0.036s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:47:53,053 | REQUEST | POST /manage/users/8/reset-password/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:47:53,053 | POST_DATA | /manage/users/8/reset-password/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'new_password': '[REDACTED]', 'confirm_password': '[REDACTED]'}
+[INFO] 2025-09-06 12:47:53,463 | RESPONSE | POST /manage/users/8/reset-password/ | Status: 302 | Duration: 0.442s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:47:53,506 | REQUEST | GET /manage/users/8/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:47:53,511 | RESPONSE | GET /manage/users/8/ | Status: 200 | Duration: 0.044s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:48:07,522 | REQUEST | GET /auth/logout/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:48:07,522 | USER_LOGOUT | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:48:07,534 | RESPONSE | GET /auth/logout/ | Status: 302 | Duration: 0.046s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:48:07,537 | REQUEST | GET /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:48:07,539 | RESPONSE | GET /auth/login/ | Status: 200 | Duration: 0.002s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:48:13,082 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:48:13,082 | POST_DATA | /auth/login/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:48:13,517 | USER_LOGIN_SUCCESS | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:48:13,517 | RESPONSE | POST /auth/login/ | Status: 302 | Duration: 0.436s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:48:13,554 | REQUEST | GET / | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:48:13,564 | RESPONSE | GET / | Status: 200 | Duration: 0.042s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:51:52,082 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:51:52,082 | POST_DATA | /auth/login/ | Data: {'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:51:52,760 | RESPONSE | POST /auth/login/ | Status: 200 | Duration: 0.679s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:51:52,763 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:51:52,763 | POST_DATA | /auth/login/ | Data: {'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:51:53,119 | RESPONSE | POST /auth/login/ | Status: 200 | Duration: 0.356s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:51:53,122 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:51:53,122 | POST_DATA | /auth/login/ | Data: {'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:51:53,479 | RESPONSE | POST /auth/login/ | Status: 200 | Duration: 0.358s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:51:53,482 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:51:53,482 | POST_DATA | /auth/login/ | Data: {'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:51:53,483 | RESPONSE | POST /auth/login/ | Status: 200 | Duration: 0.002s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:51:53,841 | REQUEST | POST /manage/users/8/unlock/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:51:53,843 | RESPONSE | POST /manage/users/8/unlock/ | Status: 302 | Duration: 0.003s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:51:53,846 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:51:53,846 | POST_DATA | /auth/login/ | Data: {'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:51:54,204 | RESPONSE | POST /auth/login/ | Status: 200 | Duration: 0.359s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:51:58,689 | REQUEST | GET / | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:51:58,717 | RESPONSE | GET / | Status: 200 | Duration: 0.067s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:00,050 | REQUEST | GET /statistics/ | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:52:00,063 | RESPONSE | GET /statistics/ | Status: 200 | Duration: 0.049s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:07,438 | REQUEST | GET /auth/logout/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:52:07,439 | RESPONSE | GET /auth/logout/ | Status: 302 | Duration: 0.045s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:07,443 | REQUEST | GET /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:52:07,447 | RESPONSE | GET /auth/login/ | Status: 200 | Duration: 0.005s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:09,040 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:52:09,040 | POST_DATA | /auth/login/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'username': 'admin', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:52:09,556 | USER_LOGIN_SUCCESS | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:52:09,557 | RESPONSE | POST /auth/login/ | Status: 302 | Duration: 0.517s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:09,594 | REQUEST | GET /auth/logout/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:52:09,594 | USER_LOGOUT | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:09,596 | RESPONSE | GET /auth/logout/ | Status: 302 | Duration: 0.035s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:09,601 | REQUEST | GET /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:52:09,603 | RESPONSE | GET /auth/login/ | Status: 200 | Duration: 0.002s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:11,716 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:52:11,717 | POST_DATA | /auth/login/ | Data: {'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:52:12,383 | RESPONSE | POST /auth/login/ | Status: 200 | Duration: 0.667s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:12,386 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:52:12,386 | POST_DATA | /auth/login/ | Data: {'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:52:12,588 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:52:12,589 | POST_DATA | /auth/login/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'username': 'admin', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:52:12,752 | RESPONSE | POST /auth/login/ | Status: 200 | Duration: 0.367s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:12,754 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:52:12,754 | POST_DATA | /auth/login/ | Data: {'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:52:13,062 | USER_LOGIN_SUCCESS | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:52:13,062 | RESPONSE | POST /auth/login/ | Status: 302 | Duration: 0.474s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:13,104 | REQUEST | GET / | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:52:13,113 | RESPONSE | GET / | Status: 200 | Duration: 0.046s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:13,126 | RESPONSE | POST /auth/login/ | Status: 200 | Duration: 0.372s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:13,128 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:52:13,128 | POST_DATA | /auth/login/ | Data: {'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:52:13,130 | RESPONSE | POST /auth/login/ | Status: 200 | Duration: 0.003s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:13,512 | REQUEST | POST /manage/users/8/unlock/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:52:13,514 | RESPONSE | POST /manage/users/8/unlock/ | Status: 302 | Duration: 0.002s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:13,518 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:52:13,519 | POST_DATA | /auth/login/ | Data: {'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:52:13,881 | USER_LOGIN_SUCCESS | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:52:13,881 | RESPONSE | POST /auth/login/ | Status: 302 | Duration: 0.363s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:16,397 | REQUEST | GET /manage/users/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:52:16,405 | RESPONSE | GET /manage/users/ | Status: 200 | Duration: 0.051s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:20,118 | REQUEST | GET /manage/database-permissions/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:52:20,134 | RESPONSE | GET /manage/database-permissions/ | Status: 200 | Duration: 0.053s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:23,120 | REQUEST | GET /manage/users/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:52:23,416 | RESPONSE | GET /manage/users/ | Status: 200 | Duration: 0.297s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:23,420 | REQUEST | GET /manage/users/8/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:52:23,426 | RESPONSE | GET /manage/users/8/ | Status: 200 | Duration: 0.007s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:27,246 | REQUEST | GET /auth/logout/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:52:27,246 | USER_LOGOUT | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:27,257 | RESPONSE | GET /auth/logout/ | Status: 302 | Duration: 0.045s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:27,261 | REQUEST | GET /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:52:27,262 | RESPONSE | GET /auth/login/ | Status: 200 | Duration: 0.001s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:33,634 | REQUEST | GET /manage/users/8/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:52:33,977 | RESPONSE | GET /manage/users/8/ | Status: 200 | Duration: 0.344s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:33,981 | REQUEST | POST /manage/users/8/unlock/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:52:33,982 | RESPONSE | POST /manage/users/8/unlock/ | Status: 302 | Duration: 0.003s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:33,985 | REQUEST | GET /manage/users/8/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:52:33,988 | RESPONSE | GET /manage/users/8/ | Status: 200 | Duration: 0.003s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:36,013 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:52:36,013 | POST_DATA | /auth/login/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:52:36,553 | RESPONSE | POST /auth/login/ | Status: 200 | Duration: 0.540s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:40,716 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:52:40,716 | POST_DATA | /auth/login/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:52:41,224 | RESPONSE | POST /auth/login/ | Status: 200 | Duration: 0.509s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:47,368 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:52:47,369 | POST_DATA | /auth/login/ | Data: {'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:52:48,065 | RESPONSE | POST /auth/login/ | Status: 200 | Duration: 0.697s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:48,068 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:52:48,068 | POST_DATA | /auth/login/ | Data: {'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:52:48,464 | RESPONSE | POST /auth/login/ | Status: 200 | Duration: 0.396s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:48,466 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:52:48,466 | POST_DATA | /auth/login/ | Data: {'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:52:48,544 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:52:48,544 | POST_DATA | /auth/login/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:52:48,863 | RESPONSE | POST /auth/login/ | Status: 200 | Duration: 0.397s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:48,865 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:52:48,865 | POST_DATA | /auth/login/ | Data: {'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:52:48,868 | RESPONSE | POST /auth/login/ | Status: 200 | Duration: 0.003s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:49,025 | RESPONSE | POST /auth/login/ | Status: 200 | Duration: 0.481s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:49,265 | REQUEST | GET /manage/users/8/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:52:49,278 | RESPONSE | GET /manage/users/8/ | Status: 200 | Duration: 0.014s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:49,281 | REQUEST | POST /manage/users/8/unlock/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:52:49,283 | RESPONSE | POST /manage/users/8/unlock/ | Status: 302 | Duration: 0.003s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:49,287 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:52:49,288 | POST_DATA | /auth/login/ | Data: {'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:52:49,671 | USER_LOGIN_SUCCESS | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:52:49,672 | RESPONSE | POST /auth/login/ | Status: 302 | Duration: 0.385s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:58,461 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:52:58,461 | POST_DATA | /auth/login/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'username': 'admin', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:52:58,816 | USER_LOGIN_SUCCESS | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:52:58,819 | RESPONSE | POST /auth/login/ | Status: 302 | Duration: 0.358s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:52:58,860 | REQUEST | GET / | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:52:58,878 | RESPONSE | GET / | Status: 200 | Duration: 0.053s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:53:02,615 | REQUEST | GET /manage/users/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:53:02,620 | RESPONSE | GET /manage/users/ | Status: 200 | Duration: 0.037s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:53:18,170 | REQUEST | GET /manage/users/8/edit/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:53:18,194 | RESPONSE | GET /manage/users/8/edit/ | Status: 500 | Duration: 0.058s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:53:21,910 | REQUEST | GET /manage/users/8/reset-password/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:53:21,913 | RESPONSE | GET /manage/users/8/reset-password/ | Status: 200 | Duration: 0.034s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:53:25,428 | REQUEST | GET /manage/users/8/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:53:25,435 | RESPONSE | GET /manage/users/8/ | Status: 200 | Duration: 0.038s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:54:31,368 | REQUEST | GET /log-files/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:54:31,373 | RESPONSE | GET /log-files/ | Status: 200 | Duration: 0.048s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:54:35,298 | REQUEST | GET /manage/logs/stats/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:54:35,340 | RESPONSE | GET /manage/logs/stats/ | Status: 200 | Duration: 0.078s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:54:45,994 | REQUEST | GET /manage/users/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:54:46,351 | RESPONSE | GET /manage/users/ | Status: 200 | Duration: 0.359s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:54:46,355 | REQUEST | GET /manage/users/8/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:54:46,362 | RESPONSE | GET /manage/users/8/ | Status: 200 | Duration: 0.009s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:54:49,143 | REQUEST | GET /manage/logs/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:54:49,157 | RESPONSE | GET /manage/logs/ | Status: 200 | Duration: 0.050s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:55:02,293 | REQUEST | GET /manage/users/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:55:02,605 | RESPONSE | GET /manage/users/ | Status: 200 | Duration: 0.313s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:55:02,609 | REQUEST | GET /manage/users/8/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:55:02,615 | RESPONSE | GET /manage/users/8/ | Status: 200 | Duration: 0.007s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:55:02,619 | REQUEST | POST /manage/users/8/unlock/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:55:02,621 | RESPONSE | POST /manage/users/8/unlock/ | Status: 302 | Duration: 0.003s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:55:02,624 | REQUEST | GET /manage/users/8/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:55:02,626 | RESPONSE | GET /manage/users/8/ | Status: 200 | Duration: 0.003s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:55:19,315 | REQUEST | GET /manage/logs/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:55:19,326 | RESPONSE | GET /manage/logs/ | Status: 200 | Duration: 0.145s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:55:21,186 | REQUEST | GET /manage/users/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:55:21,490 | RESPONSE | GET /manage/users/ | Status: 200 | Duration: 0.305s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:55:21,494 | REQUEST | GET /manage/users/8/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:55:21,500 | RESPONSE | GET /manage/users/8/ | Status: 200 | Duration: 0.007s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:55:49,389 | REQUEST | GET /manage/logs/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:55:49,402 | RESPONSE | GET /manage/logs/ | Status: 200 | Duration: 0.049s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:55:59,880 | REQUEST | GET /manage/users/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:56:00,229 | RESPONSE | GET /manage/users/ | Status: 200 | Duration: 0.351s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:56:00,234 | REQUEST | GET /manage/users/8/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:56:00,243 | RESPONSE | GET /manage/users/8/ | Status: 200 | Duration: 0.010s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:56:18,495 | REQUEST | GET /manage/users/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:56:18,805 | RESPONSE | GET /manage/users/ | Status: 200 | Duration: 0.311s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:56:19,478 | REQUEST | GET /manage/logs/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:56:19,490 | RESPONSE | GET /manage/logs/ | Status: 200 | Duration: 0.046s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:56:31,165 | REQUEST | GET /manage/users/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:56:31,475 | RESPONSE | GET /manage/users/ | Status: 200 | Duration: 0.312s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:56:31,478 | REQUEST | GET /manage/users/8/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:56:31,486 | RESPONSE | GET /manage/users/8/ | Status: 200 | Duration: 0.008s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:56:31,489 | REQUEST | POST /manage/users/8/unlock/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:56:31,491 | RESPONSE | POST /manage/users/8/unlock/ | Status: 302 | Duration: 0.003s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:56:31,494 | REQUEST | GET /manage/users/8/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 12:56:31,496 | RESPONSE | GET /manage/users/8/ | Status: 200 | Duration: 0.003s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:56:49,551 | REQUEST | GET /manage/logs/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:56:49,566 | RESPONSE | GET /manage/logs/ | Status: 200 | Duration: 0.048s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:56:57,312 | REQUEST | GET /manage/logs/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:56:57,327 | RESPONSE | GET /manage/logs/ | Status: 200 | Duration: 0.084s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:56:59,724 | REQUEST | GET /manage/users/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:56:59,729 | RESPONSE | GET /manage/users/ | Status: 200 | Duration: 0.036s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:57:05,877 | REQUEST | GET /auth/logout/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:57:05,877 | USER_LOGOUT | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:57:05,888 | RESPONSE | GET /auth/logout/ | Status: 302 | Duration: 0.045s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:57:05,891 | REQUEST | GET /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:57:05,896 | RESPONSE | GET /auth/login/ | Status: 200 | Duration: 0.005s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:57:11,812 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:57:11,813 | POST_DATA | /auth/login/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:57:12,259 | RESPONSE | POST /auth/login/ | Status: 200 | Duration: 0.446s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:57:20,792 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:57:20,793 | POST_DATA | /auth/login/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:57:21,254 | RESPONSE | POST /auth/login/ | Status: 200 | Duration: 0.462s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:57:26,076 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:57:26,076 | POST_DATA | /auth/login/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:57:26,499 | RESPONSE | POST /auth/login/ | Status: 200 | Duration: 0.423s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 12:57:30,849 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:57:30,850 | POST_DATA | /auth/login/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'username': 'admin', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 12:57:31,334 | USER_LOGIN_SUCCESS | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:57:31,334 | RESPONSE | POST /auth/login/ | Status: 302 | Duration: 0.485s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:57:31,370 | REQUEST | GET / | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:57:31,379 | RESPONSE | GET / | Status: 200 | Duration: 0.040s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:57:33,638 | REQUEST | GET /manage/users/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:57:33,643 | RESPONSE | GET /manage/users/ | Status: 200 | Duration: 0.036s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:57:38,400 | REQUEST | GET /manage/users/8/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:57:38,408 | RESPONSE | GET /manage/users/8/ | Status: 200 | Duration: 0.039s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:57:45,550 | REQUEST | POST /manage/users/8/unlock/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:57:45,550 | POST_DATA | /manage/users/8/unlock/ | Data: {'csrfmiddlewaretoken': '[REDACTED]'}
+[INFO] 2025-09-06 12:57:45,561 | RESPONSE | POST /manage/users/8/unlock/ | Status: 302 | Duration: 0.042s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:57:45,595 | REQUEST | GET /manage/users/8/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:57:45,601 | RESPONSE | GET /manage/users/8/ | Status: 200 | Duration: 0.036s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:57:49,144 | REQUEST | GET /manage/users/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:57:49,148 | RESPONSE | GET /manage/users/ | Status: 200 | Duration: 0.037s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 12:58:06,469 | REQUEST | GET /manage/database-permissions/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 12:58:06,479 | RESPONSE | GET /manage/database-permissions/ | Status: 200 | Duration: 0.043s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:01:56,707 | REQUEST | GET / | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 13:01:57,025 | RESPONSE | GET / | Status: 200 | Duration: 0.320s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:01:57,029 | REQUEST | GET /statistics/ | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 13:01:57,037 | RESPONSE | GET /statistics/ | Status: 200 | Duration: 0.009s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:01:57,040 | REQUEST | GET /abnormal-queries/ | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 13:01:57,047 | RESPONSE | GET /abnormal-queries/ | Status: 200 | Duration: 0.009s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:01:57,050 | REQUEST | GET /api/logs/ | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 13:01:57,051 | RESPONSE | GET /api/logs/ | Status: 200 | Duration: 0.003s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:01:57,054 | REQUEST | GET /generate-report/ | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 13:01:57,056 | RESPONSE | GET /generate-report/ | Status: 200 | Duration: 0.004s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:02:04,904 | REQUEST | GET / | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 13:02:05,213 | RESPONSE | GET / | Status: 200 | Duration: 0.310s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:02:05,216 | REQUEST | GET /statistics/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 13:02:05,226 | RESPONSE | GET /statistics/ | Status: 200 | Duration: 0.011s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:02:25,973 | REQUEST | GET / | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 13:02:26,296 | RESPONSE | GET / | Status: 200 | Duration: 0.324s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:02:26,300 | REQUEST | GET /statistics/ | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 13:02:26,307 | RESPONSE | GET /statistics/ | Status: 200 | Duration: 0.009s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:02:26,310 | REQUEST | GET /abnormal-queries/ | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 13:02:26,317 | RESPONSE | GET /abnormal-queries/ | Status: 200 | Duration: 0.008s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:02:26,320 | REQUEST | GET /generate-report/ | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 13:02:26,321 | RESPONSE | GET /generate-report/ | Status: 200 | Duration: 0.003s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:02:26,324 | REQUEST | GET /api/logs/ | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Unknown
+[INFO] 2025-09-06 13:02:26,326 | RESPONSE | GET /api/logs/ | Status: 200 | Duration: 0.003s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:03:01,823 | REQUEST | GET /auth/logout/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:03:01,823 | USER_LOGOUT | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:03:01,835 | RESPONSE | GET /auth/logout/ | Status: 302 | Duration: 0.045s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 13:03:01,839 | REQUEST | GET /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:03:01,845 | RESPONSE | GET /auth/login/ | Status: 200 | Duration: 0.005s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 13:03:05,422 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:03:05,422 | POST_DATA | /auth/login/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'username': 'admin', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 13:03:05,863 | USER_LOGIN_SUCCESS | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:03:05,864 | RESPONSE | POST /auth/login/ | Status: 302 | Duration: 0.442s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:03:05,900 | REQUEST | GET / | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:03:05,918 | RESPONSE | GET / | Status: 200 | Duration: 0.049s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:03:16,504 | REQUEST | GET /manage/users/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:03:16,514 | RESPONSE | GET /manage/users/ | Status: 200 | Duration: 0.045s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:03:20,194 | REQUEST | GET /auth/logout/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:03:20,194 | USER_LOGOUT | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:03:20,205 | RESPONSE | GET /auth/logout/ | Status: 302 | Duration: 0.044s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 13:03:20,209 | REQUEST | GET /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:03:20,210 | RESPONSE | GET /auth/login/ | Status: 200 | Duration: 0.001s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 13:03:27,062 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:03:27,062 | POST_DATA | /auth/login/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 13:03:27,521 | RESPONSE | POST /auth/login/ | Status: 200 | Duration: 0.460s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 13:03:31,028 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:03:31,029 | POST_DATA | /auth/login/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'username': 'admin', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 13:03:31,472 | USER_LOGIN_SUCCESS | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:03:31,472 | RESPONSE | POST /auth/login/ | Status: 302 | Duration: 0.444s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:03:31,508 | REQUEST | GET / | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:03:31,516 | RESPONSE | GET / | Status: 200 | Duration: 0.039s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:03:38,584 | REQUEST | GET /manage/users/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:03:38,588 | RESPONSE | GET /manage/users/ | Status: 200 | Duration: 0.141s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:03:44,873 | REQUEST | GET /manage/users/8/reset-password/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:03:44,876 | RESPONSE | GET /manage/users/8/reset-password/ | Status: 200 | Duration: 0.037s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:03:54,854 | REQUEST | POST /manage/users/8/reset-password/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:03:54,854 | POST_DATA | /manage/users/8/reset-password/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'new_password': '[REDACTED]', 'confirm_password': '[REDACTED]'}
+[INFO] 2025-09-06 13:03:55,267 | RESPONSE | POST /manage/users/8/reset-password/ | Status: 302 | Duration: 0.546s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:03:55,309 | REQUEST | GET /manage/users/8/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:03:55,315 | RESPONSE | GET /manage/users/8/ | Status: 200 | Duration: 0.042s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:03:59,696 | REQUEST | GET /manage/users/8/edit/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:03:59,701 | RESPONSE | GET /manage/users/8/edit/ | Status: 200 | Duration: 0.043s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:04:02,488 | REQUEST | GET /auth/logout/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:04:02,488 | USER_LOGOUT | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:04:02,499 | RESPONSE | GET /auth/logout/ | Status: 302 | Duration: 0.047s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 13:04:02,502 | REQUEST | GET /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:04:02,504 | RESPONSE | GET /auth/login/ | Status: 200 | Duration: 0.002s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 13:04:10,881 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:04:10,881 | POST_DATA | /auth/login/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'username': 'secureuser', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 13:04:11,319 | USER_LOGIN_SUCCESS | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:04:11,319 | RESPONSE | POST /auth/login/ | Status: 302 | Duration: 0.439s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:04:11,358 | REQUEST | GET / | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:04:11,365 | RESPONSE | GET / | Status: 200 | Duration: 0.041s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:04:14,669 | REQUEST | GET /statistics/ | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:04:14,683 | RESPONSE | GET /statistics/ | Status: 200 | Duration: 0.051s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:04:31,508 | REQUEST | GET /statistics/ | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:04:31,520 | RESPONSE | GET /statistics/ | Status: 200 | Duration: 0.047s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:15:08,593 | REQUEST | GET /statistics/ | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:15:08,623 | RESPONSE | GET /statistics/ | Status: 200 | Duration: 0.072s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:15:09,721 | REQUEST | GET /statistics/ | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:15:09,733 | RESPONSE | GET /statistics/ | Status: 200 | Duration: 0.048s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:15:10,529 | REQUEST | GET /statistics/ | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:15:10,540 | RESPONSE | GET /statistics/ | Status: 200 | Duration: 0.046s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:15:11,367 | REQUEST | GET /import-log/ | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:15:11,484 | RESPONSE | GET /import-log/ | Status: 500 | Duration: 0.152s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:15:13,627 | REQUEST | GET /import-log/ | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:15:13,677 | RESPONSE | GET /import-log/ | Status: 500 | Duration: 0.083s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:16:56,296 | REQUEST | GET /import-log/ | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:16:56,342 | RESPONSE | GET /import-log/ | Status: 500 | Duration: 0.086s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:16:59,200 | REQUEST | GET /import-log/ | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:16:59,239 | RESPONSE | GET /import-log/ | Status: 500 | Duration: 0.073s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:17:01,184 | REQUEST | GET /log-files/ | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:17:01,229 | RESPONSE | GET /log-files/ | Status: 500 | Duration: 0.083s | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:17:09,902 | REQUEST | GET /auth/logout/ | User: secureuser (ID: 8) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:17:09,902 | USER_LOGOUT | User: secureuser (ID: 8) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:17:09,904 | RESPONSE | GET /auth/logout/ | Status: 302 | Duration: 0.036s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 13:17:09,908 | REQUEST | GET /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:17:09,912 | RESPONSE | GET /auth/login/ | Status: 200 | Duration: 0.004s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 13:17:11,914 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:17:11,914 | POST_DATA | /auth/login/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'username': 'admin', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 13:17:12,406 | USER_LOGIN_SUCCESS | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:17:12,406 | RESPONSE | POST /auth/login/ | Status: 302 | Duration: 0.493s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:17:12,440 | REQUEST | GET / | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:17:12,450 | RESPONSE | GET / | Status: 200 | Duration: 0.040s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:17:14,645 | REQUEST | GET /manage/logs/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:17:14,659 | RESPONSE | GET /manage/logs/ | Status: 200 | Duration: 0.049s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:17:16,244 | REQUEST | GET /log-files/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:17:16,284 | RESPONSE | GET /log-files/ | Status: 500 | Duration: 0.072s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:17:18,780 | REQUEST | GET /import-log/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:17:18,831 | RESPONSE | GET /import-log/ | Status: 500 | Duration: 0.090s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:17:44,740 | REQUEST | GET /manage/logs/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:17:44,755 | RESPONSE | GET /manage/logs/ | Status: 200 | Duration: 0.050s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:18:14,823 | REQUEST | GET /manage/logs/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:18:14,837 | RESPONSE | GET /manage/logs/ | Status: 200 | Duration: 0.047s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:18:24,151 | REQUEST | GET /manage/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:18:24,161 | RESPONSE | GET /manage/ | Status: 200 | Duration: 0.070s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:18:28,668 | REQUEST | GET / | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:18:28,681 | RESPONSE | GET / | Status: 200 | Duration: 0.045s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:18:30,139 | REQUEST | GET /statistics/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:18:30,153 | RESPONSE | GET /statistics/ | Status: 200 | Duration: 0.050s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:18:31,493 | REQUEST | GET /abnormal-queries/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:18:31,507 | RESPONSE | GET /abnormal-queries/ | Status: 200 | Duration: 0.046s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:18:34,673 | REQUEST | GET /generate-report/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:18:34,678 | RESPONSE | GET /generate-report/ | Status: 200 | Duration: 0.043s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:18:38,024 | REQUEST | GET / | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:18:38,033 | RESPONSE | GET / | Status: 200 | Duration: 0.049s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:18:38,567 | REQUEST | GET / | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:18:38,576 | RESPONSE | GET / | Status: 200 | Duration: 0.046s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:18:41,378 | REQUEST | GET /auth/profile/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:18:41,380 | RESPONSE | GET /auth/profile/ | Status: 200 | Duration: 0.039s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:21:37,793 | REQUEST | GET / | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:21:37,823 | RESPONSE | GET / | Status: 200 | Duration: 0.076s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:21:39,812 | REQUEST | GET / | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:21:39,818 | RESPONSE | GET / | Status: 200 | Duration: 0.050s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:21:40,515 | REQUEST | GET / | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:21:40,525 | RESPONSE | GET / | Status: 200 | Duration: 0.045s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:21:42,530 | REQUEST | GET /generate-report/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:21:42,533 | RESPONSE | GET /generate-report/ | Status: 200 | Duration: 0.037s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:27:51,366 | REQUEST | GET /generate-report/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:27:51,378 | RESPONSE | GET /generate-report/ | Status: 200 | Duration: 0.044s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:27:56,954 | REQUEST | GET /auth/profile/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:27:56,963 | RESPONSE | GET /auth/profile/ | Status: 200 | Duration: 0.042s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:27:59,000 | REQUEST | GET /mfa/setup/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:27:59,181 | RESPONSE | GET /mfa/setup/ | Status: 200 | Duration: 0.215s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:28:27,109 | REQUEST | POST /mfa/setup/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:28:27,110 | POST_DATA | /mfa/setup/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'action': 'enable'}
+[INFO] 2025-09-06 13:28:27,112 | RESPONSE | POST /mfa/setup/ | Status: 302 | Duration: 0.040s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:28:27,150 | REQUEST | GET /mfa/setup/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:28:27,164 | RESPONSE | GET /mfa/setup/ | Status: 200 | Duration: 0.047s | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:28:33,139 | REQUEST | GET /auth/logout/ | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:28:33,139 | USER_LOGOUT | User: admin (ID: 5) | IP: 127.0.0.1
+[INFO] 2025-09-06 13:28:33,149 | RESPONSE | GET /auth/logout/ | Status: 302 | Duration: 0.042s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 13:28:33,153 | REQUEST | GET /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:28:33,158 | RESPONSE | GET /auth/login/ | Status: 200 | Duration: 0.005s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 13:28:35,735 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:28:35,735 | POST_DATA | /auth/login/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'username': 'admin', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 13:28:36,221 | RESPONSE | POST /auth/login/ | Status: 500 | Duration: 0.486s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 13:29:51,939 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:29:51,940 | POST_DATA | /auth/login/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'username': 'admin', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 13:29:52,366 | RESPONSE | POST /auth/login/ | Status: 500 | Duration: 0.427s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 13:29:53,805 | REQUEST | GET /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:29:53,806 | RESPONSE | GET /auth/login/ | Status: 200 | Duration: 0.001s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 13:29:56,022 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:29:56,022 | POST_DATA | /auth/login/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'username': 'admin', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 13:29:56,508 | RESPONSE | POST /auth/login/ | Status: 500 | Duration: 0.486s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 13:30:03,619 | REQUEST | GET /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:30:03,620 | RESPONSE | GET /auth/login/ | Status: 200 | Duration: 0.002s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 13:30:06,216 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:30:06,216 | POST_DATA | /auth/login/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'username': 'admin', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 13:30:06,684 | RESPONSE | POST /auth/login/ | Status: 500 | Duration: 0.468s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 13:30:37,708 | REQUEST | POST /auth/login/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:30:37,708 | POST_DATA | /auth/login/ | Data: {'csrfmiddlewaretoken': '[REDACTED]', 'username': 'admin', 'password': '[REDACTED]'}
+[INFO] 2025-09-06 13:30:38,103 | USER_LOGIN_SUCCESS_MFA_PENDING | User: admin (ID: 5) | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:30:38,106 | RESPONSE | POST /auth/login/ | Status: 302 | Duration: 0.398s | User: Anonymous | IP: 127.0.0.1
+[INFO] 2025-09-06 13:30:38,147 | REQUEST | GET /mfa/verify/ | User: Anonymous | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[INFO] 2025-09-06 13:30:38,156 | RESPONSE | GET /mfa/verify/ | Status: 200 | Duration: 0.041s | User: Anonymous | IP: 127.0.0.1

@@ -1,0 +1,267 @@
+{% extends 'logs/base.html' %}
+
+{% block title %}Log Viewer - SQL Log Analyzer{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-file-alt"></i> Log Viewer</h2>
+            <div class="btn-group">
+                <a href="{% url 'logs:admin_dashboard' %}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Dashboard
+                </a>
+                <a href="{% url 'logs:admin_log_stats' %}" class="btn btn-info">
+                    <i class="fas fa-chart-bar"></i> Thống Kê
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Log Type Selector -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-4">
+                        <label for="log-type" class="form-label">Loại Log:</label>
+                        <select class="form-select" id="log-type" onchange="changeLogType()">
+                            {% for log_type in log_types %}
+                            <option value="{{ log_type }}" {% if log_type == current_log_type %}selected{% endif %}>
+                                {% if log_type == 'web_activity' %}Web Activity
+                                {% elif log_type == 'security' %}Security
+                                {% elif log_type == 'django_general' %}Django General
+                                {% elif log_type == 'django_errors' %}Django Errors
+                                {% else %}{{ log_type|title }}
+                                {% endif %}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="search" class="form-label">Tìm kiếm:</label>
+                        <input type="text" class="form-control" id="search" name="search" 
+                               value="{{ search }}" placeholder="Tìm kiếm trong log...">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">&nbsp;</label>
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-primary" onclick="searchLogs()">
+                                <i class="fas fa-search"></i> Tìm kiếm
+                            </button>
+                            <button type="button" class="btn btn-success" onclick="downloadLog()">
+                                <i class="fas fa-download"></i> Tải xuống
+                            </button>
+                            <button type="button" class="btn btn-warning" onclick="clearLog()">
+                                <i class="fas fa-trash"></i> Xóa Log
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Log Statistics -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <h5 class="text-primary">{{ stats.log_file_size|filesizeformat }}</h5>
+                            <small class="text-muted">Kích thước file</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <h5 class="text-success">{{ page_obj.paginator.count }}</h5>
+                            <small class="text-muted">Tổng số dòng</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <h5 class="text-info">
+                                {% if current_log_type == 'web_activity' %}Web Activity
+                                {% elif current_log_type == 'security' %}Security
+                                {% elif current_log_type == 'django_general' %}Django General
+                                {% elif current_log_type == 'django_errors' %}Django Errors
+                                {% else %}{{ current_log_type|title }}
+                                {% endif %}
+                            </h5>
+                            <small class="text-muted">Loại log hiện tại</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <h5 class="text-warning">
+                                {% if stats.log_file_exists %}
+                                <i class="fas fa-check-circle text-success"></i> Có
+                                {% else %}
+                                <i class="fas fa-times-circle text-danger"></i> Không
+                                {% endif %}
+                            </h5>
+                            <small class="text-muted">File tồn tại</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Log Entries -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-list"></i> Log Entries</h5>
+            </div>
+            <div class="card-body">
+                {% if log_entries %}
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th width="50">#</th>
+                                <th>Nội dung</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for entry in log_entries %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>
+                                    <code class="log-entry">{{ entry }}</code>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Pagination -->
+                {% if page_obj.has_other_pages %}
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?type={{ current_log_type }}&page=1{% if search %}&search={{ search }}{% endif %}">Đầu</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?type={{ current_log_type }}&page={{ page_obj.previous_page_number }}{% if search %}&search={{ search }}{% endif %}">Trước</a>
+                        </li>
+                        {% endif %}
+                        
+                        <li class="page-item active">
+                            <span class="page-link">
+                                Trang {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+                            </span>
+                        </li>
+                        
+                        {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?type={{ current_log_type }}&page={{ page_obj.next_page_number }}{% if search %}&search={{ search }}{% endif %}">Tiếp</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?type={{ current_log_type }}&page={{ page_obj.paginator.num_pages }}{% if search %}&search={{ search }}{% endif %}">Cuối</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
+                
+                {% else %}
+                <div class="text-center py-5">
+                    <i class="fas fa-file-alt fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">Không có log entries</h5>
+                    <p class="text-muted">File log có thể trống hoặc không tồn tại.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Clear Log Modal -->
+<div class="modal fade" id="clearLogModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xác nhận xóa log</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa tất cả nội dung của file log <strong>{{ current_log_type }}</strong>?</p>
+                <p class="text-warning"><i class="fas fa-exclamation-triangle"></i> Hành động này không thể hoàn tác!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <form method="post" action="{% url 'logs:admin_log_clear' %}" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="log_type" value="{{ current_log_type }}">
+                    <button type="submit" class="btn btn-danger">Xóa Log</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function changeLogType() {
+    const logType = document.getElementById('log-type').value;
+    const search = document.getElementById('search').value;
+    let url = `{% url 'logs:admin_log_viewer' %}?type=${logType}`;
+    if (search) {
+        url += `&search=${encodeURIComponent(search)}`;
+    }
+    window.location.href = url;
+}
+
+function searchLogs() {
+    const logType = document.getElementById('log-type').value;
+    const search = document.getElementById('search').value;
+    let url = `{% url 'logs:admin_log_viewer' %}?type=${logType}`;
+    if (search) {
+        url += `&search=${encodeURIComponent(search)}`;
+    }
+    window.location.href = url;
+}
+
+function downloadLog() {
+    const logType = document.getElementById('log-type').value;
+    window.location.href = `{% url 'logs:admin_log_download' %}?type=${logType}`;
+}
+
+function clearLog() {
+    const modal = new bootstrap.Modal(document.getElementById('clearLogModal'));
+    modal.show();
+}
+
+// Auto-refresh every 30 seconds
+setInterval(function() {
+    if (!document.hidden) {
+        window.location.reload();
+    }
+}, 30000);
+</script>
+
+<style>
+.log-entry {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85em;
+    white-space: pre-wrap;
+    word-break: break-all;
+    background-color: #f8f9fa;
+    padding: 2px 4px;
+    border-radius: 3px;
+    display: block;
+}
+</style>
+{% endblock %}

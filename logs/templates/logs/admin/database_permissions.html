@@ -99,16 +99,19 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="d-flex gap-2">
-                                <select name="action" class="form-select" style="width: auto;">
+                            <div class="d-flex gap-2 align-items-center">
+                                <select name="action" class="form-select" style="width: auto;" id="bulk-action-select">
                                     <option value="">-- Chọn hành động --</option>
-                                    <option value="activate">Kích hoạt</option>
-                                    <option value="deactivate">Vô hiệu hóa</option>
-                                    <option value="delete">Xóa</option>
+                                    <option value="activate">✅ Kích hoạt</option>
+                                    <option value="deactivate">⏸️ Vô hiệu hóa</option>
+                                    <option value="delete">🗑️ Xóa</option>
                                 </select>
-                                <button type="submit" class="btn btn-warning" onclick="return confirm('Bạn có chắc chắn muốn thực hiện hành động này?')">
+                                <button type="submit" class="btn btn-warning" id="bulk-submit-btn">
                                     <i class="fas fa-play"></i> Thực hiện
                                 </button>
+                                <small class="text-muted" id="bulk-info" style="display: none;">
+                                    <span id="selected-count">0</span> phân quyền được chọn
+                                </small>
                             </div>
                         </div>
                     </div>
@@ -209,10 +212,13 @@
                                            class="btn btn-outline-primary" title="Chỉnh sửa">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="{% url 'logs:admin_database_permission_toggle_active' permission.id %}" 
-                                           class="btn btn-outline-warning" title="Bật/tắt">
-                                            <i class="fas fa-power-off"></i>
-                                        </a>
+                                        <form method="post" action="{% url 'logs:admin_database_permission_toggle_active' permission.id %}" style="display: inline;">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-outline-warning" title="Bật/tắt" 
+                                                    onclick="return confirm('Bạn có chắc chắn muốn thay đổi trạng thái phân quyền này?')">
+                                                <i class="fas fa-power-off"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>
@@ -288,12 +294,94 @@ document.getElementById('select-all-table').addEventListener('change', function(
 // Individual checkbox change
 document.querySelectorAll('.permission-checkbox').forEach(checkbox => {
     checkbox.addEventListener('change', function() {
-        const allCheckboxes = document.querySelectorAll('.permission-checkbox');
-        const checkedCheckboxes = document.querySelectorAll('.permission-checkbox:checked');
-        
-        document.getElementById('select-all').checked = allCheckboxes.length === checkedCheckboxes.length;
-        document.getElementById('select-all-table').checked = allCheckboxes.length === checkedCheckboxes.length;
+        updateBulkActionInfo();
     });
+});
+
+// Update bulk action info
+function updateBulkActionInfo() {
+    const allCheckboxes = document.querySelectorAll('.permission-checkbox');
+    const checkedCheckboxes = document.querySelectorAll('.permission-checkbox:checked');
+    const selectedCount = checkedCheckboxes.length;
+    
+    // Update select all checkboxes
+    document.getElementById('select-all').checked = allCheckboxes.length === checkedCheckboxes.length;
+    document.getElementById('select-all-table').checked = allCheckboxes.length === checkedCheckboxes.length;
+    
+    // Update bulk info display
+    const bulkInfo = document.getElementById('bulk-info');
+    const selectedCountSpan = document.getElementById('selected-count');
+    const bulkSubmitBtn = document.getElementById('bulk-submit-btn');
+    
+    if (selectedCount > 0) {
+        bulkInfo.style.display = 'block';
+        selectedCountSpan.textContent = selectedCount;
+        bulkSubmitBtn.disabled = false;
+        bulkSubmitBtn.classList.remove('btn-secondary');
+        bulkSubmitBtn.classList.add('btn-warning');
+        bulkSubmitBtn.style.pointerEvents = 'auto';
+        bulkSubmitBtn.style.opacity = '1';
+    } else {
+        bulkInfo.style.display = 'none';
+        bulkSubmitBtn.disabled = true;
+        bulkSubmitBtn.classList.remove('btn-warning');
+        bulkSubmitBtn.classList.add('btn-secondary');
+        bulkSubmitBtn.style.pointerEvents = 'none';
+        bulkSubmitBtn.style.opacity = '0.6';
+    }
+}
+
+// Bulk action confirmation
+function confirmBulkAction() {
+    const action = document.querySelector('select[name="action"]').value;
+    const checkedCheckboxes = document.querySelectorAll('.permission-checkbox:checked');
+    
+    if (!action) {
+        alert('Vui lòng chọn hành động!');
+        return false;
+    }
+    
+    if (checkedCheckboxes.length === 0) {
+        alert('Vui lòng chọn ít nhất một phân quyền!');
+        return false;
+    }
+    
+    let actionText = '';
+    switch(action) {
+        case 'activate':
+            actionText = 'kích hoạt';
+            break;
+        case 'deactivate':
+            actionText = 'vô hiệu hóa';
+            break;
+        case 'delete':
+            actionText = 'xóa';
+            break;
+    }
+    
+    const confirmMessage = `Bạn có chắc chắn muốn ${actionText} ${checkedCheckboxes.length} phân quyền đã chọn?`;
+    
+    if (action === 'delete') {
+        return confirm(confirmMessage + '\n\n⚠️ CẢNH BÁO: Hành động này không thể hoàn tác!');
+    } else {
+        return confirm(confirmMessage);
+    }
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    updateBulkActionInfo();
+    
+    // Add form submission handler
+    const bulkForm = document.getElementById('bulk-form');
+    if (bulkForm) {
+        bulkForm.addEventListener('submit', function(e) {
+            if (!confirmBulkAction()) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    }
 });
 </script>
 {% endblock %}

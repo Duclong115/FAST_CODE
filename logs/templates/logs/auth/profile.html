@@ -56,11 +56,28 @@
                                     {% endif %}
                                 </td>
                             </tr>
+                            <tr>
+                                <td><strong><i class="fas fa-shield-alt"></i> MFA:</strong></td>
+                                <td>
+                                    {% if user.mfa_enabled %}
+                                        <span class="badge bg-success">
+                                            <i class="fas fa-check"></i> Đã bật
+                                        </span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">
+                                            <i class="fas fa-times"></i> Chưa bật
+                                        </span>
+                                    {% endif %}
+                                </td>
+                            </tr>
                         </table>
                         
                         <div class="mt-4">
                             <a href="{% url 'logs:change_password' %}" class="btn btn-warning">
                                 <i class="fas fa-key"></i> Đổi mật khẩu
+                            </a>
+                            <a href="{% url 'logs:mfa_setup' %}" class="btn btn-info">
+                                <i class="fas fa-shield-alt"></i> Thiết lập MFA
                             </a>
                             <a href="{% url 'logs:index' %}" class="btn btn-secondary">
                                 <i class="fas fa-arrow-left"></i> Quay lại

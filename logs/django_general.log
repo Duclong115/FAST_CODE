@@ -1,0 +1,268 @@
+[INFO] 2025-09-06 12:33:21,369 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 12:34:07,356 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\log_analyzer\settings.py changed, reloading.
+[INFO] 2025-09-06 12:34:07,821 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 12:35:01,911 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\auth_views.py changed, reloading.
+[INFO] 2025-09-06 12:35:02,402 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 12:35:09,028 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\auth_views.py changed, reloading.
+[INFO] 2025-09-06 12:35:09,484 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 12:35:15,092 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\auth_views.py changed, reloading.
+[INFO] 2025-09-06 12:35:15,541 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 12:35:20,129 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\auth_views.py changed, reloading.
+[INFO] 2025-09-06 12:35:20,596 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 12:35:25,255 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\database_permission_views.py changed, reloading.
+[INFO] 2025-09-06 12:35:25,676 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 12:35:29,229 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\database_permission_views.py changed, reloading.
+[INFO] 2025-09-06 12:35:29,679 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 12:35:34,315 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\database_permission_views.py changed, reloading.
+[INFO] 2025-09-06 12:35:34,733 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 12:35:35,517 | django.server | log_message:213 | "GET / HTTP/1.1" 200 25697
+[INFO] 2025-09-06 12:35:39,310 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\database_permission_views.py changed, reloading.
+[INFO] 2025-09-06 12:35:39,746 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 12:35:40,255 | django.server | log_message:213 | "GET /statistics/ HTTP/1.1" 200 39453
+[INFO] 2025-09-06 12:35:44,363 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\urls.py changed, reloading.
+[INFO] 2025-09-06 12:35:44,863 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 12:35:50,435 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\urls.py changed, reloading.
+[INFO] 2025-09-06 12:35:50,878 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 12:36:08,205 | logs | log_system_event:184 | SYSTEM_EVENT | TEST_SYSTEM_EVENT | Details: Test system event
+[INFO] 2025-09-06 12:36:32,008 | django.server | log_message:213 | "GET /statistics/ HTTP/1.1" 200 39861
+[INFO] 2025-09-06 12:36:34,579 | django.server | log_message:213 | "GET /manage/users/ HTTP/1.1" 200 24030
+[INFO] 2025-09-06 12:36:46,440 | django.server | log_message:213 | "POST /manage/users/bulk-action/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 12:36:46,486 | django.server | log_message:213 | "GET /manage/users/ HTTP/1.1" 200 24525
+[INFO] 2025-09-06 12:36:52,414 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\log_views.py changed, reloading.
+[INFO] 2025-09-06 12:36:52,844 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[ERROR] 2025-09-06 12:36:58,151 | django.server | log_message:213 | "GET /manage/logs/ HTTP/1.1" 500 328869
+[ERROR] 2025-09-06 12:37:01,683 | django.server | log_message:213 | "GET /manage/logs/stats/ HTTP/1.1" 500 267016
+[INFO] 2025-09-06 12:39:21,355 | django.server | log_message:213 | "GET /manage/users/ HTTP/1.1" 200 24030
+[ERROR] 2025-09-06 12:39:23,939 | django.server | log_message:213 | "GET /manage/logs/stats/ HTTP/1.1" 500 231828
+[ERROR] 2025-09-06 12:39:28,032 | django.server | log_message:213 | "GET /manage/logs/ HTTP/1.1" 500 271332
+[INFO] 2025-09-06 12:40:47,964 | django.server | log_message:213 | "GET /manage/logs/ HTTP/1.1" 200 36848
+[INFO] 2025-09-06 12:40:54,004 | django.server | log_message:213 | "GET /manage/logs/?type=security HTTP/1.1" 200 25972
+[INFO] 2025-09-06 12:41:05,568 | django.server | log_message:213 | "GET /manage/logs/?type=django_errors HTTP/1.1" 200 31906
+[INFO] 2025-09-06 12:41:16,695 | django.server | log_message:213 | "GET /manage/logs/stats/ HTTP/1.1" 200 19939
+[INFO] 2025-09-06 12:41:22,303 | django.server | log_message:213 | "GET /manage/logs/download/?type=web_activity HTTP/1.1" 200 12797
+[INFO] 2025-09-06 12:41:31,678 | django.server | log_message:213 | "GET /manage/logs/ HTTP/1.1" 200 36788
+[INFO] 2025-09-06 12:42:01,786 | django.server | log_message:213 | "GET /manage/logs/ HTTP/1.1" 200 36875
+[INFO] 2025-09-06 12:42:31,862 | django.server | log_message:213 | "GET /manage/logs/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 12:42:31,872 | django.server | log_message:213 | "GET /auth/login/?next=/manage/logs/ HTTP/1.1" 200 5323
+[INFO] 2025-09-06 12:43:56,074 | django.server | log_message:213 | "POST /auth/login/?next=/manage/logs/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 12:43:56,130 | django.server | log_message:213 | "GET /manage/logs/ HTTP/1.1" 200 37646
+[INFO] 2025-09-06 12:44:03,407 | django.server | log_message:213 | "GET /generate-report/ HTTP/1.1" 200 24528
+[INFO] 2025-09-06 12:44:05,747 | django.server | log_message:213 | "GET /log-files/ HTTP/1.1" 200 20120
+[INFO] 2025-09-06 12:44:06,399 | django.server | log_message:213 | "GET /abnormal-queries/ HTTP/1.1" 200 23107
+[INFO] 2025-09-06 12:47:05,733 | django.server | log_message:213 | "GET / HTTP/1.1" 200 26105
+[INFO] 2025-09-06 12:47:06,931 | django.server | log_message:213 | "GET /abnormal-queries/ HTTP/1.1" 200 23107
+[INFO] 2025-09-06 12:47:07,826 | django.server | log_message:213 | "GET /generate-report/ HTTP/1.1" 200 24528
+[INFO] 2025-09-06 12:47:08,912 | django.server | log_message:213 | "GET /log-files/ HTTP/1.1" 200 20120
+[INFO] 2025-09-06 12:47:10,897 | django.server | log_message:213 | "GET /statistics/ HTTP/1.1" 200 39861
+[INFO] 2025-09-06 12:47:12,051 | django.server | log_message:213 | "GET /abnormal-queries/ HTTP/1.1" 200 23107
+[INFO] 2025-09-06 12:47:13,618 | django.server | log_message:213 | "GET /generate-report/ HTTP/1.1" 200 24528
+[INFO] 2025-09-06 12:47:15,130 | django.server | log_message:213 | "GET /manage/logs/stats/ HTTP/1.1" 200 19941
+[INFO] 2025-09-06 12:47:17,517 | django.server | log_message:213 | "GET /manage/logs/ HTTP/1.1" 200 37161
+[INFO] 2025-09-06 12:47:18,555 | django.server | log_message:213 | "GET /log-files/ HTTP/1.1" 200 20120
+[INFO] 2025-09-06 12:47:20,407 | django.server | log_message:213 | "GET /generate-report/ HTTP/1.1" 200 24528
+[INFO] 2025-09-06 12:47:21,675 | django.server | log_message:213 | "GET /abnormal-queries/ HTTP/1.1" 200 23107
+[INFO] 2025-09-06 12:47:25,744 | django.server | log_message:213 | "GET /manage/users/ HTTP/1.1" 200 24030
+[INFO] 2025-09-06 12:47:37,047 | django.server | log_message:213 | "GET /manage/users/8/reset-password/ HTTP/1.1" 200 7880
+[INFO] 2025-09-06 12:47:53,464 | django.server | log_message:213 | "POST /manage/users/8/reset-password/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 12:47:53,513 | django.server | log_message:213 | "GET /manage/users/8/ HTTP/1.1" 200 10734
+[INFO] 2025-09-06 12:48:07,535 | django.server | log_message:213 | "GET /auth/logout/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 12:48:07,539 | django.server | log_message:213 | "GET /auth/login/ HTTP/1.1" 200 5765
+[INFO] 2025-09-06 12:48:13,519 | django.server | log_message:213 | "POST /auth/login/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 12:48:13,567 | django.server | log_message:213 | "GET / HTTP/1.1" 200 24722
+[INFO] 2025-09-06 12:50:00,377 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\models.py changed, reloading.
+[INFO] 2025-09-06 12:50:00,833 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 12:50:06,414 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\models.py changed, reloading.
+[INFO] 2025-09-06 12:50:06,903 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 12:50:27,675 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\auth_views.py changed, reloading.
+[INFO] 2025-09-06 12:50:28,113 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 12:50:33,665 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\auth_views.py changed, reloading.
+[INFO] 2025-09-06 12:50:34,089 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 12:50:37,651 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\auth_views.py changed, reloading.
+[INFO] 2025-09-06 12:50:38,078 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 12:50:46,676 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\admin_views.py changed, reloading.
+[INFO] 2025-09-06 12:50:47,123 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 12:50:52,686 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\urls.py changed, reloading.
+[INFO] 2025-09-06 12:50:53,122 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 12:51:58,720 | django.server | log_message:213 | "GET / HTTP/1.1" 200 24258
+[INFO] 2025-09-06 12:52:00,065 | django.server | log_message:213 | "GET /statistics/ HTTP/1.1" 200 38572
+[INFO] 2025-09-06 12:52:07,439 | django.server | log_message:213 | "GET /auth/logout/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 12:52:07,448 | django.server | log_message:213 | "GET /auth/login/?next=/auth/logout/ HTTP/1.1" 200 5325
+[INFO] 2025-09-06 12:52:09,558 | django.server | log_message:213 | "POST /auth/login/?next=/auth/logout/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 12:52:09,597 | django.server | log_message:213 | "GET /auth/logout/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 12:52:09,603 | django.server | log_message:213 | "GET /auth/login/ HTTP/1.1" 200 6132
+[INFO] 2025-09-06 12:52:13,064 | django.server | log_message:213 | "POST /auth/login/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 12:52:13,115 | django.server | log_message:213 | "GET / HTTP/1.1" 200 26564
+[INFO] 2025-09-06 12:52:16,417 | django.server | log_message:213 | "GET /manage/users/ HTTP/1.1" 200 25636
+[INFO] 2025-09-06 12:52:20,146 | django.server | log_message:213 | "GET /manage/database-permissions/ HTTP/1.1" 200 38531
+[INFO] 2025-09-06 12:52:27,258 | django.server | log_message:213 | "GET /auth/logout/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 12:52:27,262 | django.server | log_message:213 | "GET /auth/login/ HTTP/1.1" 200 5767
+[INFO] 2025-09-06 12:52:36,554 | django.server | log_message:213 | "POST /auth/login/ HTTP/1.1" 200 5808
+[INFO] 2025-09-06 12:52:41,225 | django.server | log_message:213 | "POST /auth/login/ HTTP/1.1" 200 5808
+[INFO] 2025-09-06 12:52:49,026 | django.server | log_message:213 | "POST /auth/login/ HTTP/1.1" 200 6946
+[INFO] 2025-09-06 12:52:57,139 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\urls.py changed, reloading.
+[INFO] 2025-09-06 12:52:57,611 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 12:52:58,821 | django.server | log_message:213 | "POST /auth/login/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 12:52:58,880 | django.server | log_message:213 | "GET / HTTP/1.1" 200 26564
+[INFO] 2025-09-06 12:53:02,631 | django.server | log_message:213 | "GET /manage/users/ HTTP/1.1" 200 25636
+[ERROR] 2025-09-06 12:53:18,195 | django.server | log_message:213 | "GET /manage/users/8/edit/ HTTP/1.1" 500 110416
+[INFO] 2025-09-06 12:53:21,915 | django.server | log_message:213 | "GET /manage/users/8/reset-password/ HTTP/1.1" 200 7880
+[INFO] 2025-09-06 12:53:25,437 | django.server | log_message:213 | "GET /manage/users/8/ HTTP/1.1" 200 11008
+[INFO] 2025-09-06 12:54:31,375 | django.server | log_message:213 | "GET /log-files/ HTTP/1.1" 200 20120
+[INFO] 2025-09-06 12:54:35,351 | django.server | log_message:213 | "GET /manage/logs/stats/ HTTP/1.1" 200 19944
+[INFO] 2025-09-06 12:54:49,160 | django.server | log_message:213 | "GET /manage/logs/ HTTP/1.1" 200 37061
+[INFO] 2025-09-06 12:55:19,330 | django.server | log_message:213 | "GET /manage/logs/ HTTP/1.1" 200 36966
+[INFO] 2025-09-06 12:55:49,405 | django.server | log_message:213 | "GET /manage/logs/ HTTP/1.1" 200 36881
+[INFO] 2025-09-06 12:56:19,493 | django.server | log_message:213 | "GET /manage/logs/ HTTP/1.1" 200 36930
+[INFO] 2025-09-06 12:56:49,568 | django.server | log_message:213 | "GET /manage/logs/ HTTP/1.1" 200 36618
+[INFO] 2025-09-06 12:56:57,331 | django.server | log_message:213 | "GET /manage/logs/ HTTP/1.1" 200 36609
+[INFO] 2025-09-06 12:56:59,731 | django.server | log_message:213 | "GET /manage/users/ HTTP/1.1" 200 25636
+[INFO] 2025-09-06 12:57:05,889 | django.server | log_message:213 | "GET /auth/logout/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 12:57:05,896 | django.server | log_message:213 | "GET /auth/login/ HTTP/1.1" 200 5767
+[INFO] 2025-09-06 12:57:12,259 | django.server | log_message:213 | "POST /auth/login/ HTTP/1.1" 200 5808
+[INFO] 2025-09-06 12:57:21,254 | django.server | log_message:213 | "POST /auth/login/ HTTP/1.1" 200 5808
+[INFO] 2025-09-06 12:57:26,499 | django.server | log_message:213 | "POST /auth/login/ HTTP/1.1" 200 6946
+[INFO] 2025-09-06 12:57:31,336 | django.server | log_message:213 | "POST /auth/login/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 12:57:31,382 | django.server | log_message:213 | "GET / HTTP/1.1" 200 26564
+[INFO] 2025-09-06 12:57:33,655 | django.server | log_message:213 | "GET /manage/users/ HTTP/1.1" 200 25767
+[INFO] 2025-09-06 12:57:38,410 | django.server | log_message:213 | "GET /manage/users/8/ HTTP/1.1" 200 11963
+[INFO] 2025-09-06 12:57:45,562 | django.server | log_message:213 | "POST /manage/users/8/unlock/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 12:57:45,603 | django.server | log_message:213 | "GET /manage/users/8/ HTTP/1.1" 200 11574
+[INFO] 2025-09-06 12:57:49,150 | django.server | log_message:213 | "GET /manage/users/ HTTP/1.1" 200 25636
+[INFO] 2025-09-06 12:58:06,490 | django.server | log_message:213 | "GET /manage/database-permissions/ HTTP/1.1" 200 38531
+[INFO] 2025-09-06 13:01:04,511 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\views.py changed, reloading.
+[INFO] 2025-09-06 13:01:04,961 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:01:14,553 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\views.py changed, reloading.
+[INFO] 2025-09-06 13:01:15,001 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:01:27,666 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\views.py changed, reloading.
+[INFO] 2025-09-06 13:01:28,091 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:01:38,696 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\views.py changed, reloading.
+[INFO] 2025-09-06 13:01:39,197 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:01:47,815 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\views.py changed, reloading.
+[INFO] 2025-09-06 13:01:48,285 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:02:20,194 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\views.py changed, reloading.
+[INFO] 2025-09-06 13:02:20,728 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:02:35,424 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\views.py changed, reloading.
+[INFO] 2025-09-06 13:02:35,865 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:03:01,836 | django.server | log_message:213 | "GET /auth/logout/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 13:03:01,845 | django.server | log_message:213 | "GET /auth/login/ HTTP/1.1" 200 5767
+[INFO] 2025-09-06 13:03:05,865 | django.server | log_message:213 | "POST /auth/login/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 13:03:05,921 | django.server | log_message:213 | "GET / HTTP/1.1" 200 26564
+[INFO] 2025-09-06 13:03:16,525 | django.server | log_message:213 | "GET /manage/users/ HTTP/1.1" 200 25636
+[INFO] 2025-09-06 13:03:20,206 | django.server | log_message:213 | "GET /auth/logout/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 13:03:20,210 | django.server | log_message:213 | "GET /auth/login/ HTTP/1.1" 200 5767
+[INFO] 2025-09-06 13:03:27,522 | django.server | log_message:213 | "POST /auth/login/ HTTP/1.1" 200 5808
+[INFO] 2025-09-06 13:03:31,474 | django.server | log_message:213 | "POST /auth/login/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 13:03:31,519 | django.server | log_message:213 | "GET / HTTP/1.1" 200 26564
+[INFO] 2025-09-06 13:03:38,598 | django.server | log_message:213 | "GET /manage/users/ HTTP/1.1" 200 25868
+[INFO] 2025-09-06 13:03:44,877 | django.server | log_message:213 | "GET /manage/users/8/reset-password/ HTTP/1.1" 200 7880
+[INFO] 2025-09-06 13:03:55,269 | django.server | log_message:213 | "POST /manage/users/8/reset-password/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 13:03:55,316 | django.server | log_message:213 | "GET /manage/users/8/ HTTP/1.1" 200 11714
+[INFO] 2025-09-06 13:03:59,703 | django.server | log_message:213 | "GET /manage/users/8/edit/ HTTP/1.1" 200 9471
+[INFO] 2025-09-06 13:04:02,500 | django.server | log_message:213 | "GET /auth/logout/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 13:04:02,504 | django.server | log_message:213 | "GET /auth/login/ HTTP/1.1" 200 5767
+[INFO] 2025-09-06 13:04:11,320 | django.server | log_message:213 | "POST /auth/login/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 13:04:11,367 | django.server | log_message:213 | "GET / HTTP/1.1" 200 15986
+[INFO] 2025-09-06 13:04:14,685 | django.server | log_message:213 | "GET /statistics/ HTTP/1.1" 200 32678
+[INFO] 2025-09-06 13:04:31,531 | django.server | log_message:213 | "GET /statistics/?database=WAY4 HTTP/1.1" 200 22523
+[INFO] 2025-09-06 13:07:54,041 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\forms.py changed, reloading.
+[INFO] 2025-09-06 13:07:54,514 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:08:04,121 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\forms.py changed, reloading.
+[INFO] 2025-09-06 13:08:04,550 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:08:11,135 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\views.py changed, reloading.
+[INFO] 2025-09-06 13:08:11,633 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:08:38,415 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\views.py changed, reloading.
+[INFO] 2025-09-06 13:08:38,851 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:09:12,673 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\views.py changed, reloading.
+[INFO] 2025-09-06 13:09:13,128 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:09:51,022 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\models.py changed, reloading.
+[INFO] 2025-09-06 13:09:51,439 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:10:02,934 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\views.py changed, reloading.
+[INFO] 2025-09-06 13:10:03,365 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:10:17,045 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\admin.py changed, reloading.
+[INFO] 2025-09-06 13:10:17,539 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:14:21,582 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\forms.py changed, reloading.
+[INFO] 2025-09-06 13:14:22,024 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:15:08,626 | django.server | log_message:213 | "GET /statistics/?database=WAY4 HTTP/1.1" 200 22714
+[INFO] 2025-09-06 13:15:09,744 | django.server | log_message:213 | "GET /statistics/?database=WAY4 HTTP/1.1" 200 22714
+[INFO] 2025-09-06 13:15:10,552 | django.server | log_message:213 | "GET /statistics/?database=WAY4 HTTP/1.1" 200 22714
+[ERROR] 2025-09-06 13:15:11,486 | django.server | log_message:213 | "GET /import-log/ HTTP/1.1" 500 219757
+[ERROR] 2025-09-06 13:15:13,678 | django.server | log_message:213 | "GET /import-log/ HTTP/1.1" 500 219894
+[ERROR] 2025-09-06 13:16:56,342 | django.server | log_message:213 | "GET /import-log/ HTTP/1.1" 500 219894
+[ERROR] 2025-09-06 13:16:59,239 | django.server | log_message:213 | "GET /import-log/ HTTP/1.1" 500 219757
+[ERROR] 2025-09-06 13:17:01,230 | django.server | log_message:213 | "GET /log-files/ HTTP/1.1" 500 212370
+[INFO] 2025-09-06 13:17:09,904 | django.server | log_message:213 | "GET /auth/logout/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 13:17:09,912 | django.server | log_message:213 | "GET /auth/login/ HTTP/1.1" 200 5772
+[INFO] 2025-09-06 13:17:12,408 | django.server | log_message:213 | "POST /auth/login/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 13:17:12,453 | django.server | log_message:213 | "GET / HTTP/1.1" 200 26755
+[INFO] 2025-09-06 13:17:14,671 | django.server | log_message:213 | "GET /manage/logs/ HTTP/1.1" 200 38201
+[ERROR] 2025-09-06 13:17:16,284 | django.server | log_message:213 | "GET /log-files/ HTTP/1.1" 500 212351
+[ERROR] 2025-09-06 13:17:18,832 | django.server | log_message:213 | "GET /import-log/ HTTP/1.1" 500 219828
+[INFO] 2025-09-06 13:17:44,765 | django.server | log_message:213 | "GET /manage/logs/ HTTP/1.1" 200 38029
+[INFO] 2025-09-06 13:18:14,839 | django.server | log_message:213 | "GET /manage/logs/ HTTP/1.1" 200 38021
+[INFO] 2025-09-06 13:18:24,174 | django.server | log_message:213 | "GET /manage/ HTTP/1.1" 200 17497
+[INFO] 2025-09-06 13:18:28,684 | django.server | log_message:213 | "GET / HTTP/1.1" 200 26296
+[INFO] 2025-09-06 13:18:30,155 | django.server | log_message:213 | "GET /statistics/ HTTP/1.1" 200 40052
+[INFO] 2025-09-06 13:18:31,510 | django.server | log_message:213 | "GET /abnormal-queries/ HTTP/1.1" 200 23298
+[INFO] 2025-09-06 13:18:34,681 | django.server | log_message:213 | "GET /generate-report/ HTTP/1.1" 200 24719
+[INFO] 2025-09-06 13:18:38,035 | django.server | log_message:213 | "GET / HTTP/1.1" 200 26296
+[INFO] 2025-09-06 13:18:38,579 | django.server | log_message:213 | "GET / HTTP/1.1" 200 26296
+[INFO] 2025-09-06 13:18:41,382 | django.server | log_message:213 | "GET /auth/profile/ HTTP/1.1" 200 9141
+[INFO] 2025-09-06 13:20:51,191 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\models.py changed, reloading.
+[INFO] 2025-09-06 13:20:51,646 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:20:58,181 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\admin.py changed, reloading.
+[INFO] 2025-09-06 13:20:58,620 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:21:03,171 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\admin.py changed, reloading.
+[INFO] 2025-09-06 13:21:03,734 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:21:10,310 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\views.py changed, reloading.
+[INFO] 2025-09-06 13:21:10,826 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:21:37,827 | django.server | log_message:213 | "GET / HTTP/1.1" 200 26296
+[INFO] 2025-09-06 13:21:39,821 | django.server | log_message:213 | "GET / HTTP/1.1" 200 26296
+[INFO] 2025-09-06 13:21:40,536 | django.server | log_message:213 | "GET / HTTP/1.1" 200 26296
+[INFO] 2025-09-06 13:21:42,536 | django.server | log_message:213 | "GET /generate-report/ HTTP/1.1" 200 24719
+[INFO] 2025-09-06 13:21:42,817 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\models.py changed, reloading.
+[INFO] 2025-09-06 13:21:43,416 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:21:55,053 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\models.py changed, reloading.
+[INFO] 2025-09-06 13:21:55,509 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:22:09,176 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\models.py changed, reloading.
+[INFO] 2025-09-06 13:22:09,654 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:24:20,496 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\models.py changed, reloading.
+[INFO] 2025-09-06 13:24:21,020 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:25:31,337 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\urls.py changed, reloading.
+[INFO] 2025-09-06 13:25:31,757 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:25:37,577 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\urls.py changed, reloading.
+[INFO] 2025-09-06 13:25:38,018 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:27:23,712 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\auth_views.py changed, reloading.
+[INFO] 2025-09-06 13:27:24,173 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:27:34,851 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\mfa_views.py changed, reloading.
+[INFO] 2025-09-06 13:27:35,304 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:27:48,989 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\views.py changed, reloading.
+[INFO] 2025-09-06 13:27:49,541 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:27:51,389 | django.server | log_message:213 | "GET /generate-report/ HTTP/1.1" 200 24719
+[INFO] 2025-09-06 13:27:56,975 | django.server | log_message:213 | "GET /auth/profile/ HTTP/1.1" 200 9850
+[INFO] 2025-09-06 13:27:59,183 | django.server | log_message:213 | "GET /mfa/setup/ HTTP/1.1" 200 13060
+[INFO] 2025-09-06 13:28:04,241 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\models.py changed, reloading.
+[INFO] 2025-09-06 13:28:04,673 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:28:27,114 | django.server | log_message:213 | "POST /mfa/setup/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 13:28:27,166 | django.server | log_message:213 | "GET /mfa/setup/ HTTP/1.1" 200 10930
+[INFO] 2025-09-06 13:28:33,150 | django.server | log_message:213 | "GET /auth/logout/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 13:28:33,158 | django.server | log_message:213 | "GET /auth/login/ HTTP/1.1" 200 5767
+[ERROR] 2025-09-06 13:28:36,221 | django.server | log_message:213 | "POST /auth/login/ HTTP/1.1" 500 89821
+[INFO] 2025-09-06 13:29:09,934 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\logging_utils.py changed, reloading.
+[INFO] 2025-09-06 13:29:10,504 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:29:18,135 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\logging_utils.py changed, reloading.
+[INFO] 2025-09-06 13:29:18,659 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:29:26,285 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\mfa_views.py changed, reloading.
+[INFO] 2025-09-06 13:29:26,754 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:29:36,390 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\mfa_views.py changed, reloading.
+[INFO] 2025-09-06 13:29:36,838 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:29:42,434 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\mfa_views.py changed, reloading.
+[INFO] 2025-09-06 13:29:42,889 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[ERROR] 2025-09-06 13:29:52,367 | django.server | log_message:213 | "POST /auth/login/ HTTP/1.1" 500 89821
+[INFO] 2025-09-06 13:29:52,534 | django.utils.autoreload | trigger_reload:265 | D:\MBProject\logs\mfa_views.py changed, reloading.
+[INFO] 2025-09-06 13:29:53,000 | django.utils.autoreload | run_with_reloader:667 | Watching for file changes with StatReloader
+[INFO] 2025-09-06 13:29:53,806 | django.server | log_message:213 | "GET /auth/login/ HTTP/1.1" 200 5325
+[ERROR] 2025-09-06 13:29:56,509 | django.server | log_message:213 | "POST /auth/login/ HTTP/1.1" 500 89821
+[INFO] 2025-09-06 13:30:03,621 | django.server | log_message:213 | "GET /auth/login/ HTTP/1.1" 200 5325
+[ERROR] 2025-09-06 13:30:06,685 | django.server | log_message:213 | "POST /auth/login/ HTTP/1.1" 500 89821
+[INFO] 2025-09-06 13:30:38,109 | django.server | log_message:213 | "POST /auth/login/ HTTP/1.1" 302 0
+[INFO] 2025-09-06 13:30:38,158 | django.server | log_message:213 | "GET /mfa/verify/ HTTP/1.1" 200 11979

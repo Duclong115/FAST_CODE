@@ -3,6 +3,8 @@ from . import views
 from . import auth_views
 from . import admin_views
 from . import database_permission_views
+from . import log_views
+from . import mfa_views
 
 app_name = 'logs'
 
@@ -13,6 +15,7 @@ urlpatterns = [
     path('log-files/', views.log_files, name='log_files'),
     path('abnormal-queries/', views.abnormal_queries, name='abnormal_queries'),
     path('generate-report/', views.generate_report, name='generate_report'),
+    path('import-log/', views.import_log_file, name='import_log_file'),
     path('api/logs/', views.api_logs, name='api_logs'),
     
     # Authentication URLs
@@ -23,6 +26,13 @@ urlpatterns = [
     path('auth/change-password/', auth_views.change_password_view, name='change_password'),
     path('auth/required/', auth_views.auth_required_view, name='auth_required'),
     
+    # MFA URLs
+    path('mfa/setup/', mfa_views.mfa_setup, name='mfa_setup'),
+    path('mfa/backup-codes/', mfa_views.mfa_backup_codes, name='mfa_backup_codes'),
+    path('mfa/download-backup-codes/', mfa_views.download_backup_codes, name='download_backup_codes'),
+    path('mfa/verify/', mfa_views.MFAVerificationView.as_view(), name='mfa_verification'),
+    path('mfa/verify-code/', mfa_views.verify_mfa_code, name='verify_mfa_code'),
+    
     # Admin URLs (using 'manage' prefix to avoid conflict with Django admin)
     path('manage/', admin_views.admin_dashboard, name='admin_dashboard'),
     path('manage/users/', admin_views.admin_user_list, name='admin_user_list'),
@@ -31,6 +41,7 @@ urlpatterns = [
     path('manage/users/<int:user_id>/edit/', admin_views.admin_user_edit, name='admin_user_edit'),
     path('manage/users/<int:user_id>/toggle-active/', admin_views.admin_user_toggle_active, name='admin_user_toggle_active'),
     path('manage/users/<int:user_id>/reset-password/', admin_views.admin_user_reset_password, name='admin_user_reset_password'),
+    path('manage/users/<int:user_id>/unlock/', admin_views.admin_user_unlock, name='admin_user_unlock'),
     path('manage/users/<int:user_id>/delete/', admin_views.admin_user_delete, name='admin_user_delete'),
     path('manage/users/bulk-action/', admin_views.admin_user_bulk_action, name='admin_user_bulk_action'),
     path('manage/security-logs/', admin_views.admin_security_logs, name='admin_security_logs'),
@@ -48,4 +59,11 @@ urlpatterns = [
     
     # User Database Permissions
     path('my-database-permissions/', database_permission_views.user_database_permissions, name='user_database_permissions'),
+    
+    # Log Viewer URLs
+    path('manage/logs/', log_views.admin_log_viewer, name='admin_log_viewer'),
+    path('manage/logs/download/', log_views.admin_log_download, name='admin_log_download'),
+    path('manage/logs/clear/', log_views.admin_log_clear, name='admin_log_clear'),
+    path('manage/logs/stats/', log_views.admin_log_stats, name='admin_log_stats'),
+    path('manage/logs/search/', log_views.admin_log_search, name='admin_log_search'),
 ]

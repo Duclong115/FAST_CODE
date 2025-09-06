@@ -1,0 +1,160 @@
+{% extends 'logs/base.html' %}
+
+{% block title %}Thiết lập MFA - SQL Log Analyzer{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4><i class="fas fa-shield-alt"></i> Thiết lập Multi-Factor Authentication (MFA)</h4>
+            </div>
+            <div class="card-body">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            <i class="fas fa-{% if message.tags == 'success' %}check-circle{% elif message.tags == 'error' %}exclamation-triangle{% elif message.tags == 'warning' %}exclamation-triangle{% else %}info-circle{% endif %}"></i>
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                
+                {% if mfa_enabled %}
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle"></i>
+                        <strong>MFA đã được bật!</strong>
+                        <p class="mb-0">Tài khoản của bạn đã được bảo vệ bằng xác thực hai yếu tố.</p>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-mobile-alt fa-3x text-primary mb-3"></i>
+                                    <h5>Ứng dụng Authenticator</h5>
+                                    <p class="text-muted">Sử dụng Google Authenticator, Authy, hoặc ứng dụng tương tự</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-key fa-3x text-warning mb-3"></i>
+                                    <h5>Backup Codes</h5>
+                                    <p class="text-muted">{{ backup_codes_count }} codes còn lại</p>
+                                    <a href="{% url 'logs:mfa_backup_codes' %}" class="btn btn-outline-warning">
+                                        <i class="fas fa-eye"></i> Xem Backup Codes
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                        <a href="{% url 'logs:mfa_backup_codes' %}" class="btn btn-warning">
+                            <i class="fas fa-redo"></i> Tạo lại Backup Codes
+                        </a>
+                        <form method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="disable">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn tắt MFA? Điều này sẽ làm giảm tính bảo mật của tài khoản.')">
+                                <i class="fas fa-times"></i> Tắt MFA
+                            </button>
+                        </form>
+                    </div>
+                    
+                {% else %}
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>MFA chưa được bật</strong>
+                        <p class="mb-0">Bật MFA để tăng cường bảo mật cho tài khoản của bạn.</p>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-qrcode"></i> QR Code</h5>
+                                </div>
+                                <div class="card-body text-center">
+                                    {% if qr_code_data %}
+                                        <img src="data:image/png;base64,{{ qr_code_data }}" alt="QR Code" class="img-fluid mb-3">
+                                        <p class="text-muted">Quét QR code bằng ứng dụng Authenticator</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-key"></i> Secret Key</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" value="{{ secret_key }}" readonly id="secretKey">
+                                        <button class="btn btn-outline-secondary" type="button" onclick="copySecretKey()">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    <p class="text-muted small">Nhập secret key này vào ứng dụng Authenticator nếu không thể quét QR code</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Hướng dẫn:</strong>
+                        <ol class="mb-0 mt-2">
+                            <li>Tải ứng dụng Authenticator (Google Authenticator, Authy, Microsoft Authenticator)</li>
+                            <li>Quét QR code hoặc nhập secret key thủ công</li>
+                            <li>Nhấn "Bật MFA" để kích hoạt</li>
+                            <li>Lưu backup codes ở nơi an toàn</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{% url 'logs:profile' %}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Quay lại Profile
+                        </a>
+                        <form method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="enable">
+                            <button type="submit" class="btn btn-success" onclick="return confirm('Bạn đã thiết lập ứng dụng Authenticator chưa?')">
+                                <i class="fas fa-shield-alt"></i> Bật MFA
+                            </button>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function copySecretKey() {
+    const secretKeyInput = document.getElementById('secretKey');
+    secretKeyInput.select();
+    secretKeyInput.setSelectionRange(0, 99999); // For mobile devices
+    
+    try {
+        document.execCommand('copy');
+        // Show success message
+        const button = event.target.closest('button');
+        const originalHTML = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-check"></i>';
+        button.classList.add('btn-success');
+        button.classList.remove('btn-outline-secondary');
+        
+        setTimeout(() => {
+            button.innerHTML = originalHTML;
+            button.classList.remove('btn-success');
+            button.classList.add('btn-outline-secondary');
+        }, 2000);
+    } catch (err) {
+        alert('Không thể copy. Vui lòng copy thủ công.');
+    }
+}
+</script>
+{% endblock %}

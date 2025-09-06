@@ -15,6 +15,7 @@ from django.views.decorators.cache import never_cache
 from django.db import IntegrityError
 from .models import CustomUser
 from .forms import UserRegistrationForm, UserLoginForm
+from .logging_utils import ActivityLogger
 
 
 @csrf_protect
@@ -38,12 +39,20 @@ def register_view(request):
                 user.save()
                 
                 messages.success(request, 'Đăng ký thành công! Bạn có thể đăng nhập ngay bây giờ.')
+                
+                # Ghi log đăng ký thành công
+                ActivityLogger.log_user_registration(request, user, success=True)
+                
                 return redirect('logs:login')
                 
             except IntegrityError:
                 messages.error(request, 'Tên người dùng đã tồn tại')
+                # Ghi log đăng ký thất bại
+                ActivityLogger.log_user_registration(request, None, success=False, failure_reason="Username already exists")
             except Exception as e:
                 messages.error(request, f'Lỗi đăng ký: {str(e)}')
+                # Ghi log đăng ký thất bại
+                ActivityLogger.log_user_registration(request, None, success=False, failure_reason=str(e))
     else:
         form = UserRegistrationForm()
     
@@ -57,7 +66,7 @@ def register_view(request):
 @csrf_protect
 @never_cache
 def login_view(request):
-    """View đăng nhập người dùng"""
+    """View đăng nhập người dùng với tính năng khóa tài khoản"""
     if request.user.is_authenticated:
         return redirect('logs:index')
     
@@ -67,27 +76,114 @@ def login_view(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             
-            # Xác thực người dùng
-            user = authenticate(request, username=username, password=password)
-            
-            if user is not None:
-                if user.is_active:
-                    # Đăng nhập thành công
-                    login(request, user)
+            # Kiểm tra user có tồn tại không
+            try:
+                user = CustomUser.objects.get(username=username)
+                
+                # Kiểm tra tài khoản có bị khóa không
+                if user.is_account_locked():
+                    remaining_time = user.get_lockout_remaining_time()
+                    minutes = remaining_time // 60
+                    seconds = remaining_time % 60
+                    
+                    if minutes > 0:
+                        messages.error(request, f'Tài khoản đã bị khóa do nhập sai mật khẩu quá nhiều lần. Vui lòng thử lại sau {minutes} phút {seconds} giây.')
+                    else:
+                        messages.error(request, f'Tài khoản đã bị khóa do nhập sai mật khẩu quá nhiều lần. Vui lòng thử lại sau {seconds} giây.')
+                    
+                    # Ghi log đăng nhập thất bại - tài khoản bị khóa
+                    ActivityLogger.log_user_login(request, user, success=False, failure_reason="Account locked")
+                    return render(request, 'logs/auth/login.html', {
+                        'form': form,
+                        'title': 'Đăng nhập',
+                        'next': request.GET.get('next', ''),
+                        'account_locked': True,
+                        'remaining_time': remaining_time
+                    })
+                
+                # Kiểm tra tài khoản có active không
+                if not user.is_active:
+                    messages.error(request, 'Tài khoản của bạn đã bị vô hiệu hóa')
+                    # Ghi log đăng nhập thất bại
+                    ActivityLogger.log_user_login(request, user, success=False, failure_reason="Account disabled")
+                    return render(request, 'logs/auth/login.html', {
+                        'form': form,
+                        'title': 'Đăng nhập',
+                        'next': request.GET.get('next', '')
+                    })
+                
+                # Xác thực mật khẩu
+                if user.check_password(password):
+                    # Reset số lần đăng nhập thất bại
+                    user.reset_failed_login()
                     
                     # Cập nhật thời gian đăng nhập cuối
                     user.last_login_at = timezone.now()
                     user.save(update_fields=['last_login_at'])
                     
-                    messages.success(request, f'Chào mừng {user.username}!')
-                    
-                    # Chuyển hướng đến trang được yêu cầu hoặc trang chủ
-                    next_url = request.GET.get('next', 'logs:index')
-                    return redirect(next_url)
+                    # Kiểm tra MFA
+                    if user.mfa_enabled:
+                        # Lưu thông tin đăng nhập vào session để xác thực MFA
+                        request.session['pending_user_id'] = user.id
+                        request.session['pending_username'] = user.username
+                        request.session['pending_next'] = request.GET.get('next', 'logs:index')
+                        
+                        # Ghi log đăng nhập thành công (chưa hoàn tất MFA)
+                        ActivityLogger.log_user_login(request, user, success=True, mfa_pending=True)
+                        
+                        messages.info(request, 'Vui lòng xác thực MFA để hoàn tất đăng nhập.')
+                        return redirect('logs:mfa_verification')
+                    else:
+                        # Đăng nhập thành công (không có MFA)
+                        login(request, user)
+                        
+                        messages.success(request, f'Chào mừng {user.username}!')
+                        
+                        # Ghi log đăng nhập thành công
+                        ActivityLogger.log_user_login(request, user, success=True)
+                        
+                        # Chuyển hướng đến trang được yêu cầu hoặc trang chủ
+                        next_url = request.GET.get('next', 'logs:index')
+                        return redirect(next_url)
                 else:
-                    messages.error(request, 'Tài khoản của bạn đã bị vô hiệu hóa')
-            else:
+                    # Mật khẩu sai - tăng số lần thất bại
+                    user.increment_failed_login()
+                    
+                    # Kiểm tra xem có bị khóa không sau khi tăng
+                    if user.is_account_locked():
+                        remaining_time = user.get_lockout_remaining_time()
+                        minutes = remaining_time // 60
+                        seconds = remaining_time % 60
+                        
+                        if minutes > 0:
+                            messages.error(request, f'Tài khoản đã bị khóa do nhập sai mật khẩu quá nhiều lần. Vui lòng thử lại sau {minutes} phút {seconds} giây.')
+                        else:
+                            messages.error(request, f'Tài khoản đã bị khóa do nhập sai mật khẩu quá nhiều lần. Vui lòng thử lại sau {seconds} giây.')
+                        
+                        # Ghi log đăng nhập thất bại - tài khoản bị khóa
+                        ActivityLogger.log_user_login(request, user, success=False, failure_reason="Account locked after failed attempts")
+                        return render(request, 'logs/auth/login.html', {
+                            'form': form,
+                            'title': 'Đăng nhập',
+                            'next': request.GET.get('next', ''),
+                            'account_locked': True,
+                            'remaining_time': remaining_time
+                        })
+                    else:
+                        # Chưa bị khóa, chỉ hiển thị thông báo lỗi
+                        attempts_left = 3 - user.failed_login_attempts
+                        if attempts_left > 0:
+                            messages.error(request, f'Tên người dùng hoặc mật khẩu không đúng. Còn {attempts_left} lần thử.')
+                        else:
+                            messages.error(request, 'Tên người dùng hoặc mật khẩu không đúng.')
+                        
+                        # Ghi log đăng nhập thất bại
+                        ActivityLogger.log_user_login(request, user, success=False, failure_reason="Invalid password")
+                        
+            except CustomUser.DoesNotExist:
                 messages.error(request, 'Tên người dùng hoặc mật khẩu không đúng')
+                # Ghi log đăng nhập thất bại
+                ActivityLogger.log_user_login(request, None, success=False, failure_reason="User not found")
     else:
         form = UserLoginForm()
     
@@ -103,6 +199,11 @@ def login_view(request):
 def logout_view(request):
     """View đăng xuất người dùng"""
     username = request.user.username
+    user = request.user
+    
+    # Ghi log đăng xuất trước khi logout
+    ActivityLogger.log_user_logout(request, user)
+    
     logout(request)
     messages.success(request, f'Tạm biệt {username}! Bạn đã đăng xuất thành công.')
     return redirect('logs:login')

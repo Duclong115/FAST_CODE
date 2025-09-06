@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse
 from django.core.paginator import Paginator
 from django.db.models import Count, Avg, Sum
@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 import pandas as pd
 import io
 import csv
@@ -22,6 +23,7 @@ from datetime import datetime
 import json
 from .models import SqlLog, LogFile
 from .sql_analyzer import SQLAnalyzer
+from .forms import LogImportForm
 
 
 def get_user_accessible_databases(user):
@@ -66,13 +68,16 @@ def index(request):
     database_filter = request.GET.get('database', '')
     per_page = request.GET.get('per_page', 20)
     
+    # Lấy danh sách database user có quyền truy cập
+    user_accessible_databases = get_user_accessible_databases(request.user)
+    
     # Kiểm tra quyền database nếu có filter
     if database_filter and not request.user.has_database_permission(database_filter):
         messages.error(request, f'Bạn không có quyền truy cập database "{database_filter}"!')
         database_filter = ''
     
-    # Query logs
-    logs_query = SqlLog.objects.all()
+    # Query logs - chỉ lấy logs từ databases user có quyền
+    logs_query = SqlLog.objects.filter(database_name__in=user_accessible_databases)
     
     if database_filter:
         logs_query = logs_query.filter(database_name=database_filter)
@@ -82,7 +87,7 @@ def index(request):
     page_obj = paginator.get_page(page_number)
     
     # Lấy danh sách database user có quyền truy cập
-    databases = get_user_accessible_databases(request.user)
+    databases = user_accessible_databases
     
     # Kiểm tra có dữ liệu cho database được chọn không
     has_data = logs_query.exists() if database_filter else True
@@ -106,10 +111,18 @@ def statistics(request):
     # Lấy tham số filter database
     database_filter = request.GET.get('database', '')
     
-    # Query logs cơ bản
-    logs_query = SqlLog.objects.all()
+    # Lấy danh sách database user có quyền truy cập
+    user_accessible_databases = get_user_accessible_databases(request.user)
+    
+    # Query logs cơ bản - chỉ lấy logs từ databases user có quyền
+    logs_query = SqlLog.objects.filter(database_name__in=user_accessible_databases)
     if database_filter:
-        logs_query = logs_query.filter(database_name=database_filter)
+        # Kiểm tra quyền database nếu có filter
+        if not request.user.has_database_permission(database_filter):
+            messages.error(request, f'Bạn không có quyền truy cập database "{database_filter}"!')
+            database_filter = ''
+        else:
+            logs_query = logs_query.filter(database_name=database_filter)
     
     # Thống kê tổng quan
     total_logs = logs_query.count()
@@ -117,8 +130,8 @@ def statistics(request):
     total_exec_count = logs_query.aggregate(total=Sum('exec_count'))['total'] or 0
     avg_exec_time = logs_query.aggregate(avg=Avg('exec_time_ms'))['avg'] or 0
     
-    # Thống kê theo database (tất cả databases)
-    db_stats = SqlLog.objects.values('database_name').annotate(
+    # Thống kê theo database (chỉ databases user có quyền)
+    db_stats = logs_query.values('database_name').annotate(
         count=Count('id'),
         total_exec_time=Sum('exec_time_ms'),
         total_exec_count=Sum('exec_count'),
@@ -140,8 +153,8 @@ def statistics(request):
         created_at__gte=timezone.now() - timezone.timedelta(days=7)
     ).count()
     
-    # Lấy danh sách databases để filter
-    all_databases = SqlLog.objects.values_list('database_name', flat=True).distinct().order_by('database_name')
+    # Lấy danh sách databases để filter (chỉ databases user có quyền)
+    all_databases = user_accessible_databases
     
     # Kiểm tra có dữ liệu cho database được chọn không
     has_data = logs_query.exists() if database_filter else True
@@ -185,25 +198,35 @@ def abnormal_queries(request):
     database_filter = request.GET.get('database', '')
     per_page = request.GET.get('per_page', 20)
     
+    # Lấy danh sách database user có quyền truy cập
+    user_accessible_databases = get_user_accessible_databases(request.user)
+    
     # Query logs bất thường: exec_time_ms > 500 VÀ exec_count > 100
+    # Chỉ lấy logs từ databases user có quyền
     abnormal_query = SqlLog.objects.filter(
         exec_time_ms__gt=500,
-        exec_count__gt=100
+        exec_count__gt=100,
+        database_name__in=user_accessible_databases
     )
     
     if database_filter:
-        abnormal_query = abnormal_query.filter(database_name=database_filter)
+        # Kiểm tra quyền database nếu có filter
+        if not request.user.has_database_permission(database_filter):
+            messages.error(request, f'Bạn không có quyền truy cập database "{database_filter}"!')
+            database_filter = ''
+        else:
+            abnormal_query = abnormal_query.filter(database_name=database_filter)
     
     # Phân trang
     paginator = Paginator(abnormal_query, per_page)
     page_obj = paginator.get_page(page_number)
     
     # Lấy danh sách database user có quyền truy cập
-    databases = get_user_accessible_databases(request.user)
+    databases = user_accessible_databases
     
-    # Thống kê truy vấn bất thường
+    # Thống kê truy vấn bất thường (chỉ trong databases user có quyền)
     total_abnormal = abnormal_query.count()
-    total_logs = SqlLog.objects.count()
+    total_logs = SqlLog.objects.filter(database_name__in=user_accessible_databases).count()
     abnormal_percentage = (total_abnormal / total_logs * 100) if total_logs > 0 else 0
     
     # Thống kê theo database
@@ -244,10 +267,16 @@ def api_logs(request):
     database_filter = request.GET.get('database', '')
     per_page = min(int(request.GET.get('per_page', 20)), 100)  # Giới hạn tối đa 100
     
-    # Query logs
-    logs_query = SqlLog.objects.all()
+    # Lấy danh sách database user có quyền truy cập
+    user_accessible_databases = get_user_accessible_databases(request.user)
+    
+    # Query logs - chỉ lấy logs từ databases user có quyền
+    logs_query = SqlLog.objects.filter(database_name__in=user_accessible_databases)
     
     if database_filter:
+        # Kiểm tra quyền database nếu có filter
+        if not request.user.has_database_permission(database_filter):
+            return JsonResponse({'error': f'Bạn không có quyền truy cập database "{database_filter}"!'}, status=403)
         logs_query = logs_query.filter(database_name=database_filter)
     
     # Phân trang
@@ -287,9 +316,16 @@ def generate_report(request):
         format_type = request.POST.get('format_type')
         database_filter = request.POST.get('database_filter', '')
         
-        # Lấy dữ liệu theo filter
-        logs_query = SqlLog.objects.all()
+        # Lấy danh sách database user có quyền truy cập
+        user_accessible_databases = get_user_accessible_databases(request.user)
+        
+        # Lấy dữ liệu theo filter - chỉ databases user có quyền
+        logs_query = SqlLog.objects.filter(database_name__in=user_accessible_databases)
         if database_filter:
+            # Kiểm tra quyền database nếu có filter
+            if not request.user.has_database_permission(database_filter):
+                messages.error(request, f'Bạn không có quyền truy cập database "{database_filter}"!')
+                return redirect('logs:generate_report')
             logs_query = logs_query.filter(database_name=database_filter)
         
         if report_type == 'summary':
@@ -301,7 +337,7 @@ def generate_report(request):
             return generate_abnormal_report(abnormal_query, format_type, database_filter)
     
     # GET request - hiển thị form
-    databases = SqlLog.objects.values_list('database_name', flat=True).distinct().order_by('database_name')
+    databases = get_user_accessible_databases(request.user)
     context = {
         'databases': databases,
     }
@@ -787,3 +823,160 @@ def export_abnormal_pdf(data, database_filter):
     buffer.close()
     response.write(pdf)
     return response
+
+
+@login_required
+def import_log_file(request):
+    """Trang import file log SQL với kiểm tra quyền database"""
+    if request.method == 'POST':
+        form = LogImportForm(request.POST, request.FILES)
+        if form.is_valid():
+            log_file = form.cleaned_data['log_file']
+            database_name = form.cleaned_data['database_name']
+            skip_unauthorized = form.cleaned_data['skip_unauthorized']
+            
+            # Kiểm tra quyền database
+            user_accessible_databases = get_user_accessible_databases(request.user)
+            
+            if database_name not in user_accessible_databases:
+                if skip_unauthorized:
+                    messages.warning(request, f'Bạn không có quyền truy cập database "{database_name}". File sẽ được bỏ qua.')
+                    return redirect('logs:import_log_file')
+                else:
+                    messages.error(request, f'Bạn không có quyền truy cập database "{database_name}". Vui lòng liên hệ admin để được cấp quyền.')
+                    return redirect('logs:import_log_file')
+            
+            # Xử lý import file
+            try:
+                result = process_log_file(log_file, database_name, request.user, skip_unauthorized)
+                
+                if result['success']:
+                    messages.success(request, f'Import thành công! Đã thêm {result["imported_count"]} logs từ database "{database_name}".')
+                    if result['skipped_count'] > 0:
+                        messages.warning(request, f'Đã bỏ qua {result["skipped_count"]} logs do không có quyền truy cập.')
+                else:
+                    messages.error(request, f'Import thất bại: {result["error"]}')
+                    
+            except Exception as e:
+                messages.error(request, f'Lỗi khi xử lý file: {str(e)}')
+            
+            return redirect('logs:import_log_file')
+    else:
+        form = LogImportForm()
+    
+    # Lấy danh sách database user có quyền truy cập
+    user_accessible_databases = get_user_accessible_databases(request.user)
+    
+    # Lấy lịch sử import gần đây (10 file cuối)
+    recent_imports = LogFile.objects.filter(processed_by=request.user).order_by('-processed_at')[:10]
+    
+    context = {
+        'form': form,
+        'user_accessible_databases': user_accessible_databases,
+        'recent_imports': recent_imports,
+        'title': 'Import Log File'
+    }
+    
+    return render(request, 'logs/import_log.html', context)
+
+
+def process_log_file(log_file, database_name, user, skip_unauthorized=True):
+    """Xử lý file log và import vào database"""
+    try:
+        # Đọc nội dung file
+        content = log_file.read().decode('utf-8', errors='ignore')
+        lines = content.split('\n')
+        
+        imported_count = 0
+        skipped_count = 0
+        error_count = 0
+        
+        # Lấy danh sách database user có quyền
+        user_accessible_databases = get_user_accessible_databases(user)
+        
+        for line_num, line in enumerate(lines, 1):
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+            
+            try:
+                # Parse log line (giả định format: timestamp|database|sql_query|exec_time|exec_count)
+                parts = line.split('|')
+                if len(parts) >= 5:
+                    timestamp_str = parts[0].strip()
+                    db_name = parts[1].strip().upper()
+                    sql_query = parts[2].strip()
+                    exec_time_str = parts[3].strip()
+                    exec_count_str = parts[4].strip()
+                    
+                    # Kiểm tra quyền database
+                    if db_name not in user_accessible_databases:
+                        if skip_unauthorized:
+                            skipped_count += 1
+                            continue
+                        else:
+                            return {
+                                'success': False,
+                                'error': f'Dòng {line_num}: Không có quyền truy cập database "{db_name}"'
+                            }
+                    
+                    # Parse timestamp
+                    try:
+                        timestamp = datetime.strptime(timestamp_str, '%Y-%m-%d %H:%M:%S')
+                    except ValueError:
+                        timestamp = timezone.now()
+                    
+                    # Parse exec_time và exec_count
+                    try:
+                        exec_time_ms = float(exec_time_str) if exec_time_str else 0
+                        exec_count = int(exec_count_str) if exec_count_str else 1
+                    except ValueError:
+                        exec_time_ms = 0
+                        exec_count = 1
+                    
+                    # Tạo SqlLog object
+                    sql_log = SqlLog(
+                        database_name=db_name,
+                        sql_query=sql_query,
+                        exec_time_ms=exec_time_ms,
+                        exec_count=exec_count,
+                        created_at=timestamp,
+                        line_number=line_num
+                    )
+                    sql_log.save()
+                    imported_count += 1
+                    
+                else:
+                    error_count += 1
+                    
+            except Exception as e:
+                error_count += 1
+                if not skip_unauthorized:
+                    return {
+                        'success': False,
+                        'error': f'Dòng {line_num}: {str(e)}'
+                    }
+        
+        # Tạo LogFile record
+        LogFile.objects.create(
+            file_name=log_file.name,
+            file_size=log_file.size,
+            processed_at=timezone.now(),
+            processed_by=user,
+            imported_count=imported_count,
+            skipped_count=skipped_count,
+            error_count=error_count
+        )
+        
+        return {
+            'success': True,
+            'imported_count': imported_count,
+            'skipped_count': skipped_count,
+            'error_count': error_count
+        }
+        
+    except Exception as e:
+        return {
+            'success': False,
+            'error': str(e)
+        }

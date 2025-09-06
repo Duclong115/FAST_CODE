@@ -1,0 +1,130 @@
+{% extends 'logs/base.html' %}
+
+{% block title %}Xác thực MFA - SQL Log Analyzer{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-primary text-white text-center">
+                <h4><i class="fas fa-shield-alt"></i> Xác thực MFA</h4>
+            </div>
+            <div class="card-body">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            <i class="fas fa-{% if message.tags == 'success' %}check-circle{% elif message.tags == 'error' %}exclamation-triangle{% else %}info-circle{% endif %}"></i>
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                
+                <div class="text-center mb-4">
+                    <i class="fas fa-mobile-alt fa-3x text-primary mb-3"></i>
+                    <h5>Nhập mã xác thực</h5>
+                    {% if pending_username %}
+                        <p class="text-muted">Đang đăng nhập với tài khoản: <strong>{{ pending_username }}</strong></p>
+                    {% endif %}
+                    <p class="text-muted">Mở ứng dụng Authenticator và nhập mã 6 chữ số</p>
+                </div>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label for="code" class="form-label">Mã xác thực</label>
+                        <input type="text" 
+                               class="form-control form-control-lg text-center font-monospace" 
+                               id="code" 
+                               name="code" 
+                               placeholder="000000" 
+                               maxlength="8"
+                               autocomplete="off"
+                               required>
+                        <div class="form-text">
+                            Nhập mã 6 chữ số từ ứng dụng Authenticator hoặc backup code
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-check"></i> Xác thực
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="text-center mt-4">
+                    <small class="text-muted">
+                        Không có ứng dụng Authenticator? 
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#helpModal">
+                            Hướng dẫn cài đặt
+                        </a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Help Modal -->
+<div class="modal fade" id="helpModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Hướng dẫn cài đặt Authenticator</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <h6>Ứng dụng Authenticator phổ biến:</h6>
+                <ul>
+                    <li><strong>Google Authenticator</strong> - iOS, Android</li>
+                    <li><strong>Microsoft Authenticator</strong> - iOS, Android</li>
+                    <li><strong>Authy</strong> - iOS, Android, Desktop</li>
+                    <li><strong>1Password</strong> - iOS, Android, Desktop</li>
+                </ul>
+                
+                <h6>Cách sử dụng:</h6>
+                <ol>
+                    <li>Tải và cài đặt ứng dụng Authenticator</li>
+                    <li>Mở ứng dụng và chọn "Thêm tài khoản"</li>
+                    <li>Quét QR code hoặc nhập secret key thủ công</li>
+                    <li>Nhập mã 6 chữ số hiển thị trong ứng dụng</li>
+                </ol>
+                
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Backup Codes:</strong> Nếu không có ứng dụng Authenticator, bạn có thể sử dụng backup codes đã được tạo trước đó.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Auto-focus on code input
+document.getElementById('code').focus();
+
+// Format input (add spaces for better readability)
+document.getElementById('code').addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\s/g, '');
+    if (value.length > 6) {
+        value = value.substring(0, 6);
+    }
+    e.target.value = value;
+});
+
+// Auto-submit when 6 digits are entered
+document.getElementById('code').addEventListener('input', function(e) {
+    if (e.target.value.length === 6 && /^\d{6}$/.test(e.target.value)) {
+        // Small delay to let user see the complete code
+        setTimeout(() => {
+            e.target.form.submit();
+        }, 500);
+    }
+});
+</script>
+{% endblock %}

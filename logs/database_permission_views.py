@@ -16,6 +16,7 @@ from django.core.exceptions import PermissionDenied
 from .models import CustomUser, DatabasePermission, SqlLog
 from .forms import DatabasePermissionForm, DatabasePermissionEditForm
 from .admin_views import is_admin
+from .logging_utils import ActivityLogger
 
 
 @login_required
@@ -98,6 +99,13 @@ def admin_database_permission_create(request):
                 permission.save()
                 
                 messages.success(request, f'Đã cấp quyền "{permission.permission_type}" cho {permission.user.username} truy cập database {permission.database_name}!')
+                
+                # Ghi log hoạt động cấp quyền
+                ActivityLogger.log_database_permission_action(
+                    request, 'CREATE', permission.id, 
+                    permission.user.id, permission.database_name
+                )
+                
                 return redirect('logs:admin_database_permissions')
                 
             except Exception as e:
@@ -157,6 +165,13 @@ def admin_database_permission_edit(request, permission_id):
             try:
                 form.save()
                 messages.success(request, f'Đã cập nhật phân quyền cho {permission.user.username} truy cập database {permission.database_name}!')
+                
+                # Ghi log hoạt động cập nhật quyền
+                ActivityLogger.log_database_permission_action(
+                    request, 'UPDATE', permission.id, 
+                    permission.user.id, permission.database_name
+                )
+                
                 return redirect('logs:admin_database_permission_detail', permission_id=permission.id)
                 
             except Exception as e:
@@ -206,6 +221,13 @@ def admin_database_permission_delete(request, permission_id):
         permission.delete()
         
         messages.success(request, f'Đã xóa phân quyền cho {user_name} truy cập database {database_name}!')
+        
+        # Ghi log hoạt động xóa quyền
+        ActivityLogger.log_database_permission_action(
+            request, 'DELETE', permission_id, 
+            None, database_name
+        )
+        
         return redirect('logs:admin_database_permissions')
         
     except Exception as e:
@@ -229,18 +251,27 @@ def admin_database_permission_bulk_action(request):
         
         try:
             if action == 'activate':
-                permissions.update(is_active=True)
-                messages.success(request, f'Đã kích hoạt {len(permission_ids)} phân quyền!')
+                updated_count = permissions.update(is_active=True)
+                messages.success(request, f'✅ Đã kích hoạt thành công {updated_count} phân quyền!')
             elif action == 'deactivate':
-                permissions.update(is_active=False)
-                messages.success(request, f'Đã vô hiệu hóa {len(permission_ids)} phân quyền!')
+                updated_count = permissions.update(is_active=False)
+                messages.success(request, f'✅ Đã vô hiệu hóa thành công {updated_count} phân quyền!')
             elif action == 'delete':
                 count = permissions.count()
+                # Lấy thông tin trước khi xóa để hiển thị
+                deleted_info = []
+                for perm in permissions:
+                    deleted_info.append(f"{perm.user.username} - {perm.database_name}")
+                
                 permissions.delete()
-                messages.success(request, f'Đã xóa {count} phân quyền!')
+                messages.success(request, f'✅ Đã xóa thành công {count} phân quyền!')
+                if deleted_info:
+                    messages.info(request, f'📋 Các phân quyền đã xóa: {", ".join(deleted_info[:5])}{"..." if len(deleted_info) > 5 else ""}')
+            else:
+                messages.error(request, f'❌ Hành động "{action}" không hợp lệ!')
             
         except Exception as e:
-            messages.error(request, f'Lỗi thực hiện hành động: {str(e)}')
+            messages.error(request, f'❌ Lỗi thực hiện hành động "{action}": {str(e)}')
     
     return redirect('logs:admin_database_permissions')
 
@@ -265,7 +296,9 @@ def admin_bulk_database_permission_create(request):
         expires_datetime = None
         if expires_at:
             try:
-                expires_datetime = timezone.datetime.fromisoformat(expires_at)
+                from datetime import datetime
+                naive_datetime = datetime.fromisoformat(expires_at)
+                expires_datetime = timezone.make_aware(naive_datetime)
             except ValueError:
                 messages.error(request, 'Định dạng thời gian không hợp lệ!')
                 return redirect('logs:admin_bulk_database_permission_create')

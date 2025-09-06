@@ -176,10 +176,14 @@ def admin_user_detail(request, user_id):
         'created_at': user.created_at,
     }
     
+    # Lấy phân quyền database của user
+    user_permissions = user.get_database_permissions()
+    
     context = {
         'title': f'Chi Tiết Người Dùng: {user.username}',
         'user': user,
         'login_stats': login_stats,
+        'user_permissions': user_permissions,
     }
     
     return render(request, 'logs/admin/user_detail.html', context)
@@ -247,10 +251,18 @@ def admin_user_reset_password(request, user_id):
     user = get_object_or_404(CustomUser, id=user_id)
     
     if request.method == 'POST':
-        form = AdminPasswordResetForm(request.POST)
-        if form.is_valid():
+        new_password = request.POST.get('new_password')
+        confirm_password = request.POST.get('confirm_password')
+        force_change = request.POST.get('force_change')
+        
+        if not new_password or not confirm_password:
+            messages.error(request, 'Vui lòng điền đầy đủ thông tin!')
+        elif new_password != confirm_password:
+            messages.error(request, 'Mật khẩu xác nhận không khớp!')
+        elif len(new_password) < 8:
+            messages.error(request, 'Mật khẩu phải có ít nhất 8 ký tự!')
+        else:
             try:
-                new_password = form.cleaned_data['new_password']
                 user.set_password(new_password)
                 user.save()
                 
@@ -259,12 +271,9 @@ def admin_user_reset_password(request, user_id):
                 
             except Exception as e:
                 messages.error(request, f'Lỗi reset mật khẩu: {str(e)}')
-    else:
-        form = AdminPasswordResetForm()
     
     context = {
         'title': f'Reset Mật Khẩu: {user.username}',
-        'form': form,
         'user': user,
     }
     
@@ -335,9 +344,20 @@ def admin_user_bulk_action(request):
 def admin_security_logs(request):
     """Log bảo mật"""
     # Có thể thêm model SecurityLog để track các hoạt động
+    # Tạm thời tạo dữ liệu mẫu
+    security_logs = [
+        {
+            'timestamp': timezone.now(),
+            'user': request.user,
+            'event_type': 'login',
+            'ip_address': request.META.get('REMOTE_ADDR', 'Unknown'),
+            'details': 'Admin login'
+        }
+    ]
+    
     context = {
         'title': 'Log Bảo Mật',
-        'logs': [],  # Placeholder
+        'security_logs': security_logs,
     }
     
     return render(request, 'logs/admin/security_logs.html', context)
@@ -365,3 +385,29 @@ def admin_generate_password(request):
         })
     
     return JsonResponse({'success': False, 'error': 'Invalid request'})
+
+
+@login_required
+@user_passes_test(is_admin)
+@require_http_methods(["POST"])
+def admin_user_unlock(request, user_id):
+    """Mở khóa tài khoản người dùng"""
+    user = get_object_or_404(CustomUser, id=user_id)
+    
+    try:
+        # Mở khóa tài khoản
+        user.unlock_account()
+        
+        # Ghi log admin action
+        from .logging_utils import ActivityLogger
+        ActivityLogger.log_admin_action(
+            request, 'UNLOCK_ACCOUNT', user.id,
+            f'Unlocked account for user: {user.username}'
+        )
+        
+        messages.success(request, f'Đã mở khóa tài khoản "{user.username}" thành công!')
+        
+    except Exception as e:
+        messages.error(request, f'Lỗi mở khóa tài khoản: {str(e)}')
+    
+    return redirect('logs:admin_user_detail', user_id=user.id)

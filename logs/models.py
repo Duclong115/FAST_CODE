@@ -2,6 +2,9 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.hashers import make_password, check_password
+import pyotp
+import secrets
+import string
 
 
 class CustomUser(AbstractUser):
@@ -32,6 +35,27 @@ class CustomUser(AbstractUser):
         help_text="Tài khoản có đang hoạt động không"
     )
     
+    # Account lockout fields
+    failed_login_attempts = models.PositiveIntegerField(
+        default=0,
+        verbose_name="Số lần đăng nhập thất bại",
+        help_text="Số lần đăng nhập thất bại liên tiếp"
+    )
+    
+    locked_until = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name="Khóa đến",
+        help_text="Thời gian tài khoản bị khóa đến (None = không bị khóa)"
+    )
+    
+    last_failed_login = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name="Lần đăng nhập thất bại cuối",
+        help_text="Thời gian đăng nhập thất bại cuối cùng"
+    )
+    
     # Fix reverse accessor conflicts
     groups = models.ManyToManyField(
         'auth.Group',
@@ -48,6 +72,28 @@ class CustomUser(AbstractUser):
         help_text='Specific permissions for this user.',
         related_name="customuser_set",
         related_query_name="customuser",
+    )
+    
+    # MFA fields
+    mfa_enabled = models.BooleanField(
+        default=False,
+        verbose_name="MFA Enabled",
+        help_text="Bật xác thực hai yếu tố"
+    )
+    
+    mfa_secret_key = models.CharField(
+        max_length=32,
+        blank=True,
+        null=True,
+        verbose_name="MFA Secret Key",
+        help_text="Secret key cho TOTP"
+    )
+    
+    mfa_backup_codes = models.JSONField(
+        default=list,
+        blank=True,
+        verbose_name="MFA Backup Codes",
+        help_text="Danh sách backup codes"
     )
     
     class Meta:
@@ -105,6 +151,112 @@ class CustomUser(AbstractUser):
     def get_database_permissions(self):
         """Lấy tất cả quyền database của user"""
         return DatabasePermission.objects.filter(user=self).order_by('-granted_at')
+    
+    def is_account_locked(self):
+        """Kiểm tra tài khoản có bị khóa không"""
+        if self.locked_until:
+            return timezone.now() < self.locked_until
+        return False
+    
+    def get_lockout_remaining_time(self):
+        """Lấy thời gian còn lại của khóa tài khoản (tính bằng giây)"""
+        if self.locked_until:
+            remaining = self.locked_until - timezone.now()
+            return max(0, int(remaining.total_seconds()))
+        return 0
+    
+    def increment_failed_login(self):
+        """Tăng số lần đăng nhập thất bại"""
+        self.failed_login_attempts += 1
+        self.last_failed_login = timezone.now()
+        
+        # Nếu đã thất bại 3 lần, khóa tài khoản 10 phút
+        if self.failed_login_attempts >= 3:
+            from datetime import timedelta
+            self.locked_until = timezone.now() + timedelta(minutes=10)
+        
+        self.save(update_fields=['failed_login_attempts', 'last_failed_login', 'locked_until'])
+    
+    def reset_failed_login(self):
+        """Reset số lần đăng nhập thất bại (khi đăng nhập thành công)"""
+        self.failed_login_attempts = 0
+        self.locked_until = None
+        self.last_failed_login = None
+        self.save(update_fields=['failed_login_attempts', 'locked_until', 'last_failed_login'])
+    
+    def unlock_account(self):
+        """Mở khóa tài khoản (chỉ admin mới có thể làm)"""
+        self.failed_login_attempts = 0
+        self.locked_until = None
+        self.last_failed_login = None
+        self.save(update_fields=['failed_login_attempts', 'locked_until', 'last_failed_login'])
+    
+    # MFA methods
+    def generate_mfa_secret(self):
+        """Tạo secret key cho MFA"""
+        if not self.mfa_secret_key:
+            self.mfa_secret_key = pyotp.random_base32()
+            self.save(update_fields=['mfa_secret_key'])
+        return self.mfa_secret_key
+    
+    def get_mfa_qr_code_url(self):
+        """Lấy URL QR code cho MFA"""
+        if not self.mfa_secret_key:
+            self.generate_mfa_secret()
+        
+        totp_uri = pyotp.totp.TOTP(self.mfa_secret_key).provisioning_uri(
+            name=self.email,
+            issuer_name="SQL Log Analyzer"
+        )
+        return totp_uri
+    
+    def generate_backup_codes(self):
+        """Tạo 10 backup codes"""
+        codes = []
+        for _ in range(10):
+            code = ''.join(secrets.choice(string.ascii_uppercase + string.digits) for _ in range(8))
+            codes.append(code)
+        
+        self.mfa_backup_codes = codes
+        self.save(update_fields=['mfa_backup_codes'])
+        return codes
+    
+    def verify_totp_code(self, code):
+        """Xác thực TOTP code"""
+        if not self.mfa_secret_key:
+            return False
+        
+        totp = pyotp.TOTP(self.mfa_secret_key)
+        return totp.verify(code, valid_window=1)
+    
+    def verify_backup_code(self, code):
+        """Xác thực backup code"""
+        if not self.mfa_backup_codes:
+            return False
+        
+        if code in self.mfa_backup_codes:
+            # Xóa backup code đã sử dụng
+            self.mfa_backup_codes.remove(code)
+            self.save(update_fields=['mfa_backup_codes'])
+            return True
+        return False
+    
+    def enable_mfa(self):
+        """Bật MFA"""
+        if not self.mfa_secret_key:
+            self.generate_mfa_secret()
+        if not self.mfa_backup_codes:
+            self.generate_backup_codes()
+        
+        self.mfa_enabled = True
+        self.save(update_fields=['mfa_enabled'])
+    
+    def disable_mfa(self):
+        """Tắt MFA"""
+        self.mfa_enabled = False
+        self.mfa_secret_key = None
+        self.mfa_backup_codes = []
+        self.save(update_fields=['mfa_enabled', 'mfa_secret_key', 'mfa_backup_codes'])
 
 
 class DatabasePermission(models.Model):
@@ -280,7 +432,9 @@ class LogFile(models.Model):
     file_path = models.CharField(
         max_length=500,
         verbose_name="Đường dẫn file",
-        help_text="Đường dẫn đầy đủ đến file log"
+        help_text="Đường dẫn đầy đủ đến file log",
+        blank=True,
+        null=True
     )
     
     file_size = models.BigIntegerField(
@@ -290,12 +444,41 @@ class LogFile(models.Model):
     
     total_lines = models.PositiveIntegerField(
         verbose_name="Tổng số dòng",
-        help_text="Tổng số dòng trong file"
+        help_text="Tổng số dòng trong file",
+        default=0
     )
     
     processed_lines = models.PositiveIntegerField(
         verbose_name="Số dòng đã xử lý",
-        help_text="Số dòng đã được xử lý thành công"
+        help_text="Số dòng đã được xử lý thành công",
+        default=0
+    )
+    
+    imported_count = models.PositiveIntegerField(
+        verbose_name="Số logs đã import",
+        help_text="Số logs đã được import thành công",
+        default=0
+    )
+    
+    skipped_count = models.PositiveIntegerField(
+        verbose_name="Số logs bị bỏ qua",
+        help_text="Số logs bị bỏ qua do không có quyền",
+        default=0
+    )
+    
+    error_count = models.PositiveIntegerField(
+        verbose_name="Số lỗi",
+        help_text="Số dòng bị lỗi khi xử lý",
+        default=0
+    )
+    
+    processed_by = models.ForeignKey(
+        CustomUser,
+        on_delete=models.CASCADE,
+        verbose_name="Người xử lý",
+        help_text="User đã xử lý file này",
+        null=True,
+        blank=True
     )
     
     failed_lines = models.PositiveIntegerField(

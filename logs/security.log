@@ -1,0 +1,108 @@
+[WARNING] 2025-09-06 12:36:08,200 | security | log_user_login:37 | USER_LOGIN_FAILED | Username: testuser | Reason: Test login failure | IP: 127.0.0.1 | User-Agent: Test Agent
+[WARNING] 2025-09-06 12:36:08,200 | security | log_user_registration:64 | USER_REGISTRATION_FAILED | Username: testuser | Reason: Test registration failure | IP: 127.0.0.1
+[WARNING] 2025-09-06 12:36:08,205 | security | log_security_event:167 | SECURITY_EVENT | TEST_SECURITY_EVENT | Details: Test security event | IP: 127.0.0.1 | User-Agent: Test Agent
+[WARNING] 2025-09-06 12:36:08,891 | security | log_user_login:37 | USER_LOGIN_FAILED | Username: testuser | Reason: Invalid credentials | IP: 127.0.0.1 | User-Agent: Unknown
+[ERROR] 2025-09-06 12:36:58,091 | security | process_exception:78 | EXCEPTION | GET /manage/logs/ | Exception: TemplateSyntaxError: Invalid filter: 'replace' | User: admin (ID: 5) | IP: 127.0.0.1
+[WARNING] 2025-09-06 12:36:58,151 | security | process_response:65 | HTTP_ERROR | GET /manage/logs/ | Status: 500 | User: admin (ID: 5) | IP: 127.0.0.1
+[ERROR] 2025-09-06 12:37:01,654 | security | process_exception:78 | EXCEPTION | GET /manage/logs/stats/ | Exception: TemplateSyntaxError: Invalid filter: 'replace' | User: admin (ID: 5) | IP: 127.0.0.1
+[WARNING] 2025-09-06 12:37:01,682 | security | process_response:65 | HTTP_ERROR | GET /manage/logs/stats/ | Status: 500 | User: admin (ID: 5) | IP: 127.0.0.1
+[ERROR] 2025-09-06 12:38:40,687 | security | process_exception:78 | EXCEPTION | POST /manage/logs/search/ | Exception: TemplateDoesNotExist: logs/admin/log_search_results.html | User: admin (ID: 5) | IP: 127.0.0.1
+[WARNING] 2025-09-06 12:38:40,710 | security | process_response:65 | HTTP_ERROR | POST /manage/logs/search/ | Status: 500 | User: admin (ID: 5) | IP: 127.0.0.1
+[ERROR] 2025-09-06 12:39:23,917 | security | process_exception:78 | EXCEPTION | GET /manage/logs/stats/ | Exception: TemplateSyntaxError: 'log_filters' is not a registered tag library. Must be one of:
+admin_list
+admin_modify
+admin_urls
+cache
+i18n
+l10n
+log
+static
+tz | User: admin (ID: 5) | IP: 127.0.0.1
+[WARNING] 2025-09-06 12:39:23,938 | security | process_response:65 | HTTP_ERROR | GET /manage/logs/stats/ | Status: 500 | User: admin (ID: 5) | IP: 127.0.0.1
+[ERROR] 2025-09-06 12:39:28,003 | security | process_exception:78 | EXCEPTION | GET /manage/logs/ | Exception: TemplateSyntaxError: 'log_filters' is not a registered tag library. Must be one of:
+admin_list
+admin_modify
+admin_urls
+cache
+i18n
+l10n
+log
+static
+tz | User: admin (ID: 5) | IP: 127.0.0.1
+[WARNING] 2025-09-06 12:39:28,031 | security | process_response:65 | HTTP_ERROR | GET /manage/logs/ | Status: 500 | User: admin (ID: 5) | IP: 127.0.0.1
+[ERROR] 2025-09-06 12:42:14,170 | security | process_exception:78 | EXCEPTION | GET /manage/users/1/reset-password/ | Exception: Http404: No CustomUser matches the given query. | User: admin (ID: 5) | IP: 127.0.0.1
+[WARNING] 2025-09-06 12:42:14,173 | security | process_response:65 | HTTP_ERROR | GET /manage/users/1/reset-password/ | Status: 404 | User: admin (ID: 5) | IP: 127.0.0.1
+[ERROR] 2025-09-06 12:42:14,179 | security | process_exception:78 | EXCEPTION | POST /manage/users/1/reset-password/ | Exception: Http404: No CustomUser matches the given query. | User: admin (ID: 5) | IP: 127.0.0.1
+[WARNING] 2025-09-06 12:42:14,181 | security | process_response:65 | HTTP_ERROR | POST /manage/users/1/reset-password/ | Status: 404 | User: admin (ID: 5) | IP: 127.0.0.1
+[WARNING] 2025-09-06 12:51:52,748 | security | log_user_login:37 | USER_LOGIN_FAILED | Username: secureuser | Reason: Invalid password | IP: 127.0.0.1 | User-Agent: Unknown
+[WARNING] 2025-09-06 12:51:53,118 | security | log_user_login:37 | USER_LOGIN_FAILED | Username: secureuser | Reason: Invalid password | IP: 127.0.0.1 | User-Agent: Unknown
+[WARNING] 2025-09-06 12:51:53,477 | security | log_user_login:37 | USER_LOGIN_FAILED | Username: secureuser | Reason: Account locked after failed attempts | IP: 127.0.0.1 | User-Agent: Unknown
+[WARNING] 2025-09-06 12:51:53,482 | security | log_user_login:37 | USER_LOGIN_FAILED | Username: secureuser | Reason: Account locked | IP: 127.0.0.1 | User-Agent: Unknown
+[WARNING] 2025-09-06 12:51:54,203 | security | log_user_login:37 | USER_LOGIN_FAILED | Username: secureuser | Reason: Invalid password | IP: 127.0.0.1 | User-Agent: Unknown
+[WARNING] 2025-09-06 12:52:12,370 | security | log_user_login:37 | USER_LOGIN_FAILED | Username: secureuser | Reason: Invalid password | IP: 127.0.0.1 | User-Agent: Unknown
+[WARNING] 2025-09-06 12:52:12,751 | security | log_user_login:37 | USER_LOGIN_FAILED | Username: secureuser | Reason: Invalid password | IP: 127.0.0.1 | User-Agent: Unknown
+[WARNING] 2025-09-06 12:52:13,124 | security | log_user_login:37 | USER_LOGIN_FAILED | Username: secureuser | Reason: Account locked after failed attempts | IP: 127.0.0.1 | User-Agent: Unknown
+[WARNING] 2025-09-06 12:52:13,129 | security | log_user_login:37 | USER_LOGIN_FAILED | Username: secureuser | Reason: Account locked | IP: 127.0.0.1 | User-Agent: Unknown
+[WARNING] 2025-09-06 12:52:36,552 | security | log_user_login:37 | USER_LOGIN_FAILED | Username: secureuser | Reason: Invalid password | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[WARNING] 2025-09-06 12:52:41,223 | security | log_user_login:37 | USER_LOGIN_FAILED | Username: secureuser | Reason: Invalid password | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[WARNING] 2025-09-06 12:52:48,052 | security | log_user_login:37 | USER_LOGIN_FAILED | Username: secureuser | Reason: Invalid password | IP: 127.0.0.1 | User-Agent: Unknown
+[WARNING] 2025-09-06 12:52:48,463 | security | log_user_login:37 | USER_LOGIN_FAILED | Username: secureuser | Reason: Invalid password | IP: 127.0.0.1 | User-Agent: Unknown
+[WARNING] 2025-09-06 12:52:48,860 | security | log_user_login:37 | USER_LOGIN_FAILED | Username: secureuser | Reason: Account locked after failed attempts | IP: 127.0.0.1 | User-Agent: Unknown
+[WARNING] 2025-09-06 12:52:48,866 | security | log_user_login:37 | USER_LOGIN_FAILED | Username: secureuser | Reason: Account locked | IP: 127.0.0.1 | User-Agent: Unknown
+[WARNING] 2025-09-06 12:52:49,024 | security | log_user_login:37 | USER_LOGIN_FAILED | Username: secureuser | Reason: Account locked after failed attempts | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[ERROR] 2025-09-06 12:53:18,172 | security | process_exception:78 | EXCEPTION | GET /manage/users/8/edit/ | Exception: TemplateDoesNotExist: logs/admin/user_edit.html | User: admin (ID: 5) | IP: 127.0.0.1
+[WARNING] 2025-09-06 12:53:18,194 | security | process_response:65 | HTTP_ERROR | GET /manage/users/8/edit/ | Status: 500 | User: admin (ID: 5) | IP: 127.0.0.1
+[WARNING] 2025-09-06 12:57:12,258 | security | log_user_login:37 | USER_LOGIN_FAILED | Username: secureuser | Reason: Invalid password | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[WARNING] 2025-09-06 12:57:21,253 | security | log_user_login:37 | USER_LOGIN_FAILED | Username: secureuser | Reason: Invalid password | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[WARNING] 2025-09-06 12:57:26,497 | security | log_user_login:37 | USER_LOGIN_FAILED | Username: secureuser | Reason: Account locked after failed attempts | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[WARNING] 2025-09-06 13:03:27,520 | security | log_user_login:37 | USER_LOGIN_FAILED | Username: secureuser | Reason: Invalid password | IP: 127.0.0.1 | User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Sa
+[ERROR] 2025-09-06 13:15:11,388 | security | process_exception:78 | EXCEPTION | GET /import-log/ | Exception: ProgrammingError: column logs_logfile.filename does not exist
+LINE 1: SELECT "logs_logfile"."id", "logs_logfile"."filename", "logs...
+                                    ^
+HINT:  Perhaps you meant to reference the column "logs_logfile.file_name".
+ | User: secureuser (ID: 8) | IP: 127.0.0.1
+[WARNING] 2025-09-06 13:15:11,485 | security | process_response:65 | HTTP_ERROR | GET /import-log/ | Status: 500 | User: secureuser (ID: 8) | IP: 127.0.0.1
+[ERROR] 2025-09-06 13:15:13,632 | security | process_exception:78 | EXCEPTION | GET /import-log/ | Exception: ProgrammingError: column logs_logfile.filename does not exist
+LINE 1: SELECT "logs_logfile"."id", "logs_logfile"."filename", "logs...
+                                    ^
+HINT:  Perhaps you meant to reference the column "logs_logfile.file_name".
+ | User: secureuser (ID: 8) | IP: 127.0.0.1
+[WARNING] 2025-09-06 13:15:13,677 | security | process_response:65 | HTTP_ERROR | GET /import-log/ | Status: 500 | User: secureuser (ID: 8) | IP: 127.0.0.1
+[ERROR] 2025-09-06 13:16:56,302 | security | process_exception:78 | EXCEPTION | GET /import-log/ | Exception: ProgrammingError: column logs_logfile.filename does not exist
+LINE 1: SELECT "logs_logfile"."id", "logs_logfile"."filename", "logs...
+                                    ^
+HINT:  Perhaps you meant to reference the column "logs_logfile.file_name".
+ | User: secureuser (ID: 8) | IP: 127.0.0.1
+[WARNING] 2025-09-06 13:16:56,342 | security | process_response:65 | HTTP_ERROR | GET /import-log/ | Status: 500 | User: secureuser (ID: 8) | IP: 127.0.0.1
+[ERROR] 2025-09-06 13:16:59,204 | security | process_exception:78 | EXCEPTION | GET /import-log/ | Exception: ProgrammingError: column logs_logfile.filename does not exist
+LINE 1: SELECT "logs_logfile"."id", "logs_logfile"."filename", "logs...
+                                    ^
+HINT:  Perhaps you meant to reference the column "logs_logfile.file_name".
+ | User: secureuser (ID: 8) | IP: 127.0.0.1
+[WARNING] 2025-09-06 13:16:59,239 | security | process_response:65 | HTTP_ERROR | GET /import-log/ | Status: 500 | User: secureuser (ID: 8) | IP: 127.0.0.1
+[ERROR] 2025-09-06 13:17:01,188 | security | process_exception:78 | EXCEPTION | GET /log-files/ | Exception: ProgrammingError: column logs_logfile.filename does not exist
+LINE 1: SELECT "logs_logfile"."id", "logs_logfile"."filename", "logs...
+                                    ^
+HINT:  Perhaps you meant to reference the column "logs_logfile.file_name".
+ | User: secureuser (ID: 8) | IP: 127.0.0.1
+[WARNING] 2025-09-06 13:17:01,229 | security | process_response:65 | HTTP_ERROR | GET /log-files/ | Status: 500 | User: secureuser (ID: 8) | IP: 127.0.0.1
+[ERROR] 2025-09-06 13:17:16,246 | security | process_exception:78 | EXCEPTION | GET /log-files/ | Exception: ProgrammingError: column logs_logfile.filename does not exist
+LINE 1: SELECT "logs_logfile"."id", "logs_logfile"."filename", "logs...
+                                    ^
+HINT:  Perhaps you meant to reference the column "logs_logfile.file_name".
+ | User: admin (ID: 5) | IP: 127.0.0.1
+[WARNING] 2025-09-06 13:17:16,284 | security | process_response:65 | HTTP_ERROR | GET /log-files/ | Status: 500 | User: admin (ID: 5) | IP: 127.0.0.1
+[ERROR] 2025-09-06 13:17:18,786 | security | process_exception:78 | EXCEPTION | GET /import-log/ | Exception: ProgrammingError: column logs_logfile.filename does not exist
+LINE 1: SELECT "logs_logfile"."id", "logs_logfile"."filename", "logs...
+                                    ^
+HINT:  Perhaps you meant to reference the column "logs_logfile.file_name".
+ | User: admin (ID: 5) | IP: 127.0.0.1
+[WARNING] 2025-09-06 13:17:18,831 | security | process_response:65 | HTTP_ERROR | GET /import-log/ | Status: 500 | User: admin (ID: 5) | IP: 127.0.0.1
+[ERROR] 2025-09-06 13:28:36,194 | security | process_exception:78 | EXCEPTION | POST /auth/login/ | Exception: TypeError: ActivityLogger.log_user_login() got an unexpected keyword argument 'mfa_pending' | User: Anonymous | IP: 127.0.0.1
+[WARNING] 2025-09-06 13:28:36,221 | security | process_response:65 | HTTP_ERROR | POST /auth/login/ | Status: 500 | User: Anonymous | IP: 127.0.0.1
+[ERROR] 2025-09-06 13:29:52,353 | security | process_exception:78 | EXCEPTION | POST /auth/login/ | Exception: TypeError: ActivityLogger.log_user_login() got an unexpected keyword argument 'mfa_pending' | User: Anonymous | IP: 127.0.0.1
+[WARNING] 2025-09-06 13:29:52,366 | security | process_response:65 | HTTP_ERROR | POST /auth/login/ | Status: 500 | User: Anonymous | IP: 127.0.0.1
+[ERROR] 2025-09-06 13:29:56,496 | security | process_exception:78 | EXCEPTION | POST /auth/login/ | Exception: TypeError: ActivityLogger.log_user_login() got an unexpected keyword argument 'mfa_pending' | User: Anonymous | IP: 127.0.0.1
+[WARNING] 2025-09-06 13:29:56,508 | security | process_response:65 | HTTP_ERROR | POST /auth/login/ | Status: 500 | User: Anonymous | IP: 127.0.0.1
+[ERROR] 2025-09-06 13:30:06,671 | security | process_exception:78 | EXCEPTION | POST /auth/login/ | Exception: TypeError: ActivityLogger.log_user_login() got an unexpected keyword argument 'mfa_pending' | User: Anonymous | IP: 127.0.0.1
+[WARNING] 2025-09-06 13:30:06,684 | security | process_response:65 | HTTP_ERROR | POST /auth/login/ | Status: 500 | User: Anonymous | IP: 127.0.0.1

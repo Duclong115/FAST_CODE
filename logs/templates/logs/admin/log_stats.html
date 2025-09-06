@@ -1,0 +1,199 @@
+{% extends 'logs/base.html' %}
+
+{% block title %}Log Statistics - SQL Log Analyzer{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-chart-bar"></i> Log Statistics</h2>
+            <div class="btn-group">
+                <a href="{% url 'logs:admin_log_viewer' %}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Log Viewer
+                </a>
+                <a href="{% url 'logs:admin_dashboard' %}" class="btn btn-primary">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Overall Statistics -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-info-circle"></i> Tổng Quan</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <h3 class="text-primary">{{ total_size_mb }} MB</h3>
+                            <small class="text-muted">Tổng kích thước logs</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <h3 class="text-success">{{ stats|length }}</h3>
+                            <small class="text-muted">Số loại log files</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <h3 class="text-info">
+                                {% for stat in stats.values %}
+                                    {% if stat.exists %}{{ forloop.counter0|add:1 }}{% endif %}
+                                {% endfor %}
+                            </h3>
+                            <small class="text-muted">Files tồn tại</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <h3 class="text-warning">
+                                {% for stat in stats.values %}
+                                    {% if not stat.exists %}{{ forloop.counter0|add:1 }}{% endif %}
+                                {% endfor %}
+                            </h3>
+                            <small class="text-muted">Files không tồn tại</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Detailed Statistics -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-table"></i> Chi Tiết Theo Loại Log</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Loại Log</th>
+                                <th>Trạng Thái</th>
+                                <th>Kích Thước</th>
+                                <th>Số Dòng</th>
+                                <th>Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for log_type, stat in stats.items %}
+                            <tr>
+                                <td>
+                                    <strong>
+                                        {% if log_type == 'web_activity' %}Web Activity
+                                        {% elif log_type == 'security' %}Security
+                                        {% elif log_type == 'django_general' %}Django General
+                                        {% elif log_type == 'django_errors' %}Django Errors
+                                        {% else %}{{ log_type|title }}
+                                        {% endif %}
+                                    </strong>
+                                    <br><small class="text-muted">{{ log_type }}</small>
+                                </td>
+                                <td>
+                                    {% if stat.exists %}
+                                    <span class="badge bg-success">
+                                        <i class="fas fa-check"></i> Tồn tại
+                                    </span>
+                                    {% else %}
+                                    <span class="badge bg-danger">
+                                        <i class="fas fa-times"></i> Không tồn tại
+                                    </span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if stat.exists %}
+                                    <strong>{{ stat.size_mb }} MB</strong>
+                                    <br><small class="text-muted">{{ stat.size|filesizeformat }}</small>
+                                    {% else %}
+                                    <span class="text-muted">-</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if stat.exists %}
+                                    <strong>{{ stat.line_count|floatformat:0 }}</strong> dòng
+                                    {% else %}
+                                    <span class="text-muted">-</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if stat.exists %}
+                                    <div class="btn-group btn-group-sm">
+                                        <a href="{% url 'logs:admin_log_viewer' %}?type={{ log_type }}" 
+                                           class="btn btn-outline-primary" title="Xem log">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="{% url 'logs:admin_log_download' %}?type={{ log_type }}" 
+                                           class="btn btn-outline-success" title="Tải xuống">
+                                            <i class="fas fa-download"></i>
+                                        </a>
+                                    </div>
+                                    {% else %}
+                                    <span class="text-muted">Không có thao tác</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Log File Locations -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-folder"></i> Vị Trí Files Log</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Web Activity Logs</h6>
+                        <ul class="list-unstyled">
+                            <li><code>logs/web_activity.log</code> - Hoạt động web</li>
+                            <li><code>logs/security.log</code> - Sự kiện bảo mật</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Django System Logs</h6>
+                        <ul class="list-unstyled">
+                            <li><code>logs/django_general.log</code> - Log tổng quát</li>
+                            <li><code>logs/django_errors.log</code> - Log lỗi</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="alert alert-info mt-3">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Lưu ý:</strong> Các file log được tự động rotate khi đạt kích thước 10MB. 
+                    Tối đa 5-10 file backup được giữ lại tùy theo loại log.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Auto-refresh every 60 seconds
+setInterval(function() {
+    if (!document.hidden) {
+        window.location.reload();
+    }
+}, 60000);
+</script>
+{% endblock %}

@@ -6,7 +6,7 @@ Forms cho hệ thống xác thực
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
-from .models import CustomUser, DatabasePermission
+from .models import CustomUser, DatabasePermission, SqlLog
 
 
 class UserRegistrationForm(forms.Form):
@@ -496,3 +496,66 @@ class DatabasePermissionEditForm(forms.ModelForm):
             'is_active': 'Quyền hoạt động',
             'notes': 'Ghi chú',
         }
+
+
+class LogImportForm(forms.Form):
+    """Form import file log SQL"""
+    
+    log_file = forms.FileField(
+        label='File Log SQL',
+        help_text='Chọn file log SQL để import (định dạng: .log, .txt, .sql)',
+        widget=forms.FileInput(attrs={
+            'class': 'form-control',
+            'accept': '.log,.txt,.sql'
+        })
+    )
+    
+    database_name = forms.CharField(
+        max_length=100,
+        label='Tên Database',
+        help_text='Tên database chứa trong file log (ví dụ: WAY4, EBANK)',
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Nhập tên database...'
+        })
+    )
+    
+    skip_unauthorized = forms.BooleanField(
+        label='Bỏ qua logs không có quyền',
+        help_text='Nếu bật, các dòng log từ database không có quyền sẽ bị bỏ qua thay vì báo lỗi',
+        required=False,
+        initial=True,
+        widget=forms.CheckboxInput(attrs={
+            'class': 'form-check-input'
+        })
+    )
+    
+    def clean_log_file(self):
+        """Validate file upload"""
+        file = self.cleaned_data.get('log_file')
+        if not file:
+            raise ValidationError('Vui lòng chọn file log.')
+        
+        # Kiểm tra định dạng file
+        allowed_extensions = ['.log', '.txt', '.sql']
+        file_extension = file.name.lower().split('.')[-1]
+        if f'.{file_extension}' not in allowed_extensions:
+            raise ValidationError('File phải có định dạng .log, .txt hoặc .sql')
+        
+        # Kiểm tra kích thước file (giới hạn 10MB)
+        if file.size > 10 * 1024 * 1024:
+            raise ValidationError('File quá lớn. Kích thước tối đa là 10MB.')
+        
+        return file
+    
+    def clean_database_name(self):
+        """Validate database name"""
+        database_name = self.cleaned_data.get('database_name')
+        if not database_name:
+            raise ValidationError('Vui lòng nhập tên database.')
+        
+        # Kiểm tra tên database hợp lệ
+        if not database_name.replace('_', '').replace('-', '').isalnum():
+            raise ValidationError('Tên database chỉ được chứa chữ cái, số, dấu gạch ngang và gạch dưới.')
+        
+        return database_name.upper()

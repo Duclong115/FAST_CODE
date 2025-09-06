@@ -1,0 +1,168 @@
+{% extends 'logs/base.html' %}
+
+{% block title %}Import Log File - SQL Log Analyzer{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4><i class="fas fa-upload"></i> Import Log File</h4>
+            </div>
+            <div class="card-body">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            <i class="fas fa-{% if message.tags == 'success' %}check-circle{% elif message.tags == 'error' %}exclamation-triangle{% elif message.tags == 'warning' %}exclamation-triangle{% else %}info-circle{% endif %}"></i>
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Hướng dẫn Import:</strong>
+                    <ul class="mb-0 mt-2">
+                        <li>File log phải có định dạng: <code>timestamp|database|sql_query|exec_time|exec_count</code></li>
+                        <li>Ví dụ: <code>2025-09-06 10:30:00|WAY4|SELECT * FROM users|150.5|10</code></li>
+                        <li>Chỉ có thể import logs từ databases bạn có quyền truy cập</li>
+                        <li>Logs từ databases không có quyền sẽ bị bỏ qua hoặc báo lỗi</li>
+                    </ul>
+                </div>
+                
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.log_file.id_for_label }}" class="form-label">
+                            {{ form.log_file.label }}
+                        </label>
+                        {{ form.log_file }}
+                        {% if form.log_file.help_text %}
+                            <div class="form-text">{{ form.log_file.help_text }}</div>
+                        {% endif %}
+                        {% if form.log_file.errors %}
+                            <div class="text-danger small mt-1">
+                                {% for error in form.log_file.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.database_name.id_for_label }}" class="form-label">
+                            {{ form.database_name.label }}
+                        </label>
+                        {{ form.database_name }}
+                        {% if form.database_name.help_text %}
+                            <div class="form-text">{{ form.database_name.help_text }}</div>
+                        {% endif %}
+                        {% if form.database_name.errors %}
+                            <div class="text-danger small mt-1">
+                                {% for error in form.database_name.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="form-check">
+                            {{ form.skip_unauthorized }}
+                            <label class="form-check-label" for="{{ form.skip_unauthorized.id_for_label }}">
+                                {{ form.skip_unauthorized.label }}
+                            </label>
+                        </div>
+                        {% if form.skip_unauthorized.help_text %}
+                            <div class="form-text">{{ form.skip_unauthorized.help_text }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{% url 'logs:index' %}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Quay lại
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-upload"></i> Import Log File
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Thông tin quyền database -->
+        <div class="card mt-4">
+            <div class="card-header bg-info text-white">
+                <h5><i class="fas fa-database"></i> Databases Có Quyền Truy Cập</h5>
+            </div>
+            <div class="card-body">
+                {% if user_accessible_databases %}
+                    <div class="row">
+                        {% for db in user_accessible_databases %}
+                            <div class="col-md-3 mb-2">
+                                <span class="badge bg-success">
+                                    <i class="fas fa-database"></i> {{ db }}
+                                </span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <p class="text-muted mt-3 mb-0">
+                        <i class="fas fa-info-circle"></i>
+                        Bạn chỉ có thể import logs từ các databases trên. 
+                        Logs từ databases khác sẽ bị bỏ qua hoặc báo lỗi.
+                    </p>
+                {% else %}
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Bạn chưa có quyền truy cập database nào. 
+                        Vui lòng liên hệ admin để được cấp quyền.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Lịch sử import -->
+        <div class="card mt-4">
+            <div class="card-header bg-secondary text-white">
+                <h5><i class="fas fa-history"></i> Lịch Sử Import</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>File Name</th>
+                                <th>Size</th>
+                                <th>Imported</th>
+                                <th>Skipped</th>
+                                <th>Errors</th>
+                                <th>Processed At</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for log_file in recent_imports %}
+                            <tr>
+                                <td>{{ log_file.file_name }}</td>
+                                <td>{{ log_file.file_size|filesizeformat }}</td>
+                                <td><span class="badge bg-success">{{ log_file.imported_count }}</span></td>
+                                <td><span class="badge bg-warning">{{ log_file.skipped_count }}</span></td>
+                                <td><span class="badge bg-danger">{{ log_file.error_count }}</span></td>
+                                <td>{{ log_file.processed_at|date:"d/m/Y H:i" }}</td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="6" class="text-center text-muted">
+                                    <i class="fas fa-inbox"></i> Chưa có file nào được import
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

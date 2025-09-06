@@ -5,6 +5,40 @@
 {% block subtitle %}Đăng nhập vào hệ thống{% endblock %}
 
 {% block content %}
+{% if account_locked %}
+    <div class="alert alert-danger">
+        <i class="fas fa-lock"></i>
+        <strong>Tài khoản đã bị khóa!</strong><br>
+        Tài khoản của bạn đã bị khóa do nhập sai mật khẩu quá nhiều lần.
+        {% if remaining_time %}
+            <br><small>Thời gian còn lại: <span id="countdown">{{ remaining_time }}</span> giây</small>
+        {% endif %}
+        <br><small>Vui lòng liên hệ quản trị viên để mở khóa tài khoản.</small>
+    </div>
+    
+    {% if remaining_time %}
+    <script>
+        // Countdown timer
+        let timeLeft = {{ remaining_time }};
+        const countdownElement = document.getElementById('countdown');
+        
+        const timer = setInterval(function() {
+            timeLeft--;
+            countdownElement.textContent = timeLeft;
+            
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                countdownElement.textContent = '0';
+                // Reload page to check if account is unlocked
+                setTimeout(function() {
+                    window.location.reload();
+                }, 1000);
+            }
+        }, 1000);
+    </script>
+    {% endif %}
+{% endif %}
+
 <form method="post">
     {% csrf_token %}
     

@@ -58,6 +58,11 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="{% url 'logs:import_log_file' %}">
+                    <i class="fas fa-upload"></i> Import Log
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="{% url 'logs:log_files' %}">
                     <i class="fas fa-file-alt"></i> File Logs
                 </a>
@@ -76,6 +81,13 @@
                     </a></li>
                     <li><a class="dropdown-item" href="{% url 'logs:admin_database_permissions' %}">
                         <i class="fas fa-database"></i> Phân Quyền Database
+                    </a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{% url 'logs:admin_log_viewer' %}">
+                        <i class="fas fa-file-alt"></i> Log Viewer
+                    </a></li>
+                    <li><a class="dropdown-item" href="{% url 'logs:admin_log_stats' %}">
+                        <i class="fas fa-chart-bar"></i> Thống Kê Logs
                     </a></li>
                 </ul>
             </li>
@@ -123,6 +135,21 @@
     </nav>
 
     <div class="container mt-4">
+        <!-- Messages -->
+        {% if messages %}
+        <div class="row">
+            <div class="col-12">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    <i class="fas fa-{% if message.tags == 'success' %}check-circle{% elif message.tags == 'error' %}exclamation-triangle{% elif message.tags == 'warning' %}exclamation-circle{% elif message.tags == 'info' %}info-circle{% else %}bell{% endif %}"></i>
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        
         {% block content %}
         {% endblock %}
     </div>

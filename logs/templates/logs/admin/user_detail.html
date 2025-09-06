@@ -1,0 +1,186 @@
+{% extends 'logs/base.html' %}
+
+{% block title %}User Detail - SQL Log Analyzer{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-user"></i> User Detail: {{ user.username }}</h2>
+            <div class="btn-group">
+                <a href="{% url 'logs:admin_user_list' %}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Users
+                </a>
+                <a href="{% url 'logs:admin_user_edit' user.id %}" class="btn btn-primary">
+                    <i class="fas fa-edit"></i> Edit User
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-info-circle"></i> User Information</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-borderless">
+                    <tr>
+                        <td><strong>Username:</strong></td>
+                        <td>{{ user.username }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Email:</strong></td>
+                        <td>{{ user.email|default:"N/A" }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Full Name:</strong></td>
+                        <td>{{ user.get_full_name|default:"N/A" }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Is Active:</strong></td>
+                        <td>
+                            {% if user.is_active %}
+                                <span class="badge bg-success">Active</span>
+                            {% else %}
+                                <span class="badge bg-danger">Inactive</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Is Superuser:</strong></td>
+                        <td>
+                            {% if user.is_superuser %}
+                                <span class="badge bg-warning">Superuser</span>
+                            {% else %}
+                                <span class="badge bg-info">Regular User</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Date Joined:</strong></td>
+                        <td>{{ user.date_joined|date:"Y-m-d H:i:s" }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Last Login:</strong></td>
+                        <td>{{ user.last_login|date:"Y-m-d H:i:s"|default:"Never" }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Account Status:</strong></td>
+                        <td>
+                            {% if user.is_account_locked %}
+                                <span class="badge bg-danger">
+                                    <i class="fas fa-lock"></i> Locked
+                                </span>
+                                <br><small class="text-muted">
+                                    Locked until: {{ user.locked_until|date:"Y-m-d H:i:s" }}
+                                </small>
+                            {% else %}
+                                <span class="badge bg-success">
+                                    <i class="fas fa-unlock"></i> Unlocked
+                                </span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Failed Login Attempts:</strong></td>
+                        <td>
+                            <span class="badge bg-{% if user.failed_login_attempts >= 2 %}danger{% elif user.failed_login_attempts >= 1 %}warning{% else %}success{% endif %}">
+                                {{ user.failed_login_attempts }}/3
+                            </span>
+                            {% if user.last_failed_login %}
+                                <br><small class="text-muted">
+                                    Last failed: {{ user.last_failed_login|date:"Y-m-d H:i:s" }}
+                                </small>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-database"></i> Database Permissions</h5>
+            </div>
+            <div class="card-body">
+                {% if user_permissions %}
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Database</th>
+                                    <th>Permission</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for perm in user_permissions %}
+                                <tr>
+                                    <td>{{ perm.database_name }}</td>
+                                    <td>
+                                        <span class="badge bg-{% if perm.permission_type == 'admin' %}danger{% elif perm.permission_type == 'write' %}warning{% else %}info{% endif %}">
+                                            {{ perm.permission_type|title }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {% if perm.is_active %}
+                                            <span class="badge bg-success">Active</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary">Inactive</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> No database permissions assigned.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-cogs"></i> Actions</h5>
+            </div>
+            <div class="card-body">
+                <div class="btn-group" role="group">
+                    <a href="{% url 'logs:admin_user_edit' user.id %}" class="btn btn-primary">
+                        <i class="fas fa-edit"></i> Edit User
+                    </a>
+                    <a href="{% url 'logs:admin_user_reset_password' user.id %}" class="btn btn-warning">
+                        <i class="fas fa-key"></i> Reset Password
+                    </a>
+                    {% if user.is_account_locked %}
+                        <form method="post" action="{% url 'logs:admin_user_unlock' user.id %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success" onclick="return confirm('Bạn có chắc chắn muốn mở khóa tài khoản này?')">
+                                <i class="fas fa-unlock"></i> Unlock Account
+                            </button>
+                        </form>
+                    {% endif %}
+                    <a href="{% url 'logs:admin_user_toggle_active' user.id %}" class="btn btn-{% if user.is_active %}danger{% else %}success{% endif %}">
+                        <i class="fas fa-{% if user.is_active %}ban{% else %}check{% endif %}"></i> 
+                        {% if user.is_active %}Deactivate{% else %}Activate{% endif %}
+                    </a>
+                    <a href="{% url 'logs:admin_database_permission_create' %}" class="btn btn-info">
+                        <i class="fas fa-plus"></i> Add Permission
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
