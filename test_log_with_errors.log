@@ -1,0 +1,28 @@
+DB:T24VN,sql:SELECT * FROM accounts WHERE balance > 1000000,exec_time_ms:1100,exec_count:125
+DB:WAY4,sql:SELECT * FROM customers WHERE cust_id = 203,exec_time_ms:5005,exec_count:150
+DB:EBANK,sql:SELECT * FROM transactions WHERE amount > 50000,exec_time_ms:800,exec_count:200
+DB:MICRO,sql:SELECT * FROM trans_log_103 Create_date  > sysdate -1,exec_time_ms:504,exec_count:103
+DB:BIZ,sql:SELECT * FROM business_accounts WHERE status = 'active',exec_time_ms:300,exec_count:50
+INVALID_LINE_WITHOUT_PREFIX
+DB:SALE,sql:SELECT * FROM sales_data WHERE date >= '2024-01-01',exec_time_ms:450,exec_count:75
+MISSING_COMMA_BETWEEN_FIELDS DB:T24VN sql:SELECT * FROM users exec_time_ms:200 exec_count:30
+DB:WAY4,sql:SELECT * FROM vip_accounts_1 WHERE acount_id = 4,exec_time_ms:1002,exec_count:34
+DB:EBANK,sql:SELECT * FROM loan_accounts WHERE balance < 0,exec_time_ms:600,exec_count:80
+WRONG_FORMAT:database=T24VN,query=SELECT * FROM logs,time=150,count=25
+DB:MICRO,sql:SELECT * FROM accounts_10 account_id=32,exec_time_ms:381,exec_count:120
+DB:T24VN,sql:SELECT * FROM action_log WHERE action_id = 32,exec_time_ms:2000,exec_count:105
+EMPTY_LINE_WITH_SPACES    
+DB:WAY4,sql:SELECT * FROM vip_accounts_5 WHERE acount_id = 8,exec_time_ms:800,exec_count:20
+DB:EBANK,sql:SELECT * FROM deposit_accounts WHERE interest_rate > 5,exec_time_ms:350,exec_count:60
+MISSING_EXEC_COUNT DB:T24VN,sql:SELECT * FROM audit_log,exec_time_ms:250
+DB:MICRO,sql:SELECT * FROM accounts_23 account_id=45,exec_time_ms:461,exec_count:120
+DB:T24VN,sql:SELECT * FROM accounts_17 account_id=39,exec_time_ms:400,exec_count:119
+INVALID_CHARACTERS_IN_TIME DB:T24VN,sql:SELECT * FROM test,exec_time_ms:abc,exec_count:10
+DB:WAY4,sql:SELECT * FROM accounts_5 account_id=12,exec_time_ms:320,exec_count:90
+DB:EBANK,sql:SELECT * FROM accounts_15 account_id=28,exec_time_ms:280,exec_count:85
+MISSING_SQL_PREFIX DB:T24VN,SELECT * FROM products,exec_time_ms:180,exec_count:40
+DB:MICRO,sql:SELECT * FROM accounts_8 account_id=19,exec_time_ms:240,exec_count:70
+DB:T24VN,sql:SELECT * FROM accounts_12 account_id=25,exec_time_ms:220,exec_count:65
+WRONG_ORDER DB:T24VN,exec_time_ms:160,sql:SELECT * FROM orders,exec_count:35
+DB:WAY4,sql:SELECT * FROM accounts_3 account_id=8,exec_time_ms:200,exec_count:55
+DB:EBANK,sql:SELECT * FROM accounts_20 account_id=35,exec_time_ms:190,exec_count:45

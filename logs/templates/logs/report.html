@@ -1,0 +1,344 @@
+{% extends 'logs/base.html' %}
+
+{% block title %}Tạo Báo Cáo - SQL Log Analyzer{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2><i class="fas fa-file-alt"></i> Tạo Báo Cáo</h2>
+        
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5><i class="fas fa-cog"></i> Cấu hình Báo Cáo</h5>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" id="reportForm">
+                            {% csrf_token %}
+                            
+                            <!-- Loại báo cáo -->
+                            <div class="mb-4">
+                                <label class="form-label"><strong>Loại báo cáo:</strong></label>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="report_type" id="summary" value="summary" checked>
+                                            <label class="form-check-label" for="summary">
+                                                <i class="fas fa-chart-bar text-primary"></i> Báo cáo tổng hợp
+                                            </label>
+                                            <small class="form-text text-muted d-block">
+                                                Thống kê tổng quan, top queries, phân tích theo database
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="report_type" id="detailed" value="detailed">
+                                            <label class="form-check-label" for="detailed">
+                                                <i class="fas fa-list text-info"></i> Báo cáo chi tiết
+                                            </label>
+                                            <small class="form-text text-muted d-block">
+                                                Danh sách đầy đủ tất cả logs với thông tin chi tiết
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="report_type" id="abnormal" value="abnormal">
+                                            <label class="form-check-label" for="abnormal">
+                                                <i class="fas fa-exclamation-triangle text-danger"></i> Truy vấn bất thường
+                                            </label>
+                                            <small class="form-text text-muted d-block">
+                                                Các truy vấn có exec_time_ms > 500 và exec_count > 100
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Định dạng xuất -->
+                            <div class="mb-4">
+                                <label class="form-label"><strong>Định dạng xuất:</strong></label>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="format_type" id="csv" value="csv" checked>
+                                            <label class="form-check-label" for="csv">
+                                                <i class="fas fa-file-csv text-success"></i> CSV
+                                            </label>
+                                            <small class="form-text text-muted d-block">
+                                                File Excel có thể mở bằng Microsoft Excel
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="format_type" id="pdf" value="pdf">
+                                            <label class="form-check-label" for="pdf">
+                                                <i class="fas fa-file-pdf text-danger"></i> PDF
+                                            </label>
+                                            <small class="form-text text-muted d-block">
+                                                File PDF có thể in và chia sẻ dễ dàng
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Lọc database -->
+                            <div class="mb-4">
+                                <label for="database_filter" class="form-label"><strong>Lọc theo Database:</strong></label>
+                                <select class="form-select" name="database_filter" id="database_filter">
+                                    <option value="">Tất cả Database</option>
+                                    {% for db in databases %}
+                                    <option value="{{ db }}">{{ db }}</option>
+                                    {% endfor %}
+                                </select>
+                                <small class="form-text text-muted">
+                                    Chọn database cụ thể hoặc để trống để bao gồm tất cả
+                                </small>
+                            </div>
+
+                            <!-- Nút tạo báo cáo -->
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-download"></i> Tạo Báo Cáo
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <!-- Thông tin báo cáo -->
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                        <h5><i class="fas fa-info-circle"></i> Thông tin Báo Cáo</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="reportInfo">
+                            <h6>Báo cáo tổng hợp:</h6>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success"></i> Thống kê tổng quan</li>
+                                <li><i class="fas fa-check text-success"></i> Top 10 queries chậm nhất</li>
+                                <li><i class="fas fa-check text-success"></i> Top 10 queries được thực thi nhiều nhất</li>
+                                <li><i class="fas fa-check text-success"></i> Thống kê theo database</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hướng dẫn -->
+                <div class="card mt-3">
+                    <div class="card-header bg-warning text-dark">
+                        <h5><i class="fas fa-lightbulb"></i> Hướng dẫn</h5>
+                    </div>
+                    <div class="card-body">
+                        <ol class="small">
+                            <li>Chọn loại báo cáo phù hợp</li>
+                            <li>Chọn định dạng xuất (CSV hoặc PDF)</li>
+                            <li>Lọc theo database nếu cần</li>
+                            <li>Nhấn "Tạo Báo Cáo" để tải file</li>
+                        </ol>
+                        <div class="alert alert-info small">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Lưu ý:</strong> File sẽ được tải xuống tự động với tên chứa timestamp.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preview báo cáo -->
+        <div class="row mt-4" id="previewSection" style="display: none;">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h5><i class="fas fa-eye"></i> Xem trước Báo Cáo</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="previewContent">
+                            <!-- Nội dung preview sẽ được load bằng AJAX -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const reportTypeRadios = document.querySelectorAll('input[name="report_type"]');
+    const reportInfo = document.getElementById('reportInfo');
+    
+    function updateReportInfo() {
+        const selectedType = document.querySelector('input[name="report_type"]:checked').value;
+        
+        let infoHtml = '';
+        if (selectedType === 'summary') {
+            infoHtml = `
+                <h6>Báo cáo tổng hợp:</h6>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-check text-success"></i> Thống kê tổng quan</li>
+                    <li><i class="fas fa-check text-success"></i> Top 10 queries chậm nhất</li>
+                    <li><i class="fas fa-check text-success"></i> Top 10 queries được thực thi nhiều nhất</li>
+                    <li><i class="fas fa-check text-success"></i> Thống kê theo database</li>
+                </ul>
+            `;
+        } else if (selectedType === 'detailed') {
+            infoHtml = `
+                <h6>Báo cáo chi tiết:</h6>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-check text-success"></i> Danh sách đầy đủ tất cả logs</li>
+                    <li><i class="fas fa-check text-success"></i> Thông tin chi tiết từng truy vấn</li>
+                    <li><i class="fas fa-check text-success"></i> Thời gian tạo và số dòng</li>
+                    <li><i class="fas fa-check text-success"></i> Sắp xếp theo thời gian tạo</li>
+                </ul>
+            `;
+        } else if (selectedType === 'abnormal') {
+            infoHtml = `
+                <h6>Báo cáo truy vấn bất thường:</h6>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-check text-success"></i> Truy vấn có exec_time_ms > 500ms</li>
+                    <li><i class="fas fa-check text-success"></i> Truy vấn có exec_count > 100</li>
+                    <li><i class="fas fa-check text-success"></i> Phân loại mức độ nghiêm trọng</li>
+                    <li><i class="fas fa-check text-success"></i> Sắp xếp theo thời gian thực thi</li>
+                </ul>
+            `;
+        }
+        
+        reportInfo.innerHTML = infoHtml;
+    }
+    
+    reportTypeRadios.forEach(radio => {
+        radio.addEventListener('change', updateReportInfo);
+    });
+    
+    // Cập nhật thông tin ban đầu
+    updateReportInfo();
+    
+    // Xử lý form submit
+    document.getElementById('reportForm').addEventListener('submit', function(e) {
+        const formatType = document.querySelector('input[name="format_type"]:checked').value;
+        const reportType = document.querySelector('input[name="report_type"]:checked').value;
+        
+        if (formatType === 'json') {
+            e.preventDefault();
+            // Load preview bằng AJAX
+            loadPreview(reportType);
+        }
+    });
+    
+    function loadPreview(reportType) {
+        const formData = new FormData(document.getElementById('reportForm'));
+        formData.set('format_type', 'json');
+        
+        fetch('{% url "logs:generate_report" %}', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('previewSection').style.display = 'block';
+            document.getElementById('previewContent').innerHTML = generatePreviewHTML(data, reportType);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+    
+    function generatePreviewHTML(data, reportType) {
+        if (reportType === 'summary') {
+            return `
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Thống kê tổng quan:</h6>
+                        <table class="table table-sm">
+                            <tr><td>Tổng số logs:</td><td><strong>${data.summary.total_logs}</strong></td></tr>
+                            <tr><td>Tổng thời gian (ms):</td><td><strong>${data.summary.total_exec_time}</strong></td></tr>
+                            <tr><td>Tổng số lần thực thi:</td><td><strong>${data.summary.total_exec_count}</strong></td></tr>
+                            <tr><td>Thời gian TB (ms):</td><td><strong>${data.summary.avg_exec_time}</strong></td></tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Top queries chậm nhất:</h6>
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr><th>Database</th><th>Thời gian (ms)</th><th>Số lần thực thi</th></tr>
+                                </thead>
+                                <tbody>
+                                    ${data.slowest_queries.slice(0, 5).map(q => `
+                                        <tr>
+                                            <td>${q.database_name}</td>
+                                            <td>${q.exec_time_ms}</td>
+                                            <td>${q.exec_count}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            `;
+        } else if (reportType === 'detailed') {
+            return `
+                <h6>Dữ liệu chi tiết (hiển thị 10 records đầu tiên):</h6>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>ID</th><th>Database</th><th>Thời gian (ms)</th><th>Số lần thực thi</th><th>Thời gian tạo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${data.logs.slice(0, 10).map(log => `
+                                <tr>
+                                    <td>${log.ID}</td>
+                                    <td>${log.Database}</td>
+                                    <td>${log['Thời gian (ms)']}</td>
+                                    <td>${log['Số lần thực thi']}</td>
+                                    <td>${log['Thời gian tạo']}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+                <small class="text-muted">Tổng số records: ${data.logs.length}</small>
+            `;
+        } else if (reportType === 'abnormal') {
+            return `
+                <h6>Truy vấn bất thường:</h6>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Database</th><th>Thời gian (ms)</th><th>Số lần thực thi</th><th>Mức độ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${data.abnormal_logs.map(log => `
+                                <tr>
+                                    <td>${log.Database}</td>
+                                    <td>${log['Thời gian (ms)']}</td>
+                                    <td>${log['Số lần thực thi']}</td>
+                                    <td><span class="badge ${log['Mức độ nghiêm trọng'] === 'Rất cao' ? 'bg-danger' : log['Mức độ nghiêm trọng'] === 'Cao' ? 'bg-warning' : 'bg-info'}">${log['Mức độ nghiêm trọng']}</span></td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+                <small class="text-muted">Tổng số truy vấn bất thường: ${data.abnormal_logs.length}</small>
+            `;
+        }
+        return '';
+    }
+});
+</script>
+{% endblock %}

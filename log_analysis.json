@@ -1,0 +1,197 @@
+{
+  "timestamp": "2025-09-06T09:19:42.950933",
+  "file_analyzed": "logsql.log",
+  "statistics": {
+    "total_records": 299,
+    "total_exec_time": 85239,
+    "total_exec_count": 17540,
+    "database_stats": {
+      "T24VN": {
+        "record_count": 104,
+        "total_exec_time": 28610,
+        "total_exec_count": 6165,
+        "avg_exec_time": 275.1,
+        "unique_queries": 103
+      },
+      "WAY4": {
+        "record_count": 39,
+        "total_exec_time": 14539,
+        "total_exec_count": 1785,
+        "avg_exec_time": 372.79,
+        "unique_queries": 39
+      },
+      "EBANK": {
+        "record_count": 114,
+        "total_exec_time": 30040,
+        "total_exec_count": 7227,
+        "avg_exec_time": 263.51,
+        "unique_queries": 114
+      },
+      "MICRO": {
+        "record_count": 21,
+        "total_exec_time": 5697,
+        "total_exec_count": 1195,
+        "avg_exec_time": 271.29,
+        "unique_queries": 21
+      },
+      "BIZ": {
+        "record_count": 17,
+        "total_exec_time": 5596,
+        "total_exec_count": 853,
+        "avg_exec_time": 329.18,
+        "unique_queries": 17
+      },
+      "SALE": {
+        "record_count": 4,
+        "total_exec_time": 757,
+        "total_exec_count": 315,
+        "avg_exec_time": 189.25,
+        "unique_queries": 4
+      }
+    }
+  },
+  "slowest_queries": [
+    {
+      "database_name": "WAY4",
+      "sql_query": "SELECT * FROM customers WHERE cust_id = 203",
+      "exec_time_ms": 5005,
+      "exec_count": 150,
+      "line_number": 5
+    },
+    {
+      "database_name": "T24VN",
+      "sql_query": "SELECT * FROM action_log WHERE action_id = 32",
+      "exec_time_ms": 2000,
+      "exec_count": 105,
+      "line_number": 4
+    },
+    {
+      "database_name": "T24VN",
+      "sql_query": "SELECT * FROM accounts WHERE balance > 1000000",
+      "exec_time_ms": 1100,
+      "exec_count": 125,
+      "line_number": 2
+    },
+    {
+      "database_name": "WAY4",
+      "sql_query": "SELECT * FROM vip_accounts_1 WHERE acount_id = 4",
+      "exec_time_ms": 1002,
+      "exec_count": 34,
+      "line_number": 7
+    },
+    {
+      "database_name": "WAY4",
+      "sql_query": "SELECT * FROM vip_accounts_5 WHERE acount_id = 8",
+      "exec_time_ms": 800,
+      "exec_count": 20,
+      "line_number": 11
+    },
+    {
+      "database_name": "WAY4",
+      "sql_query": "SELECT * FROM vip_accounts_15 WHERE acount_id = 18",
+      "exec_time_ms": 647,
+      "exec_count": 9,
+      "line_number": 21
+    },
+    {
+      "database_name": "T24VN",
+      "sql_query": "SELECT * FROM accounts_84 account_id=106",
+      "exec_time_ms": 513,
+      "exec_count": 13,
+      "line_number": 235
+    },
+    {
+      "database_name": "BIZ",
+      "sql_query": "SELECT * FROM accounts_90 account_id=112",
+      "exec_time_ms": 513,
+      "exec_count": 17,
+      "line_number": 241
+    },
+    {
+      "database_name": "EBANK",
+      "sql_query": "SELECT * FROM accounts_35 account_id=57",
+      "exec_time_ms": 512,
+      "exec_count": 37,
+      "line_number": 186
+    },
+    {
+      "database_name": "T24VN",
+      "sql_query": "SELECT * FROM accounts_109 account_id=131",
+      "exec_time_ms": 511,
+      "exec_count": 51,
+      "line_number": 260
+    }
+  ],
+  "most_executed_queries": [
+    {
+      "database_name": "WAY4",
+      "sql_query": "SELECT * FROM customers WHERE cust_id = 203",
+      "exec_time_ms": 5005,
+      "exec_count": 150,
+      "line_number": 5
+    },
+    {
+      "database_name": "T24VN",
+      "sql_query": "SELECT * FROM accounts WHERE balance > 1000000",
+      "exec_time_ms": 1100,
+      "exec_count": 125,
+      "line_number": 2
+    },
+    {
+      "database_name": "MICRO",
+      "sql_query": "SELECT * FROM accounts_10 account_id=32",
+      "exec_time_ms": 381,
+      "exec_count": 120,
+      "line_number": 161
+    },
+    {
+      "database_name": "T24VN",
+      "sql_query": "SELECT * FROM accounts_23 account_id=45",
+      "exec_time_ms": 461,
+      "exec_count": 120,
+      "line_number": 174
+    },
+    {
+      "database_name": "T24VN",
+      "sql_query": "SELECT * FROM accounts_17 account_id=39",
+      "exec_time_ms": 31,
+      "exec_count": 119,
+      "line_number": 168
+    },
+    {
+      "database_name": "T24VN",
+      "sql_query": "SELECT * FROM accounts_113 account_id=135",
+      "exec_time_ms": 104,
+      "exec_count": 119,
+      "line_number": 264
+    },
+    {
+      "database_name": "EBANK",
+      "sql_query": "SELECT * FROM trans_log_57 Create_date  > sysdate -1",
+      "exec_time_ms": 253,
+      "exec_count": 118,
+      "line_number": 83
+    },
+    {
+      "database_name": "EBANK",
+      "sql_query": "SELECT * FROM trans_log_80 Create_date  > sysdate -1",
+      "exec_time_ms": 222,
+      "exec_count": 118,
+      "line_number": 106
+    },
+    {
+      "database_name": "T24VN",
+      "sql_query": "SELECT * FROM accounts_37 account_id=59",
+      "exec_time_ms": 9,
+      "exec_count": 118,
+      "line_number": 188
+    },
+    {
+      "database_name": "T24VN",
+      "sql_query": "SELECT * FROM accounts_48 account_id=70",
+      "exec_time_ms": 289,
+      "exec_count": 118,
+      "line_number": 199
+    }
+  ]
+}

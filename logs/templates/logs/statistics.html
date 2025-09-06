@@ -1,0 +1,283 @@
+{% extends 'logs/base.html' %}
+
+{% block title %}Thống kê SQL Logs - SQL Log Analyzer{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-chart-bar"></i> Thống kê SQL Logs</h2>
+            <div class="d-flex gap-2">
+                <form method="get" class="d-flex">
+                    <select name="database" class="form-select me-2" style="width: auto;">
+                        <option value="">Tất cả Database</option>
+                        {% for db in all_databases %}
+                        <option value="{{ db }}" {% if db == selected_database %}selected{% endif %}>
+                            {{ db }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-filter"></i> Lọc
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Thông báo khi không có dữ liệu -->
+        {% if selected_database and not has_data %}
+        <div class="alert alert-warning text-center mb-4">
+            <i class="fas fa-exclamation-triangle"></i> 
+            <strong>Không tìm thấy truy vấn nào cho database "{{ selected_database }}"</strong>
+            <br>
+            <small>Vui lòng chọn database khác hoặc xem tất cả databases.</small>
+        </div>
+        {% endif %}
+        
+        <!-- Tổng quan -->
+        {% if has_data %}
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card stats-card bg-primary text-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-database fa-2x mb-2"></i>
+                        <h4>{{ total_logs|floatformat:0 }}</h4>
+                        <p class="mb-0">Tổng số Logs</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stats-card bg-success text-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-clock fa-2x mb-2"></i>
+                        <h4>{{ total_exec_time|floatformat:0 }}</h4>
+                        <p class="mb-0">Tổng thời gian (ms)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stats-card bg-info text-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-play fa-2x mb-2"></i>
+                        <h4>{{ total_exec_count|floatformat:0 }}</h4>
+                        <p class="mb-0">Tổng số lần thực thi</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card stats-card bg-warning text-white">
+                    <div class="card-body text-center">
+                        <i class="fas fa-tachometer-alt fa-2x mb-2"></i>
+                        <h4>{{ avg_exec_time|floatformat:2 }}</h4>
+                        <p class="mb-0">Thời gian TB (ms)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Thống kê theo Database -->
+        {% if has_data %}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-server"></i> Thống kê theo Database</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Database</th>
+                                        <th>Số Logs</th>
+                                        <th>Thời gian TB</th>
+                                        <th>Tổng thời gian</th>
+                                        <th>Tổng thực thi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for stat in db_stats %}
+                                    <tr>
+                                        <td>
+                                            <span class="badge bg-secondary">{{ stat.database_name }}</span>
+                                        </td>
+                                        <td>{{ stat.count }}</td>
+                                        <td>{{ stat.avg_exec_time|floatformat:2 }}</td>
+                                        <td>{{ stat.total_exec_time|floatformat:0 }}</td>
+                                        <td>{{ stat.total_exec_count|floatformat:0 }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-chart-pie"></i> Phân bố theo Database</h5>
+                    </div>
+                    <div class="card-body">
+                        {% for stat in db_stats %}
+                        <div class="mb-2">
+                            <div class="d-flex justify-content-between">
+                                <span>{{ stat.database_name }}</span>
+                                <span>{{ stat.count }} logs</span>
+                            </div>
+                            <div class="progress" style="height: 20px;">
+                                <div class="progress-bar" role="progressbar" 
+                                     style="width: {% widthratio stat.count total_logs 100 %}%"
+                                     aria-valuenow="{{ stat.count }}" 
+                                     aria-valuemin="0" 
+                                     aria-valuemax="{{ total_logs }}">
+                                    {% widthratio stat.count total_logs 100 %}%
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Top Queries -->
+        {% if has_data %}
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-snail"></i> Top 10 Queries Chậm Nhất</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Database</th>
+                                        <th>Thời gian (ms)</th>
+                                        <th>Số lần thực thi</th>
+                                        <th>SQL Query</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for query in slowest_queries %}
+                                    <tr>
+                                        <td>
+                                            <span class="badge bg-info">{{ query.database_name }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-danger">{{ query.exec_time_ms|floatformat:0 }}</span>
+                                        </td>
+                                        <td>{{ query.exec_count }}</td>
+                                        <td>
+                                            <div class="sql-query" title="{{ query.sql_query }}">
+                                                {{ query.sql_query|truncatechars:50 }}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-fire"></i> Top 10 Queries Được Thực Thi Nhiều Nhất</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Database</th>
+                                        <th>Số lần thực thi</th>
+                                        <th>Thời gian (ms)</th>
+                                        <th>SQL Query</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for query in most_executed %}
+                                    <tr>
+                                        <td>
+                                            <span class="badge bg-info">{{ query.database_name }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-success">{{ query.exec_count }}</span>
+                                        </td>
+                                        <td>{{ query.exec_time_ms|floatformat:0 }}</td>
+                                        <td>
+                                            <div class="sql-query" title="{{ query.sql_query }}">
+                                                {{ query.sql_query|truncatechars:50 }}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Databases không có dữ liệu -->
+        {% if databases_without_data %}
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card border-warning">
+                    <div class="card-header bg-warning text-dark">
+                        <h5><i class="fas fa-exclamation-triangle"></i> Databases không có dữ liệu</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-warning">
+                            <strong>Các database sau không có truy vấn nào:</strong>
+                            <ul class="mb-0 mt-2">
+                                {% for db in databases_without_data %}
+                                <li><code>{{ db }}</code></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Thông tin bổ sung -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-info-circle"></i> Thông tin bổ sung</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <strong>Logs trong 7 ngày gần đây:</strong> {{ recent_logs }}
+                            </div>
+                            <div class="col-md-3">
+                                <strong>Tổng thời gian thực thi:</strong> {{ total_exec_time|floatformat:0 }} ms
+                            </div>
+                            <div class="col-md-3">
+                                <strong>Thời gian trung bình:</strong> {{ avg_exec_time|floatformat:2 }} ms
+                            </div>
+                            <div class="col-md-3">
+                                <strong>Tổng số databases:</strong> {{ databases_with_data|length|add:databases_without_data|length }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
