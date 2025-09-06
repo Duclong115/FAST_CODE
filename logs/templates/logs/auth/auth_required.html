@@ -1,0 +1,37 @@
+{% extends 'logs/auth/base_auth.html' %}
+
+{% block title %}Yêu cầu đăng nhập - SQL Log Analyzer{% endblock %}
+
+{% block subtitle %}Truy cập bị từ chối{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <div class="mb-4">
+        <i class="fas fa-lock fa-3x text-warning"></i>
+    </div>
+    
+    <h4 class="mb-3">Yêu cầu đăng nhập</h4>
+    
+    <p class="text-muted mb-4">
+        Bạn cần đăng nhập để truy cập trang này.
+        <br>
+        Vui lòng đăng nhập hoặc tạo tài khoản mới.
+    </p>
+    
+    <div class="d-grid gap-2">
+        <a href="{% url 'logs:login' %}" class="btn btn-primary btn-auth">
+            <i class="fas fa-sign-in-alt"></i> Đăng nhập
+        </a>
+        
+        <a href="{% url 'logs:register' %}" class="btn btn-outline-primary btn-auth">
+            <i class="fas fa-user-plus"></i> Đăng ký tài khoản
+        </a>
+    </div>
+    
+    <div class="auth-links mt-4">
+        <a href="{% url 'logs:index' %}" class="text-muted">
+            <i class="fas fa-arrow-left"></i> Quay lại trang chủ
+        </a>
+    </div>
+</div>
+{% endblock %}

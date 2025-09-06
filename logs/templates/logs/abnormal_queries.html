@@ -135,6 +135,7 @@
                         <th>Dòng</th>
                         <th>Thời gian tạo</th>
                         <th>Mức độ nghiêm trọng</th>
+                        <th>Gợi ý</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -169,6 +170,19 @@
                             <span class="badge bg-warning">Cao</span>
                             {% else %}
                             <span class="badge bg-info">Trung bình</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if log.optimization_suggestion %}
+                            <div class="optimization-suggestion" title="{{ log.optimization_suggestion }}">
+                                <span class="badge bg-success">
+                                    <i class="fas fa-lightbulb"></i> {{ log.optimization_suggestion|truncatechars:30 }}
+                                </span>
+                            </div>
+                            {% else %}
+                            <span class="badge bg-secondary">
+                                <i class="fas fa-clock"></i> Đang phân tích...
+                            </span>
                             {% endif %}
                         </td>
                     </tr>

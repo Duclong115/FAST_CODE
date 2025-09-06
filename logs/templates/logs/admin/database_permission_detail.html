@@ -1,0 +1,228 @@
+{% extends 'logs/base.html' %}
+
+{% block title %}Chi Tiết Phân Quyền Database - SQL Log Analyzer{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-eye"></i> Chi Tiết Phân Quyền Database</h2>
+            <div class="btn-group">
+                <a href="{% url 'logs:admin_database_permissions' %}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Danh Sách
+                </a>
+                <a href="{% url 'logs:admin_database_permission_edit' permission.id %}" class="btn btn-primary">
+                    <i class="fas fa-edit"></i> Chỉnh Sửa
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Thông tin phân quyền -->
+<div class="row mb-4">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-info-circle"></i> Thông Tin Phân Quyền</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <table class="table table-borderless">
+                            <tr>
+                                <td><strong>ID:</strong></td>
+                                <td>{{ permission.id }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Người dùng:</strong></td>
+                                <td>
+                                    <strong>{{ permission.user.username }}</strong>
+                                    {% if permission.user.first_name or permission.user.last_name %}
+                                    <br><small class="text-muted">{{ permission.user.get_full_name }}</small>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Email:</strong></td>
+                                <td>{{ permission.user.email }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Database:</strong></td>
+                                <td><span class="badge bg-primary fs-6">{{ permission.database_name }}</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table class="table table-borderless">
+                            <tr>
+                                <td><strong>Loại quyền:</strong></td>
+                                <td>
+                                    {% if permission.permission_type == 'read' %}
+                                    <span class="badge bg-info fs-6">Chỉ đọc</span>
+                                    {% elif permission.permission_type == 'write' %}
+                                    <span class="badge bg-warning fs-6">Đọc và ghi</span>
+                                    {% elif permission.permission_type == 'admin' %}
+                                    <span class="badge bg-danger fs-6">Quản trị</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cấp quyền bởi:</strong></td>
+                                <td>
+                                    {% if permission.granted_by %}
+                                    {{ permission.granted_by.username }}
+                                    {% else %}
+                                    <span class="text-muted">Hệ thống</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Thời gian cấp:</strong></td>
+                                <td>{{ permission.granted_at|date:"d/m/Y H:i:s" }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Hết hạn:</strong></td>
+                                <td>
+                                    {% if permission.expires_at %}
+                                    {{ permission.expires_at|date:"d/m/Y H:i:s" }}
+                                    {% else %}
+                                    <span class="text-muted">Không hết hạn</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                {% if permission.notes %}
+                <hr>
+                <div class="mb-3">
+                    <strong>Ghi chú:</strong>
+                    <p class="mt-2">{{ permission.notes }}</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-chart-bar"></i> Thống Kê Sử Dụng</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <strong>Tổng logs:</strong>
+                    <span class="badge bg-primary">{{ usage_stats.total_logs }}</span>
+                </div>
+                <div class="mb-3">
+                    <strong>Logs gần đây (7 ngày):</strong>
+                    <span class="badge bg-success">{{ usage_stats.recent_logs }}</span>
+                </div>
+                <div class="mb-3">
+                    <strong>Trạng thái:</strong>
+                    {% if permission.is_valid %}
+                    <span class="badge bg-success">Hoạt động</span>
+                    {% elif permission.is_expired %}
+                    <span class="badge bg-danger">Hết hạn</span>
+                    {% else %}
+                    <span class="badge bg-secondary">Không hoạt động</span>
+                    {% endif %}
+                </div>
+                
+                <hr>
+                
+                <div class="d-grid gap-2">
+                    <a href="{% url 'logs:index' %}?database={{ permission.database_name }}" class="btn btn-outline-primary">
+                        <i class="fas fa-eye"></i> Xem Logs Database
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Thao tác -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-cogs"></i> Thao Tác</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <a href="{% url 'logs:admin_database_permission_edit' permission.id %}" class="btn btn-primary w-100 mb-2">
+                            <i class="fas fa-edit"></i><br>
+                            Chỉnh Sửa
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{% url 'logs:admin_database_permission_toggle_active' permission.id %}" 
+                           class="btn btn-warning w-100 mb-2"
+                           onclick="return confirm('Bạn có chắc chắn muốn thay đổi trạng thái phân quyền này?')">
+                            <i class="fas fa-power-off"></i><br>
+                            {% if permission.is_active %}Vô hiệu hóa{% else %}Kích hoạt{% endif %}
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{% url 'logs:admin_database_permissions' %}?user={{ permission.user.username }}" class="btn btn-info w-100 mb-2">
+                            <i class="fas fa-user"></i><br>
+                            Xem Quyền User
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{% url 'logs:admin_database_permissions' %}?database={{ permission.database_name }}" class="btn btn-secondary w-100 mb-2">
+                            <i class="fas fa-database"></i><br>
+                            Xem Quyền Database
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Thông tin bổ sung -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h6><i class="fas fa-info-circle"></i> Thông Tin Bổ Sung</h6>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Quyền hiện tại cho phép:</h6>
+                        <ul class="small">
+                            {% if permission.permission_type == 'read' %}
+                            <li>Xem logs của database {{ permission.database_name }}</li>
+                            <li>Tạo báo cáo từ logs</li>
+                            <li>Xuất dữ liệu logs</li>
+                            {% elif permission.permission_type == 'write' %}
+                            <li>Tất cả quyền đọc</li>
+                            <li>Import logs mới vào database</li>
+                            <li>Chỉnh sửa logs hiện có</li>
+                            {% elif permission.permission_type == 'admin' %}
+                            <li>Tất cả quyền đọc và ghi</li>
+                            <li>Xóa logs khỏi database</li>
+                            <li>Quản lý cấu hình database</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Lưu ý:</h6>
+                        <ul class="small">
+                            <li>Phân quyền này chỉ áp dụng cho database {{ permission.database_name }}</li>
+                            <li>User có thể truy cập từ trang chủ bằng cách chọn database từ dropdown</li>
+                            <li>Nếu hết hạn, user sẽ không thể truy cập database này</li>
+                            <li>Có thể chỉnh sửa hoặc vô hiệu hóa phân quyền bất kỳ lúc nào</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

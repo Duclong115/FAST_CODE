@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.views import View
+from django.contrib.auth.decorators import login_required
 import pandas as pd
 import io
 import csv
@@ -20,6 +21,15 @@ import os
 from datetime import datetime
 import json
 from .models import SqlLog, LogFile
+from .sql_analyzer import SQLAnalyzer
+
+
+def get_user_accessible_databases(user):
+    """Lấy danh sách database user có quyền truy cập"""
+    if user.is_superuser:
+        return SqlLog.objects.values_list('database_name', flat=True).distinct().order_by('database_name')
+    else:
+        return user.get_accessible_databases()
 
 
 def register_vietnamese_font():
@@ -48,12 +58,18 @@ def register_vietnamese_font():
         return False
 
 
+@login_required
 def index(request):
     """Trang chủ hiển thị danh sách logs"""
     # Lấy tham số từ request
     page_number = request.GET.get('page', 1)
     database_filter = request.GET.get('database', '')
     per_page = request.GET.get('per_page', 20)
+    
+    # Kiểm tra quyền database nếu có filter
+    if database_filter and not request.user.has_database_permission(database_filter):
+        messages.error(request, f'Bạn không có quyền truy cập database "{database_filter}"!')
+        database_filter = ''
     
     # Query logs
     logs_query = SqlLog.objects.all()
@@ -65,8 +81,8 @@ def index(request):
     paginator = Paginator(logs_query, per_page)
     page_obj = paginator.get_page(page_number)
     
-    # Lấy danh sách databases để filter
-    databases = SqlLog.objects.values_list('database_name', flat=True).distinct().order_by('database_name')
+    # Lấy danh sách database user có quyền truy cập
+    databases = get_user_accessible_databases(request.user)
     
     # Kiểm tra có dữ liệu cho database được chọn không
     has_data = logs_query.exists() if database_filter else True
@@ -84,6 +100,7 @@ def index(request):
     return render(request, 'logs/index.html', context)
 
 
+@login_required
 def statistics(request):
     """Trang thống kê"""
     # Lấy tham số filter database
@@ -148,6 +165,7 @@ def statistics(request):
     return render(request, 'logs/statistics.html', context)
 
 
+@login_required
 def log_files(request):
     """Trang danh sách các file log đã xử lý"""
     log_files = LogFile.objects.all().order_by('-processed_at')
@@ -159,6 +177,7 @@ def log_files(request):
     return render(request, 'logs/log_files.html', context)
 
 
+@login_required
 def abnormal_queries(request):
     """Trang quét truy vấn bất thường"""
     # Lấy tham số từ request
@@ -179,8 +198,8 @@ def abnormal_queries(request):
     paginator = Paginator(abnormal_query, per_page)
     page_obj = paginator.get_page(page_number)
     
-    # Lấy danh sách databases để filter
-    databases = SqlLog.objects.values_list('database_name', flat=True).distinct().order_by('database_name')
+    # Lấy danh sách database user có quyền truy cập
+    databases = get_user_accessible_databases(request.user)
     
     # Thống kê truy vấn bất thường
     total_abnormal = abnormal_query.count()
@@ -193,6 +212,15 @@ def abnormal_queries(request):
         avg_exec_time=Avg('exec_time_ms'),
         avg_exec_count=Avg('exec_count')
     ).order_by('-count')
+    
+    # Phân tích SQL và tạo gợi ý tối ưu hóa cho các truy vấn bất thường
+    analyzer = SQLAnalyzer()
+    for log in page_obj:
+        if not log.optimization_suggestion:  # Chỉ phân tích nếu chưa có gợi ý
+            analysis = analyzer.analyze_sql(log.sql_query)
+            suggestion = analyzer.get_optimization_summary(analysis)
+            log.optimization_suggestion = suggestion
+            log.save(update_fields=['optimization_suggestion'])
     
     context = {
         'page_obj': page_obj,
@@ -209,6 +237,7 @@ def abnormal_queries(request):
     return render(request, 'logs/abnormal_queries.html', context)
 
 
+@login_required
 def api_logs(request):
     """API endpoint để lấy dữ liệu logs dưới dạng JSON"""
     page_number = request.GET.get('page', 1)
@@ -250,6 +279,7 @@ def api_logs(request):
     })
 
 
+@login_required
 def generate_report(request):
     """Trang tạo báo cáo"""
     if request.method == 'POST':

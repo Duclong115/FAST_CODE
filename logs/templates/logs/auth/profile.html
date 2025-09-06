@@ -1,0 +1,75 @@
+{% extends 'logs/base.html' %}
+
+{% block title %}Thông tin cá nhân - SQL Log Analyzer{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4><i class="fas fa-user-circle"></i> Thông tin cá nhân</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <div class="mb-3">
+                            <i class="fas fa-user-circle fa-5x text-primary"></i>
+                        </div>
+                        <h5>{{ user.username }}</h5>
+                        <p class="text-muted">{{ user.email }}</p>
+                    </div>
+                    <div class="col-md-8">
+                        <table class="table table-borderless">
+                            <tr>
+                                <td><strong><i class="fas fa-user"></i> Tên người dùng:</strong></td>
+                                <td>{{ user.username }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong><i class="fas fa-envelope"></i> Email:</strong></td>
+                                <td>{{ user.email }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong><i class="fas fa-signature"></i> Họ tên:</strong></td>
+                                <td>{{ user.get_full_name|default:"Chưa cập nhật" }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong><i class="fas fa-calendar-plus"></i> Ngày tạo:</strong></td>
+                                <td>{{ user.created_at|date:"d/m/Y H:i:s" }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong><i class="fas fa-sign-in-alt"></i> Lần đăng nhập cuối:</strong></td>
+                                <td>
+                                    {% if user.last_login_at %}
+                                        {{ user.last_login_at|date:"d/m/Y H:i:s" }}
+                                    {% else %}
+                                        Chưa có
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong><i class="fas fa-check-circle"></i> Trạng thái:</strong></td>
+                                <td>
+                                    {% if user.is_active %}
+                                        <span class="badge bg-success">Hoạt động</span>
+                                    {% else %}
+                                        <span class="badge bg-danger">Bị khóa</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        </table>
+                        
+                        <div class="mt-4">
+                            <a href="{% url 'logs:change_password' %}" class="btn btn-warning">
+                                <i class="fas fa-key"></i> Đổi mật khẩu
+                            </a>
+                            <a href="{% url 'logs:index' %}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Quay lại
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,180 @@
+{% extends 'logs/base.html' %}
+
+{% block title %}Chỉnh Sửa Phân Quyền Database - SQL Log Analyzer{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4><i class="fas fa-edit"></i> Chỉnh Sửa Phân Quyền Database</h4>
+            </div>
+            <div class="card-body">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            <i class="fas fa-{% if message.tags == 'success' %}check-circle{% elif message.tags == 'error' %}exclamation-triangle{% else %}info-circle{% endif %}"></i>
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                
+                <!-- Thông tin hiện tại -->
+                <div class="alert alert-info">
+                    <h6><i class="fas fa-info-circle"></i> Thông Tin Hiện Tại</h6>
+                    <p class="mb-1"><strong>User:</strong> {{ permission.user.username }} ({{ permission.user.email }})</p>
+                    <p class="mb-1"><strong>Database:</strong> {{ permission.database_name }}</p>
+                    <p class="mb-0"><strong>Loại quyền hiện tại:</strong> 
+                        {% if permission.permission_type == 'read' %}
+                        <span class="badge bg-info">Chỉ đọc</span>
+                        {% elif permission.permission_type == 'write' %}
+                        <span class="badge bg-warning">Đọc và ghi</span>
+                        {% elif permission.permission_type == 'admin' %}
+                        <span class="badge bg-danger">Quản trị</span>
+                        {% endif %}
+                    </p>
+                </div>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.non_field_errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.permission_type.id_for_label }}" class="form-label">
+                            <i class="fas fa-shield-alt"></i> {{ form.permission_type.label }}
+                        </label>
+                        {{ form.permission_type }}
+                        {% if form.permission_type.help_text %}
+                            <div class="form-text">{{ form.permission_type.help_text }}</div>
+                        {% endif %}
+                        {% if form.permission_type.errors %}
+                            <div class="text-danger small mt-1">
+                                {% for error in form.permission_type.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.expires_at.id_for_label }}" class="form-label">
+                            <i class="fas fa-clock"></i> {{ form.expires_at.label }}
+                        </label>
+                        {{ form.expires_at }}
+                        {% if form.expires_at.help_text %}
+                            <div class="form-text">{{ form.expires_at.help_text }}</div>
+                        {% endif %}
+                        {% if form.expires_at.errors %}
+                            <div class="text-danger small mt-1">
+                                {% for error in form.expires_at.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="form-check">
+                            {{ form.is_active }}
+                            <label class="form-check-label" for="{{ form.is_active.id_for_label }}">
+                                {{ form.is_active.label }}
+                            </label>
+                        </div>
+                        {% if form.is_active.help_text %}
+                            <div class="form-text">{{ form.is_active.help_text }}</div>
+                        {% endif %}
+                        {% if form.is_active.errors %}
+                            <div class="text-danger small mt-1">
+                                {% for error in form.is_active.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="{{ form.notes.id_for_label }}" class="form-label">
+                            <i class="fas fa-sticky-note"></i> {{ form.notes.label }}
+                        </label>
+                        {{ form.notes }}
+                        {% if form.notes.help_text %}
+                            <div class="form-text">{{ form.notes.help_text }}</div>
+                        {% endif %}
+                        {% if form.notes.errors %}
+                            <div class="text-danger small mt-1">
+                                {% for error in form.notes.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Cập Nhật Phân Quyền
+                        </button>
+                        <a href="{% url 'logs:admin_database_permission_detail' permission.id %}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Quay Lại
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Hướng dẫn -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h6><i class="fas fa-info-circle"></i> Hướng Dẫn Chỉnh Sửa</h6>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h6>Thay Đổi Loại Quyền:</h6>
+                        <ul class="small">
+                            <li><strong>Chỉ đọc:</strong> Giới hạn nhất</li>
+                            <li><strong>Đọc và ghi:</strong> Quyền trung bình</li>
+                            <li><strong>Quản trị:</strong> Quyền cao nhất</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h6>Thời Hạn:</h6>
+                        <ul class="small">
+                            <li>Để trống = không hết hạn</li>
+                            <li>Chọn ngày = tự động hết hạn</li>
+                            <li>Có thể gia hạn bất kỳ lúc nào</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h6>Trạng Thái:</h6>
+                        <ul class="small">
+                            <li><strong>Hoạt động:</strong> User có thể sử dụng</li>
+                            <li><strong>Không hoạt động:</strong> User không thể sử dụng</li>
+                            <li>Có thể bật/tắt bất kỳ lúc nào</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <hr>
+                
+                <div class="alert alert-warning">
+                    <h6><i class="fas fa-exclamation-triangle"></i> Lưu Ý Quan Trọng</h6>
+                    <ul class="mb-0 small">
+                        <li>Thay đổi loại quyền sẽ có hiệu lực ngay lập tức</li>
+                        <li>Vô hiệu hóa phân quyền sẽ ngăn user truy cập database</li>
+                        <li>Thời hạn hết hạn sẽ tự động vô hiệu hóa quyền</li>
+                        <li>Ghi chú giúp theo dõi lý do thay đổi</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

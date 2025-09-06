@@ -1,0 +1,275 @@
+{% extends 'logs/base.html' %}
+
+{% block title %}Quản Lý Người Dùng - SQL Log Analyzer{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-users"></i> Quản Lý Người Dùng</h2>
+            <div class="btn-group">
+                <a href="{% url 'logs:admin_dashboard' %}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Dashboard
+                </a>
+                <a href="{% url 'logs:admin_user_create' %}" class="btn btn-success">
+                    <i class="fas fa-user-plus"></i> Tạo Người Dùng Mới
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Filters và Search -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="get" class="row g-3">
+                    <div class="col-md-4">
+                        <label for="search" class="form-label">Tìm kiếm</label>
+                        <input type="text" class="form-control" id="search" name="search" 
+                               value="{{ search }}" placeholder="Username, email, tên...">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="status" class="form-label">Trạng thái</label>
+                        <select class="form-select" id="status" name="status">
+                            <option value="">Tất cả</option>
+                            <option value="active" {% if status_filter == 'active' %}selected{% endif %}>Hoạt động</option>
+                            <option value="inactive" {% if status_filter == 'inactive' %}selected{% endif %}>Không hoạt động</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="role" class="form-label">Vai trò</label>
+                        <select class="form-select" id="role" name="role">
+                            <option value="">Tất cả</option>
+                            <option value="superuser" {% if role_filter == 'superuser' %}selected{% endif %}>Superuser</option>
+                            <option value="staff" {% if role_filter == 'staff' %}selected{% endif %}>Staff</option>
+                            <option value="user" {% if role_filter == 'user' %}selected{% endif %}>User</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="per_page" class="form-label">Hiển thị</label>
+                        <select class="form-select" id="per_page" name="per_page">
+                            <option value="10" {% if per_page == '10' %}selected{% endif %}>10</option>
+                            <option value="20" {% if per_page == '20' %}selected{% endif %}>20</option>
+                            <option value="50" {% if per_page == '50' %}selected{% endif %}>50</option>
+                            <option value="100" {% if per_page == '100' %}selected{% endif %}>100</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">&nbsp;</label>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-search"></i> Tìm kiếm
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bulk Actions -->
+<div class="row mb-3">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="{% url 'logs:admin_user_bulk_action' %}" id="bulk-form">
+                    {% csrf_token %}
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="select-all">
+                                <label class="form-check-label" for="select-all">
+                                    Chọn tất cả
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex gap-2">
+                                <select name="action" class="form-select" style="width: auto;">
+                                    <option value="">-- Chọn hành động --</option>
+                                    <option value="activate">Kích hoạt</option>
+                                    <option value="deactivate">Vô hiệu hóa</option>
+                                    <option value="delete">Xóa</option>
+                                </select>
+                                <button type="submit" class="btn btn-warning" onclick="return confirm('Bạn có chắc chắn muốn thực hiện hành động này?')">
+                                    <i class="fas fa-play"></i> Thực hiện
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Danh sách người dùng -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-list"></i> Danh Sách Người Dùng ({{ total_users }} người dùng)</h5>
+            </div>
+            <div class="card-body">
+                {% if page_obj %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th width="50">
+                                    <input type="checkbox" class="form-check-input" id="select-all-table">
+                                </th>
+                                <th>ID</th>
+                                <th>Người Dùng</th>
+                                <th>Email</th>
+                                <th>Vai Trò</th>
+                                <th>Trạng Thái</th>
+                                <th>Ngày Tạo</th>
+                                <th>Đăng Nhập Cuối</th>
+                                <th width="150">Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in page_obj %}
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="form-check-input user-checkbox" 
+                                           name="user_ids" value="{{ user.id }}">
+                                </td>
+                                <td>{{ user.id }}</td>
+                                <td>
+                                    <div>
+                                        <strong>{{ user.username }}</strong>
+                                        {% if user.first_name or user.last_name %}
+                                        <br><small class="text-muted">{{ user.get_full_name }}</small>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                                <td>{{ user.email }}</td>
+                                <td>
+                                    {% if user.is_superuser %}
+                                    <span class="badge bg-warning">Superuser</span>
+                                    {% elif user.is_staff %}
+                                    <span class="badge bg-info">Staff</span>
+                                    {% else %}
+                                    <span class="badge bg-secondary">User</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if user.is_active %}
+                                    <span class="badge bg-success">Hoạt động</span>
+                                    {% else %}
+                                    <span class="badge bg-danger">Không hoạt động</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <small>{{ user.created_at|date:"d/m/Y H:i" }}</small>
+                                </td>
+                                <td>
+                                    {% if user.last_login_at %}
+                                    <small>{{ user.last_login_at|date:"d/m/Y H:i" }}</small>
+                                    {% else %}
+                                    <small class="text-muted">Chưa đăng nhập</small>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <a href="{% url 'logs:admin_user_detail' user.id %}" 
+                                           class="btn btn-outline-info" title="Xem chi tiết">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="{% url 'logs:admin_user_edit' user.id %}" 
+                                           class="btn btn-outline-primary" title="Chỉnh sửa">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="{% url 'logs:admin_user_reset_password' user.id %}" 
+                                           class="btn btn-outline-warning" title="Reset mật khẩu">
+                                            <i class="fas fa-key"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Pagination -->
+                {% if page_obj.has_other_pages %}
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page=1{% if search %}&search={{ search }}{% endif %}{% if status_filter %}&status={{ status_filter }}{% endif %}{% if role_filter %}&role={{ role_filter }}{% endif %}&per_page={{ per_page }}">Đầu</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if search %}&search={{ search }}{% endif %}{% if status_filter %}&status={{ status_filter }}{% endif %}{% if role_filter %}&role={{ role_filter }}{% endif %}&per_page={{ per_page }}">Trước</a>
+                        </li>
+                        {% endif %}
+                        
+                        <li class="page-item active">
+                            <span class="page-link">
+                                Trang {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+                            </span>
+                        </li>
+                        
+                        {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if search %}&search={{ search }}{% endif %}{% if status_filter %}&status={{ status_filter }}{% endif %}{% if role_filter %}&role={{ role_filter }}{% endif %}&per_page={{ per_page }}">Tiếp</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if search %}&search={{ search }}{% endif %}{% if status_filter %}&status={{ status_filter }}{% endif %}{% if role_filter %}&role={{ role_filter }}{% endif %}&per_page={{ per_page }}">Cuối</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
+                
+                {% else %}
+                <div class="text-center py-5">
+                    <i class="fas fa-users fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">Không tìm thấy người dùng nào</h5>
+                    <p class="text-muted">Hãy thử thay đổi bộ lọc hoặc tạo người dùng mới.</p>
+                    <a href="{% url 'logs:admin_user_create' %}" class="btn btn-success">
+                        <i class="fas fa-user-plus"></i> Tạo Người Dùng Mới
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Select all functionality
+document.getElementById('select-all').addEventListener('change', function() {
+    const checkboxes = document.querySelectorAll('.user-checkbox');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = this.checked;
+    });
+});
+
+document.getElementById('select-all-table').addEventListener('change', function() {
+    const checkboxes = document.querySelectorAll('.user-checkbox');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = this.checked;
+    });
+});
+
+// Individual checkbox change
+document.querySelectorAll('.user-checkbox').forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+        const allCheckboxes = document.querySelectorAll('.user-checkbox');
+        const checkedCheckboxes = document.querySelectorAll('.user-checkbox:checked');
+        
+        document.getElementById('select-all').checked = allCheckboxes.length === checkedCheckboxes.length;
+        document.getElementById('select-all-table').checked = allCheckboxes.length === checkedCheckboxes.length;
+    });
+});
+</script>
+{% endblock %}
